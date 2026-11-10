@@ -13,9 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSIjMEExNjMzIi8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI4IiBmaWxsPSIjNkU5QkZGIi8+PHRleHQgeD0iOTAiIHk9IjEyNSIgZm9udC1mYW1pbHk9IkFyY2hpdm8sIEhlbHZldGljYSBOZXVlLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIxMTAiIGZpbGw9IiNFOEVFRjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSItMyI+TjwvdGV4dD48L3N2Zz4=">
 <style>
-/* ========================================
-   RP Design System v0.2 — Private (dark) base
-   ======================================== */
+/* RP Design System v0.2 — Private (dark) base */
 :root {
   --bg:#0A1633; --surface:#101F45; --surface-2:#16285A;
   --text:#E8EEF8; --muted:#9DAECB; --line:#24386E;
@@ -24,21 +22,13 @@
   --font:"Archivo","Helvetica Neue",Arial,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
   --headline-wdth:115%;
-  --t-fast:120ms; --t-base:200ms; --t-slow:300ms;
+  --t-fast:120ms; --t-base:200ms;
   --ease-out:cubic-bezier(.2,.7,.2,1);
   --r-control:4px; --r-box:8px; --r-sheet:14px;
+  --tab-height:68px;
   color-scheme:dark;
 }
-:root[data-theme="light"] {
-  --bg:#EEF3FA; --surface:#FFFFFF; --surface-2:#F6F9FD;
-  --text:#1C2433; --muted:#56647A; --line:#D5DEEA;
-  --primary:#1446D8; --primary-hover:#0F38B0; --primary-ink:#FFFFFF; --primary-soft:#E3EBFF;
-  --go:#1B8A4B; --caution:#A86F00; --stop:#C62F2F; --focus:#1446D8;
-  color-scheme:light;
-}
-
 * { box-sizing:border-box; margin:0; padding:0; }
-html { scroll-behavior:smooth; }
 body {
   background:var(--bg); color:var(--text);
   font-family:var(--font); font-size:16px; line-height:1.55;
@@ -48,22 +38,24 @@ body {
   overflow-x:hidden;
 }
 :focus-visible { outline:2px solid var(--focus); outline-offset:2px; border-radius:2px; }
-code,pre { font-family:var(--mono); font-size:13.5px; }
+code { font-family:var(--mono); font-size:13.5px; }
 
-/* ========================================
-   Layout
-   ======================================== */
 .screen {
   max-width:520px; margin:0 auto;
   padding-top:max(55px, calc(env(safe-area-inset-top, 0px) + 35px));
-  padding-left:22px; padding-right:22px; padding-bottom:40px;
+  padding-left:22px; padding-right:22px;
+  padding-bottom:calc(var(--tab-height) + env(safe-area-inset-bottom, 0px) + 40px);
   position:relative;
+}
+.screen.no-tabs {
+  padding-bottom:40px;
 }
 .blueline {
   position:fixed; top:0; left:0; right:0;
-  height:6px; background:var(--primary);
-  z-index:100;
+  height:6px; background:var(--primary); z-index:100;
 }
+
+/* App Header */
 .app-header {
   display:flex; justify-content:space-between; align-items:flex-start;
   margin-bottom:28px; gap:16px;
@@ -73,22 +65,47 @@ code,pre { font-family:var(--mono); font-size:13.5px; }
   font-stretch:var(--headline-wdth); letter-spacing:-0.025em;
   line-height:1;
 }
-.app-sub {
-  font-size:13px; color:var(--muted);
-  margin-top:4px;
-}
-.header-right {
-  display:flex; flex-direction:column; align-items:flex-end; gap:6px;
-}
+.app-sub { font-size:13px; color:var(--muted); margin-top:4px; }
+.header-right { display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
 .user-pill {
-  font-size:12px; color:var(--muted);
-  font-family:var(--mono);
+  font-size:12px; color:var(--muted); font-family:var(--mono);
   max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
 
-/* ========================================
-   Buttons (RP DS)
-   ======================================== */
+/* Bottom tab bar */
+.tab-bar {
+  position:fixed; bottom:0; left:0; right:0;
+  background:var(--surface);
+  border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom, 0px);
+  z-index:90;
+  display:flex; justify-content:center;
+}
+.tab-bar-inner {
+  max-width:520px; width:100%;
+  display:flex;
+}
+.tab {
+  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:4px; padding:10px 8px;
+  background:none; border:0; cursor:pointer;
+  color:var(--muted); font:inherit; font-size:11px; font-weight:600;
+  letter-spacing:0.08em; text-transform:uppercase;
+  min-height:var(--tab-height);
+  position:relative;
+  transition:color var(--t-fast) var(--ease-out);
+}
+.tab.active { color:var(--primary); }
+.tab.active::before {
+  content:""; position:absolute; top:0; left:20%; right:20%; height:3px;
+  background:var(--primary); border-radius:0 0 3px 3px;
+}
+.tab svg {
+  width:24px; height:24px; stroke:currentColor; stroke-width:2;
+  fill:none; stroke-linecap:round; stroke-linejoin:round;
+}
+
+/* Buttons */
 .btn {
   font:inherit; font-size:15px; font-weight:600;
   border-radius:var(--r-control);
@@ -111,13 +128,9 @@ code,pre { font-family:var(--mono); font-size:13.5px; }
 .btn-small { min-height:32px; padding:0 12px; font-size:13px; }
 .btn-block { width:100%; }
 
-/* ========================================
-   Fields (RP DS)
-   ======================================== */
-.field { display:grid; gap:6px; }
-.field label {
-  font-size:14px; font-weight:600;
-}
+/* Fields */
+.field { display:grid; gap:6px; margin-bottom:16px; }
+.field label { font-size:14px; font-weight:600; }
 .field .input {
   display:flex; align-items:center;
   border:1.5px solid var(--line); border-radius:var(--r-control);
@@ -125,17 +138,35 @@ code,pre { font-family:var(--mono); font-size:13.5px; }
   transition:border-color var(--t-fast) var(--ease-out);
 }
 .field .input:focus-within { border-color:var(--primary); }
-.field input {
+.field input, .field select, .field textarea {
   font:inherit; border:0; background:transparent; color:var(--text);
   padding:0 12px; flex:1; min-width:0; height:42px;
   outline:none; font-variant-numeric:tabular-nums;
+  appearance:none;
 }
-.field input::placeholder { color:var(--muted); opacity:0.7; }
+.field textarea { height:auto; min-height:80px; padding:12px; resize:vertical; }
+.field select {
+  padding-right:36px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%239DAECB' d='M5 8l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 10px center;
+  background-size:16px;
+  cursor:pointer;
+}
+.field input::placeholder, .field textarea::placeholder { color:var(--muted); opacity:0.5; }
+.field .unit {
+  padding:0 12px; color:var(--muted); font-size:14px;
+  border-left:1px solid var(--line);
+  align-self:stretch; display:flex; align-items:center;
+}
 .field .hint { font-size:13px; color:var(--muted); }
 
-/* ========================================
-   Login screen
-   ======================================== */
+.row-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.row-3 { display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; }
+.row-3 .field { margin-bottom:0; }
+.row-2 .field { margin-bottom:0; }
+
+/* Login (unchanged from before) */
 .login-wrap {
   min-height:70vh;
   display:flex; flex-direction:column; justify-content:center;
@@ -153,32 +184,46 @@ code,pre { font-family:var(--mono); font-size:13.5px; }
 }
 .login-sub {
   font-size:15px; color:var(--muted);
-  margin-bottom:28px; line-height:1.45;
+  margin-bottom:24px; line-height:1.45;
 }
-.login-wrap .field { margin-bottom:16px; }
-
+.login-divider {
+  display:flex; align-items:center; gap:12px;
+  margin:20px 0 16px;
+  font-size:12px; color:var(--muted);
+  letter-spacing:0.12em; text-transform:uppercase;
+}
+.login-divider::before, .login-divider::after {
+  content:""; flex:1; height:1px; background:var(--line);
+}
 .login-state {
   margin-top:20px; padding:14px 16px;
   border-radius:var(--r-box);
-  font-size:14px; line-height:1.5;
-  display:none;
+  font-size:14px; line-height:1.5; display:none;
 }
 .login-state.show { display:block; }
 .login-state.info {
-  background:var(--primary-soft);
-  border:1px solid var(--primary);
-  color:var(--text);
+  background:var(--primary-soft); border:1px solid var(--primary); color:var(--text);
 }
 .login-state.err {
-  background:transparent;
-  border-left:4px solid var(--stop);
-  border-radius:0 var(--r-box) var(--r-box) 0;
-  color:var(--text);
+  background:transparent; border-left:4px solid var(--stop);
+  border-radius:0 var(--r-box) var(--r-box) 0; color:var(--text);
 }
+.login-state.ok {
+  background:transparent; border-left:4px solid var(--go);
+  border-radius:0 var(--r-box) var(--r-box) 0; color:var(--text);
+}
+.mode-toggle {
+  text-align:center; margin-top:12px;
+  font-size:14px; color:var(--muted);
+}
+.mode-toggle button {
+  background:none; border:0; color:var(--primary);
+  font:inherit; font-weight:600; cursor:pointer;
+  padding:0 4px;
+}
+.mode-toggle button:hover { text-decoration:underline; }
 
-/* ========================================
-   KPI cards (RP DS) — the signature top-border blue line
-   ======================================== */
+/* KPIs */
 .kpis {
   display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
   gap:12px; margin-bottom:24px;
@@ -189,10 +234,7 @@ code,pre { font-family:var(--mono); font-size:13.5px; }
   border-radius:0 0 var(--r-box) var(--r-box);
   padding:14px 16px;
 }
-.kpi .label {
-  font-size:13px; color:var(--muted);
-  letter-spacing:0.02em;
-}
+.kpi .label { font-size:13px; color:var(--muted); letter-spacing:0.02em; }
 .kpi .value {
   font-size:32px; font-weight:800;
   font-stretch:var(--headline-wdth); line-height:1.1;
@@ -202,18 +244,13 @@ code,pre { font-family:var(--mono); font-size:13.5px; }
   font-size:14px; font-weight:600; color:var(--muted);
   margin-left:4px; font-stretch:100%;
 }
-.kpi .delta {
-  font-size:12px; font-weight:600; margin-top:4px;
-  color:var(--muted);
-}
+.kpi .delta { font-size:12px; font-weight:600; margin-top:4px; color:var(--muted); }
 
-/* ========================================
-   Section
-   ======================================== */
+/* Sections */
 .section { margin-bottom:28px; }
 .section-header {
   display:flex; justify-content:space-between; align-items:center;
-  margin-bottom:14px;
+  margin-bottom:14px; gap:12px;
 }
 .section-title {
   font-size:14px; font-weight:700;
@@ -228,12 +265,173 @@ code,pre { font-family:var(--mono); font-size:13.5px; }
   color:var(--muted);
   font-size:14px; line-height:1.5;
 }
+.empty-state .big {
+  color:var(--text); font-size:17px; font-weight:700;
+  margin-bottom:6px;
+}
+.empty-state .btn { margin-top:16px; }
 
-/* ========================================
-   Loading
-   ======================================== */
+/* Food list */
+.food-search {
+  margin-bottom:16px;
+}
+.food-list {
+  display:flex; flex-direction:column; gap:8px;
+}
+.food-row {
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r-box);
+  padding:12px 14px;
+  display:flex; align-items:center; gap:12px;
+  cursor:pointer;
+  transition:border-color var(--t-fast) var(--ease-out),
+             background-color var(--t-fast) var(--ease-out);
+}
+.food-row:hover { border-color:var(--primary); }
+.food-row:active { background:var(--surface-2); }
+.food-row .cat {
+  width:36px; height:36px; border-radius:var(--r-control);
+  background:var(--primary-soft); color:var(--primary);
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; flex-shrink:0;
+}
+.food-row .info { flex:1; min-width:0; }
+.food-row .name {
+  font-size:15px; font-weight:700; color:var(--text);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.food-row .brand {
+  font-size:12px; color:var(--muted);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.food-row .macros {
+  font-size:12px; color:var(--muted);
+  font-family:var(--mono);
+  margin-top:2px;
+}
+.food-row .fav {
+  color:var(--caution); font-size:16px;
+  margin-left:auto;
+}
+.food-row .star-off { color:var(--line); }
+
+/* Modal / Sheet */
+.sheet-backdrop {
+  position:fixed; inset:0;
+  background:rgba(10,22,51,0.75);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+  z-index:150;
+  opacity:0; pointer-events:none;
+  transition:opacity var(--t-base) var(--ease-out);
+}
+.sheet-backdrop.show { opacity:1; pointer-events:auto; }
+.sheet {
+  position:fixed; bottom:0; left:0; right:0;
+  background:var(--bg);
+  border-top:1px solid var(--line);
+  border-radius:var(--r-sheet) var(--r-sheet) 0 0;
+  max-height:92vh; overflow-y:auto;
+  z-index:151;
+  transform:translateY(100%);
+  transition:transform var(--t-base) var(--ease-out);
+  padding-bottom:env(safe-area-inset-bottom, 0px);
+}
+.sheet.show { transform:translateY(0); }
+.sheet-inner {
+  max-width:520px; margin:0 auto;
+  padding:20px 22px 24px;
+}
+.sheet-handle {
+  width:40px; height:4px; background:var(--line);
+  border-radius:2px;
+  margin:4px auto 20px;
+}
+.sheet-header {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:20px; gap:16px;
+}
+.sheet-title {
+  font-size:24px; font-weight:800;
+  font-stretch:var(--headline-wdth); letter-spacing:-0.02em;
+}
+.sheet-close {
+  background:none; border:0; color:var(--muted);
+  font-size:22px; cursor:pointer; padding:4px 8px;
+  line-height:1;
+}
+
+/* Chip group (multi-select) */
+.chips {
+  display:flex; flex-wrap:wrap; gap:8px;
+}
+.chip {
+  background:var(--surface); border:1.5px solid var(--line);
+  border-radius:999px;
+  padding:7px 13px; font-size:13px; font-weight:600;
+  cursor:pointer; color:var(--muted);
+  transition:all var(--t-fast) var(--ease-out);
+  font-family:inherit;
+}
+.chip.active {
+  background:var(--primary-soft); border-color:var(--primary); color:var(--primary);
+}
+.chip:active { transform:scale(.96); }
+
+/* Toggle row */
+.toggle-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 0;
+  border-top:1px solid var(--line);
+}
+.toggle-row:first-child { border-top:0; }
+.toggle-row .label-group .label {
+  font-size:15px; font-weight:600;
+}
+.toggle-row .label-group .hint {
+  font-size:12px; color:var(--muted);
+}
+.toggle {
+  width:46px; height:26px; background:var(--line); border:0;
+  border-radius:13px; position:relative; cursor:pointer;
+  transition:background-color var(--t-fast) var(--ease-out);
+  padding:0;
+}
+.toggle::after {
+  content:""; position:absolute; top:3px; left:3px;
+  width:20px; height:20px; background:#fff;
+  border-radius:50%;
+  transition:transform var(--t-fast) var(--ease-out);
+}
+.toggle.on { background:var(--primary); }
+.toggle.on::after { transform:translateX(20px); }
+
+/* Kcal preview */
+.kcal-preview {
+  background:var(--surface-2);
+  border:1px solid var(--line);
+  border-left:3px solid var(--primary);
+  border-radius:var(--r-box);
+  padding:12px 14px;
+  margin:4px 0 16px;
+  display:flex; justify-content:space-between; align-items:baseline;
+}
+.kcal-preview .lab {
+  font-size:12px; color:var(--muted);
+  letter-spacing:0.08em; text-transform:uppercase; font-weight:700;
+}
+.kcal-preview .val {
+  font-size:22px; font-weight:800;
+  font-stretch:var(--headline-wdth); color:var(--text);
+}
+.kcal-preview .val small {
+  font-size:13px; color:var(--muted); font-weight:600;
+  margin-left:3px; font-stretch:100%;
+}
+
+/* Loading */
 .loading {
-  min-height:100vh; min-height:100dvh;
+  min-height:60vh;
   display:flex; align-items:center; justify-content:center;
   color:var(--muted); font-size:14px;
   letter-spacing:0.08em; text-transform:uppercase;
@@ -248,11 +446,10 @@ code,pre { font-family:var(--mono); font-size:13.5px; }
 }
 @keyframes spin { to { transform:rotate(360deg); } }
 
-/* ========================================
-   Toast
-   ======================================== */
+/* Toast */
 .toast {
-  position:fixed; left:50%; bottom:24px;
+  position:fixed; left:50%;
+  bottom:calc(var(--tab-height) + env(safe-area-inset-bottom, 0px) + 16px);
   transform:translateX(-50%) translateY(20px);
   background:var(--text); color:var(--bg);
   padding:12px 18px; border-radius:var(--r-box);
@@ -261,13 +458,8 @@ code,pre { font-family:var(--mono); font-size:13.5px; }
   transition:opacity .15s ease-out, transform .15s ease-out;
   z-index:200; max-width:90vw;
 }
-.toast.show {
-  opacity:1; transform:translateX(-50%) translateY(0);
-}
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
-/* ========================================
-   Footer
-   ======================================== */
 .app-footer {
   margin-top:40px; padding-top:20px;
   border-top:1px solid var(--line);
@@ -286,7 +478,13 @@ code,pre { font-family:var(--mono); font-size:13.5px; }
 <div class="blueline" role="presentation"></div>
 
 <div id="app">
-  <div class="loading">Loading</div>
+  <div class="loading" style="min-height:100vh">Loading</div>
+</div>
+
+<!-- Sheet (shared modal for food form) -->
+<div class="sheet-backdrop" id="sheet-backdrop"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-inner" id="sheet-inner"></div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -294,26 +492,48 @@ code,pre { font-family:var(--mono); font-size:13.5px; }
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-// ========================================
-// Config
-// ========================================
 const SUPABASE_URL = 'https://wiyvkdjyqynhpeeiygqp.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_WdD0Ii2rIpAoJjM3zWU8kg_cOc68Toe';
 
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY, {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: true,
-  }
+  auth: { autoRefreshToken:true, persistSession:true, detectSessionInUrl:true }
 });
 
 const app = document.getElementById('app');
 
-// ========================================
+// Global state
+let currentUser = null;
+let currentTab = 'today'; // 'today' | 'foods'
+let loginMode = 'signin'; // 'signin' | 'signup' | 'magic'
+let foodsCache = [];
+let foodSearch = '';
+
+// Constants
+const CATEGORIES = [
+  { id:'protein',   label:'Protein',   icon:'🥩' },
+  { id:'carb',      label:'Carb',      icon:'🍚' },
+  { id:'fat',       label:'Fat',       icon:'🥑' },
+  { id:'vegetable', label:'Vegetable', icon:'🥦' },
+  { id:'fruit',     label:'Fruit',     icon:'🍎' },
+  { id:'dairy',     label:'Dairy',     icon:'🥛' },
+  { id:'drink',     label:'Drink',     icon:'🥤' },
+  { id:'alcohol',   label:'Alcohol',   icon:'🍺' },
+  { id:'mixed',     label:'Mixed',     icon:'🍱' },
+  { id:'other',     label:'Other',     icon:'🔹' },
+];
+const CAT_MAP = Object.fromEntries(CATEGORIES.map(c => [c.id, c]));
+
+const MEAL_SLOTS = [
+  { id:'breakfast',   label:'Breakfast' },
+  { id:'pre_workout', label:'Pre-WO' },
+  { id:'post_workout',label:'Post-WO' },
+  { id:'lunch',       label:'Lunch' },
+  { id:'dinner',      label:'Dinner' },
+  { id:'snacks',      label:'Snacks' },
+];
+
 // Utils
-// ========================================
-function toast(msg, type='info') {
+function toast(msg) {
   const el = document.getElementById('toast');
   el.textContent = msg;
   el.className = 'toast show';
@@ -328,43 +548,106 @@ function fmtDate() {
     weekday:'long', day:'numeric', month:'long'
   });
 }
-
-// ========================================
-// Auth flow
-// ========================================
-async function sendMagicLink(email) {
-  const btn = document.getElementById('send-link');
-  const stateEl = document.getElementById('login-state');
-  btn.disabled = true;
-  btn.textContent = 'Sending…';
-  const { error } = await sb.auth.signInWithOtp({
-    email,
-    options: {
-      emailRedirectTo: window.location.href.split('#')[0],
-    }
-  });
-  btn.disabled = false;
-  btn.textContent = 'Send magic link';
-  if (error) {
-    stateEl.className = 'login-state err show';
-    stateEl.textContent = error.message || 'Could not send link. Try again.';
-    return;
-  }
-  stateEl.className = 'login-state info show';
-  stateEl.innerHTML = `Magic link sent to <strong>${email}</strong>. Check your inbox (and spam). Tap the link on <em>this</em> device.`;
+function esc(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+function kcalFromMacros(p, f, c, a=0) {
+  return (Number(p)||0)*4 + (Number(c)||0)*4 + (Number(f)||0)*9 + (Number(a)||0)*7;
 }
 
+// Sheet control
+function openSheet(html) {
+  document.getElementById('sheet-inner').innerHTML = html;
+  document.getElementById('sheet-backdrop').classList.add('show');
+  document.getElementById('sheet').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeSheet() {
+  document.getElementById('sheet-backdrop').classList.remove('show');
+  document.getElementById('sheet').classList.remove('show');
+  document.body.style.overflow = '';
+}
+document.getElementById('sheet-backdrop').addEventListener('click', closeSheet);
+
+// ==========================================
+// Auth
+// ==========================================
+function setLoginState(type, msg) {
+  const el = document.getElementById('login-state');
+  if (!el) return;
+  if (!msg) { el.className = 'login-state'; el.innerHTML = ''; return; }
+  el.className = `login-state ${type} show`;
+  el.innerHTML = msg;
+}
+async function signInWithPassword(email, password) {
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  setLoginState();
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  btn.disabled = false; btn.textContent = 'Sign in';
+  if (error) {
+    const msg = error.message || 'Could not sign in';
+    setLoginState('err',
+      msg.toLowerCase().includes('invalid')
+        ? 'Wrong email or password. Try again, or create an account below.'
+        : msg
+    );
+  }
+}
+async function signUp(email, password) {
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'Creating account…';
+  setLoginState();
+  const { data, error } = await sb.auth.signUp({
+    email, password,
+    options: { emailRedirectTo: window.location.href.split('#')[0] }
+  });
+  btn.disabled = false; btn.textContent = 'Create account';
+  if (error) { setLoginState('err', error.message || 'Could not create account'); return; }
+  if (data.session) toast('Account created');
+  else {
+    setLoginState('ok', `Account created. Sign in with your email + password.`);
+    setTimeout(() => { loginMode = 'signin'; renderLogin(email); }, 1500);
+  }
+}
+async function sendMagicLink(email) {
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  setLoginState();
+  const { error } = await sb.auth.signInWithOtp({
+    email,
+    options: { emailRedirectTo: window.location.href.split('#')[0] }
+  });
+  btn.disabled = false; btn.textContent = 'Send magic link';
+  if (error) { setLoginState('err', error.message || 'Could not send link.'); return; }
+  setLoginState('info',
+    `Magic link sent to <strong>${esc(email)}</strong>. Check your inbox and tap the link on this device.`
+  );
+}
 async function signOut() {
   await sb.auth.signOut();
+  foodsCache = [];
   toast('Signed out');
 }
 
-// ========================================
-// Screens
-// ========================================
-function renderLogin() {
+function renderLogin(prefillEmail = '') {
+  const isSignin = loginMode === 'signin';
+  const isSignup = loginMode === 'signup';
+  const isMagic = loginMode === 'magic';
+
+  const titles = { signin:'Sign in', signup:'Create account', magic:'Magic link' };
+  const subs = {
+    signin:'Enter your email and password to continue.',
+    signup:"Set up a new account. You'll stay signed in on this device.",
+    magic:"Enter your email. You'll get a link — tap it on this device.",
+  };
+  const submitLabels = { signin:'Sign in', signup:'Create account', magic:'Send magic link' };
+  const showPassword = !isMagic;
+
   app.innerHTML = `
-    <div class="screen">
+    <div class="screen no-tabs">
       <div class="app-header">
         <div>
           <div class="app-title">Nutrition</div>
@@ -373,47 +656,116 @@ function renderLogin() {
       </div>
       <div class="login-wrap">
         <div class="login-card">
-          <div class="login-title">Sign in</div>
-          <div class="login-sub">
-            Enter your email. You'll get a magic link —
-            tap it on this device to sign in.
-          </div>
+          <div class="login-title">${titles[loginMode]}</div>
+          <div class="login-sub">${subs[loginMode]}</div>
           <div class="field">
             <label for="email">Email</label>
             <div class="input">
               <input type="email" id="email" inputmode="email"
-                autocomplete="email" placeholder="you@example.com">
+                autocomplete="email" placeholder="you@example.com"
+                value="${esc(prefillEmail)}">
             </div>
           </div>
+          ${showPassword ? `
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="input">
+              <input type="password" id="password"
+                autocomplete="${isSignup ? 'new-password' : 'current-password'}"
+                placeholder="${isSignup ? 'Choose a password (min 6 chars)' : 'Your password'}">
+            </div>
+            ${isSignup ? '<div class="hint">At least 6 characters</div>' : ''}
+          </div>
+          ` : ''}
           <div style="margin-top:20px">
-            <button class="btn btn-primary btn-block" id="send-link">
-              Send magic link
+            <button class="btn btn-primary btn-block" id="submit-btn">
+              ${submitLabels[loginMode]}
             </button>
           </div>
           <div class="login-state" id="login-state"></div>
+          <div class="login-divider">or</div>
+          ${isSignin ? `
+            <div class="mode-toggle">No account? <button type="button" data-mode="signup">Create one</button></div>
+            <div class="mode-toggle">Forgot password? <button type="button" data-mode="magic">Use magic link</button></div>
+          ` : ''}
+          ${isSignup ? `
+            <div class="mode-toggle">Already have an account? <button type="button" data-mode="signin">Sign in</button></div>
+          ` : ''}
+          ${isMagic ? `
+            <div class="mode-toggle">Have a password? <button type="button" data-mode="signin">Sign in with password</button></div>
+          ` : ''}
         </div>
-      </div>
-      <div class="app-footer">
-        <span>Nutrition v0.1</span>
-        <span>Session 1</span>
       </div>
     </div>
   `;
+
   const emailEl = document.getElementById('email');
-  const btn = document.getElementById('send-link');
+  const passwordEl = document.getElementById('password');
+  const btn = document.getElementById('submit-btn');
   const submit = () => {
     const email = emailEl.value.trim();
-    if (!email || !email.includes('@')) {
-      toast('Enter a valid email');
-      return;
+    if (!email || !email.includes('@')) { setLoginState('err', 'Enter a valid email.'); return; }
+    if (showPassword) {
+      const password = passwordEl.value;
+      if (!password || password.length < 6) { setLoginState('err', 'Password must be at least 6 characters.'); return; }
+      if (isSignup) signUp(email, password);
+      else signInWithPassword(email, password);
+    } else {
+      sendMagicLink(email);
     }
-    sendMagicLink(email);
   };
   btn.addEventListener('click', submit);
-  emailEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
+  emailEl.addEventListener('keydown', e => { if (e.key === 'Enter') { if (showPassword && passwordEl) passwordEl.focus(); else submit(); } });
+  if (passwordEl) passwordEl.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+  document.querySelectorAll('[data-mode]').forEach(el => {
+    el.addEventListener('click', () => { loginMode = el.dataset.mode; renderLogin(emailEl.value.trim()); });
+  });
+  setTimeout(() => {
+    if (prefillEmail && showPassword && passwordEl) passwordEl.focus();
+    else emailEl.focus();
+  }, 100);
 }
 
-async function renderToday(user) {
+// ==========================================
+// Tab bar
+// ==========================================
+function tabBarHTML() {
+  return `
+    <nav class="tab-bar">
+      <div class="tab-bar-inner">
+        <button class="tab ${currentTab === 'today' ? 'active' : ''}" data-tab="today">
+          <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>
+          Today
+        </button>
+        <button class="tab ${currentTab === 'foods' ? 'active' : ''}" data-tab="foods">
+          <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7c0 2.5 1 5 3 7l4 6 4-6c2-2 3-4.5 3-7a7 7 0 00-7-7z"/><circle cx="12" cy="9" r="2"/></svg>
+          Foods
+        </button>
+      </div>
+    </nav>
+  `;
+}
+
+function wireTabBar() {
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => {
+      const tab = t.dataset.tab;
+      if (tab === currentTab) return;
+      currentTab = tab;
+      renderCurrentTab();
+    });
+  });
+}
+
+function renderCurrentTab() {
+  if (currentTab === 'today') renderToday();
+  else if (currentTab === 'foods') renderFoods();
+}
+
+// ==========================================
+// Today screen
+// ==========================================
+async function renderToday() {
   app.innerHTML = `
     <div class="screen">
       <div class="app-header">
@@ -422,7 +774,7 @@ async function renderToday(user) {
           <div class="app-sub">${fmtDate()}</div>
         </div>
         <div class="header-right">
-          <div class="user-pill">${user.email || user.id.slice(0,8)}</div>
+          <div class="user-pill">${esc(currentUser.email || currentUser.id.slice(0,8))}</div>
           <button class="btn btn-ghost btn-small" id="signout">Sign out</button>
         </div>
       </div>
@@ -437,38 +789,24 @@ async function renderToday(user) {
       <div class="section">
         <div class="section-header">
           <div class="section-title">Meals</div>
-          <button class="btn btn-primary btn-small" id="add-meal" disabled>+ Add</button>
+          <button class="btn btn-primary btn-small" disabled>+ Add</button>
         </div>
         <div class="empty-state">
           Meal logging ships next session.<br>
-          Scaffold is live — auth works, data layer is ready.
+          Add foods to your library first — tap the <strong>Foods</strong> tab below.
         </div>
       </div>
-
-      <div class="app-footer">
-        <span>Nutrition v0.1</span>
-        <span>Scaffold OK</span>
-      </div>
     </div>
+    ${tabBarHTML()}
   `;
   document.getElementById('signout').addEventListener('click', signOut);
+  wireTabBar();
 
-  // Fetch today's totals (empty on first run, but proves DB connection works)
   try {
-    const { data, error } = await sb
-      .from('day_totals')
-      .select('*')
-      .eq('date', todayISO())
-      .maybeSingle();
-    if (error) {
-      console.error('day_totals fetch error:', error);
-      toast('DB connection: ' + error.message);
-    } else if (data) {
-      updateKPIs(data);
-    }
-  } catch (e) {
-    console.error(e);
-  }
+    const { data } = await sb.from('day_totals').select('*')
+      .eq('date', todayISO()).maybeSingle();
+    if (data) updateKPIs(data);
+  } catch (e) { console.error(e); }
 }
 
 function updateKPIs(d) {
@@ -489,27 +827,397 @@ function updateKPIs(d) {
   `).join('');
 }
 
-// ========================================
+// ==========================================
+// Foods screen
+// ==========================================
+async function fetchFoods() {
+  const { data, error } = await sb.from('foods')
+    .select('*')
+    .order('favorite', { ascending: false })
+    .order('used_count', { ascending: false })
+    .order('name', { ascending: true });
+  if (error) { console.error(error); toast('Failed to load foods'); return []; }
+  return data || [];
+}
+
+async function renderFoods() {
+  app.innerHTML = `
+    <div class="screen">
+      <div class="app-header">
+        <div>
+          <div class="app-title">Foods</div>
+          <div class="app-sub">Your library</div>
+        </div>
+        <div class="header-right">
+          <button class="btn btn-primary btn-small" id="add-food">+ Add food</button>
+        </div>
+      </div>
+
+      <div class="field food-search">
+        <div class="input">
+          <input type="search" id="food-search" placeholder="Search foods…" value="${esc(foodSearch)}">
+        </div>
+      </div>
+
+      <div id="foods-content">
+        <div class="loading" style="min-height:40vh">Loading</div>
+      </div>
+    </div>
+    ${tabBarHTML()}
+  `;
+  wireTabBar();
+  document.getElementById('add-food').addEventListener('click', () => openFoodForm(null));
+  const searchEl = document.getElementById('food-search');
+  searchEl.addEventListener('input', () => {
+    foodSearch = searchEl.value.toLowerCase();
+    renderFoodList();
+  });
+
+  foodsCache = await fetchFoods();
+  renderFoodList();
+}
+
+function renderFoodList() {
+  const content = document.getElementById('foods-content');
+  if (!content) return;
+
+  if (foodsCache.length === 0) {
+    content.innerHTML = `
+      <div class="empty-state">
+        <div class="big">No foods yet</div>
+        Add your staples one by one — chicken breast, rice, oats, protein powder — and they'll show up here, sorted by what you log most.
+        <br>
+        <button class="btn btn-primary" id="empty-add">Add your first food</button>
+      </div>
+    `;
+    document.getElementById('empty-add').addEventListener('click', () => openFoodForm(null));
+    return;
+  }
+
+  const filtered = foodSearch
+    ? foodsCache.filter(f =>
+        (f.name || '').toLowerCase().includes(foodSearch) ||
+        (f.brand || '').toLowerCase().includes(foodSearch))
+    : foodsCache;
+
+  if (filtered.length === 0) {
+    content.innerHTML = `
+      <div class="empty-state">
+        No foods match "<strong>${esc(foodSearch)}</strong>".
+      </div>
+    `;
+    return;
+  }
+
+  content.innerHTML = `
+    <div class="food-list" id="food-list">
+      ${filtered.map(f => {
+        const cat = CAT_MAP[f.category] || CAT_MAP.other;
+        const kcal = Math.round(f.kcal_per_100g || kcalFromMacros(f.protein_g, f.fat_g, f.carbs_g, f.alcohol_g));
+        return `
+          <div class="food-row" data-id="${f.id}">
+            <div class="cat" title="${cat.label}">${cat.icon}</div>
+            <div class="info">
+              <div class="name">${esc(f.name)}</div>
+              ${f.brand ? `<div class="brand">${esc(f.brand)}</div>` : ''}
+              <div class="macros">P${Math.round(f.protein_g)} · F${Math.round(f.fat_g)} · C${Math.round(f.carbs_g)} · ${kcal} kcal /100g</div>
+            </div>
+            <div class="fav ${f.favorite ? '' : 'star-off'}">★</div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+
+  document.querySelectorAll('.food-row').forEach(row => {
+    row.addEventListener('click', () => {
+      const food = foodsCache.find(f => f.id === row.dataset.id);
+      if (food) openFoodForm(food);
+    });
+  });
+}
+
+// ==========================================
+// Food form (add / edit)
+// ==========================================
+function openFoodForm(food) {
+  const isEdit = !!food;
+  const f = food || {
+    name:'', brand:'', barcode:'',
+    protein_g:0, fat_g:0, carbs_g:0, alcohol_g:0,
+    fiber_g:0, sodium_mg:0,
+    default_serving_g:null, default_serving_label:'',
+    category:'other', suggested_meals:[], favorite:false,
+  };
+
+  openSheet(`
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <div class="sheet-title">${isEdit ? 'Edit food' : 'Add food'}</div>
+      <button class="sheet-close" id="sheet-close">✕</button>
+    </div>
+
+    <div class="field">
+      <label>Name</label>
+      <div class="input">
+        <input type="text" id="f-name" placeholder="e.g. Chicken breast" value="${esc(f.name)}">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Brand <span style="color:var(--muted); font-weight:400">· optional</span></label>
+      <div class="input">
+        <input type="text" id="f-brand" placeholder="e.g. Rewe Bio" value="${esc(f.brand || '')}">
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top:8px; margin-bottom:8px">
+      <div class="section-title">Per 100g</div>
+    </div>
+
+    <div class="row-3" style="margin-bottom:16px">
+      <div class="field">
+        <label>Protein</label>
+        <div class="input">
+          <input type="number" inputmode="decimal" step="0.1" min="0" id="f-p" placeholder="0" value="${f.protein_g ?? ''}">
+          <div class="unit">g</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Fat</label>
+        <div class="input">
+          <input type="number" inputmode="decimal" step="0.1" min="0" id="f-f" placeholder="0" value="${f.fat_g ?? ''}">
+          <div class="unit">g</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Carbs</label>
+        <div class="input">
+          <input type="number" inputmode="decimal" step="0.1" min="0" id="f-c" placeholder="0" value="${f.carbs_g ?? ''}">
+          <div class="unit">g</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kcal-preview">
+      <span class="lab">Calculated kcal /100g</span>
+      <span class="val"><span id="f-kcal">0</span><small>kcal</small></span>
+    </div>
+
+    <div class="row-3" style="margin-bottom:16px">
+      <div class="field">
+        <label>Fiber</label>
+        <div class="input">
+          <input type="number" inputmode="decimal" step="0.1" min="0" id="f-fiber" placeholder="0" value="${f.fiber_g ?? ''}">
+          <div class="unit">g</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Sodium</label>
+        <div class="input">
+          <input type="number" inputmode="decimal" step="1" min="0" id="f-sodium" placeholder="0" value="${f.sodium_mg ?? ''}">
+          <div class="unit">mg</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Alcohol</label>
+        <div class="input">
+          <input type="number" inputmode="decimal" step="0.1" min="0" id="f-alc" placeholder="0" value="${f.alcohol_g ?? ''}">
+          <div class="unit">g</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top:12px; margin-bottom:8px">
+      <div class="section-title">Default serving <span style="text-transform:none; letter-spacing:0; font-weight:400; color:var(--muted)">· optional</span></div>
+    </div>
+
+    <div class="row-2" style="margin-bottom:16px">
+      <div class="field">
+        <label>Serving size</label>
+        <div class="input">
+          <input type="number" inputmode="decimal" step="1" min="0" id="f-serving-g" placeholder="30" value="${f.default_serving_g ?? ''}">
+          <div class="unit">g</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Label</label>
+        <div class="input">
+          <input type="text" id="f-serving-label" placeholder="e.g. 1 scoop" value="${esc(f.default_serving_label || '')}">
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Category</label>
+      <div class="input">
+        <select id="f-category">
+          ${CATEGORIES.map(c => `
+            <option value="${c.id}" ${f.category === c.id ? 'selected' : ''}>${c.icon} ${c.label}</option>
+          `).join('')}
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Suggested meal buckets</label>
+      <div class="chips" id="f-meals">
+        ${MEAL_SLOTS.map(m => `
+          <button type="button" class="chip ${(f.suggested_meals || []).includes(m.id) ? 'active' : ''}" data-meal="${m.id}">${m.label}</button>
+        `).join('')}
+      </div>
+      <div class="hint">Where this food typically fits. Tap to toggle.</div>
+    </div>
+
+    <div class="toggle-row">
+      <div class="label-group">
+        <div class="label">Favorite</div>
+        <div class="hint">Always surface at the top of the list</div>
+      </div>
+      <button type="button" class="toggle ${f.favorite ? 'on' : ''}" id="f-fav" aria-pressed="${f.favorite}"></button>
+    </div>
+
+    <div style="display:flex; gap:12px; margin-top:24px">
+      ${isEdit ? `<button class="btn btn-danger" id="f-delete" style="flex:0 0 auto">Delete</button>` : ''}
+      <button class="btn btn-primary btn-block" id="f-save" style="flex:1">${isEdit ? 'Save' : 'Add to library'}</button>
+    </div>
+  `);
+
+  // Wire inputs
+  const getVals = () => ({
+    name: document.getElementById('f-name').value.trim(),
+    brand: document.getElementById('f-brand').value.trim(),
+    protein_g: Number(document.getElementById('f-p').value) || 0,
+    fat_g: Number(document.getElementById('f-f').value) || 0,
+    carbs_g: Number(document.getElementById('f-c').value) || 0,
+    fiber_g: Number(document.getElementById('f-fiber').value) || 0,
+    sodium_mg: Number(document.getElementById('f-sodium').value) || 0,
+    alcohol_g: Number(document.getElementById('f-alc').value) || 0,
+    default_serving_g: document.getElementById('f-serving-g').value
+      ? Number(document.getElementById('f-serving-g').value) : null,
+    default_serving_label: document.getElementById('f-serving-label').value.trim() || null,
+    category: document.getElementById('f-category').value,
+    suggested_meals: Array.from(document.querySelectorAll('#f-meals .chip.active')).map(c => c.dataset.meal),
+    favorite: document.getElementById('f-fav').classList.contains('on'),
+  });
+
+  const updateKcal = () => {
+    const v = getVals();
+    const k = kcalFromMacros(v.protein_g, v.fat_g, v.carbs_g, v.alcohol_g);
+    document.getElementById('f-kcal').textContent = Math.round(k);
+  };
+  ['f-p','f-f','f-c','f-alc'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updateKcal);
+  });
+  updateKcal();
+
+  // Meal chips
+  document.querySelectorAll('#f-meals .chip').forEach(c => {
+    c.addEventListener('click', () => c.classList.toggle('active'));
+  });
+
+  // Favorite toggle
+  document.getElementById('f-fav').addEventListener('click', () => {
+    const btn = document.getElementById('f-fav');
+    btn.classList.toggle('on');
+    btn.setAttribute('aria-pressed', btn.classList.contains('on'));
+  });
+
+  // Close
+  document.getElementById('sheet-close').addEventListener('click', closeSheet);
+
+  // Save
+  document.getElementById('f-save').addEventListener('click', async () => {
+    const v = getVals();
+    if (!v.name) { toast('Name is required'); return; }
+    if (!v.protein_g && !v.fat_g && !v.carbs_g && !v.alcohol_g) {
+      toast('Enter at least one macro');
+      return;
+    }
+    const saveBtn = document.getElementById('f-save');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+
+    const payload = {
+      name: v.name,
+      brand: v.brand || null,
+      protein_g: v.protein_g,
+      fat_g: v.fat_g,
+      carbs_g: v.carbs_g,
+      fiber_g: v.fiber_g,
+      sodium_mg: v.sodium_mg,
+      alcohol_g: v.alcohol_g,
+      default_serving_g: v.default_serving_g,
+      default_serving_label: v.default_serving_label,
+      category: v.category,
+      suggested_meals: v.suggested_meals,
+      favorite: v.favorite,
+      user_id: currentUser.id,
+      updated_at: new Date().toISOString(),
+    };
+
+    let result;
+    if (isEdit) {
+      result = await sb.from('foods').update(payload).eq('id', food.id);
+    } else {
+      result = await sb.from('foods').insert(payload);
+    }
+
+    if (result.error) {
+      saveBtn.disabled = false;
+      saveBtn.textContent = isEdit ? 'Save' : 'Add to library';
+      toast('Save failed: ' + result.error.message);
+      console.error(result.error);
+      return;
+    }
+
+    toast(isEdit ? 'Food updated' : 'Food added');
+    closeSheet();
+    foodsCache = await fetchFoods();
+    renderFoodList();
+  });
+
+  // Delete (edit only)
+  if (isEdit) {
+    document.getElementById('f-delete').addEventListener('click', async () => {
+      if (!confirm(`Delete "${food.name}"? This cannot be undone.`)) return;
+      const { error } = await sb.from('foods').delete().eq('id', food.id);
+      if (error) { toast('Delete failed'); console.error(error); return; }
+      toast('Food deleted');
+      closeSheet();
+      foodsCache = await fetchFoods();
+      renderFoodList();
+    });
+  }
+
+  // Autofocus
+  setTimeout(() => {
+    if (!isEdit) document.getElementById('f-name').focus();
+  }, 200);
+}
+
+// ==========================================
 // Init
-// ========================================
+// ==========================================
 async function init() {
-  // Get current session (handles both fresh load and magic-link redirect)
   const { data: { session } } = await sb.auth.getSession();
   if (session) {
-    await renderToday(session.user);
+    currentUser = session.user;
+    renderCurrentTab();
   } else {
     renderLogin();
   }
 }
 
-// React to auth state changes (sign-in, sign-out, token refresh)
 sb.auth.onAuthStateChange(async (event, session) => {
   if (event === 'SIGNED_IN' && session) {
-    // Clean URL (remove #access_token=... hash)
     history.replaceState(null, '', window.location.pathname + window.location.search);
-    await renderToday(session.user);
+    currentUser = session.user;
+    currentTab = 'today';
+    renderCurrentTab();
     toast('Signed in');
   } else if (event === 'SIGNED_OUT') {
+    currentUser = null;
     renderLogin();
   }
 });
