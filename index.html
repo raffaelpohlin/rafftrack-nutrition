@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0A1633">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Nutrition">
+<title>Nutrition · RaffTrack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSIjMEExNjMzIi8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI4IiBmaWxsPSIjNkU5QkZGIi8+PHRleHQgeD0iOTAiIHk9IjEyNSIgZm9udC1mYW1pbHk9IkFyY2hpdm8sIEhlbHZldGljYSBOZXVlLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIxMTAiIGZpbGw9IiNFOEVFRjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSItMyI+TjwvdGV4dD48L3N2Zz4=">
+<style>
+/* ========================================
+   RP Design System v0.2 — Private (dark) base
+   ======================================== */
+:root {
+  --bg:#0A1633; --surface:#101F45; --surface-2:#16285A;
+  --text:#E8EEF8; --muted:#9DAECB; --line:#24386E;
+  --primary:#6E9BFF; --primary-hover:#8FB2FF; --primary-ink:#06122E; --primary-soft:#1A2F66;
+  --go:#3DC47A; --caution:#E5B040; --stop:#FF6B6B; --focus:#8FB2FF;
+  --font:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --headline-wdth:115%;
+  --t-fast:120ms; --t-base:200ms; --t-slow:300ms;
+  --ease-out:cubic-bezier(.2,.7,.2,1);
+  --r-control:4px; --r-box:8px; --r-sheet:14px;
+  color-scheme:dark;
+}
+:root[data-theme="light"] {
+  --bg:#EEF3FA; --surface:#FFFFFF; --surface-2:#F6F9FD;
+  --text:#1C2433; --muted:#56647A; --line:#D5DEEA;
+  --primary:#1446D8; --primary-hover:#0F38B0; --primary-ink:#FFFFFF; --primary-soft:#E3EBFF;
+  --go:#1B8A4B; --caution:#A86F00; --stop:#C62F2F; --focus:#1446D8;
+  color-scheme:light;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg); color:var(--text);
+  font-family:var(--font); font-size:16px; line-height:1.55;
+  font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh; min-height:100dvh;
+  overflow-x:hidden;
+}
+:focus-visible { outline:2px solid var(--focus); outline-offset:2px; border-radius:2px; }
+code,pre { font-family:var(--mono); font-size:13.5px; }
+
+/* ========================================
+   Layout
+   ======================================== */
+.screen {
+  max-width:520px; margin:0 auto;
+  padding-top:max(55px, calc(env(safe-area-inset-top, 0px) + 35px));
+  padding-left:22px; padding-right:22px; padding-bottom:40px;
+  position:relative;
+}
+.blueline {
+  position:fixed; top:0; left:0; right:0;
+  height:6px; background:var(--primary);
+  z-index:100;
+}
+.app-header {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  margin-bottom:28px; gap:16px;
+}
+.app-title {
+  font-size:34px; font-weight:800;
+  font-stretch:var(--headline-wdth); letter-spacing:-0.025em;
+  line-height:1;
+}
+.app-sub {
+  font-size:13px; color:var(--muted);
+  margin-top:4px;
+}
+.header-right {
+  display:flex; flex-direction:column; align-items:flex-end; gap:6px;
+}
+.user-pill {
+  font-size:12px; color:var(--muted);
+  font-family:var(--mono);
+  max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+
+/* ========================================
+   Buttons (RP DS)
+   ======================================== */
+.btn {
+  font:inherit; font-size:15px; font-weight:600;
+  border-radius:var(--r-control);
+  padding:0 18px; min-height:44px;
+  border:1.5px solid transparent; cursor:pointer;
+  transition:background-color var(--t-fast) var(--ease-out),
+             border-color var(--t-fast) var(--ease-out),
+             transform var(--t-fast) var(--ease-out);
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  white-space:nowrap;
+}
+.btn:active { transform:scale(.98); }
+.btn-primary { background:var(--primary); color:var(--primary-ink); }
+.btn-primary:hover { background:var(--primary-hover); }
+.btn-primary:disabled { opacity:0.5; cursor:not-allowed; }
+.btn-secondary { background:var(--surface); color:var(--text); border-color:var(--line); }
+.btn-secondary:hover { border-color:var(--text); }
+.btn-ghost { background:transparent; color:var(--primary); }
+.btn-danger { background:transparent; color:var(--stop); border-color:var(--stop); }
+.btn-small { min-height:32px; padding:0 12px; font-size:13px; }
+.btn-block { width:100%; }
+
+/* ========================================
+   Fields (RP DS)
+   ======================================== */
+.field { display:grid; gap:6px; }
+.field label {
+  font-size:14px; font-weight:600;
+}
+.field .input {
+  display:flex; align-items:center;
+  border:1.5px solid var(--line); border-radius:var(--r-control);
+  background:var(--surface); min-height:44px;
+  transition:border-color var(--t-fast) var(--ease-out);
+}
+.field .input:focus-within { border-color:var(--primary); }
+.field input {
+  font:inherit; border:0; background:transparent; color:var(--text);
+  padding:0 12px; flex:1; min-width:0; height:42px;
+  outline:none; font-variant-numeric:tabular-nums;
+}
+.field input::placeholder { color:var(--muted); opacity:0.7; }
+.field .hint { font-size:13px; color:var(--muted); }
+
+/* ========================================
+   Login screen
+   ======================================== */
+.login-wrap {
+  min-height:70vh;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.login-card {
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--r-sheet);
+  padding:32px 24px;
+}
+.login-title {
+  font-size:28px; font-weight:800;
+  font-stretch:var(--headline-wdth); letter-spacing:-0.02em;
+  line-height:1.1; margin-bottom:8px;
+}
+.login-sub {
+  font-size:15px; color:var(--muted);
+  margin-bottom:28px; line-height:1.45;
+}
+.login-wrap .field { margin-bottom:16px; }
+
+.login-state {
+  margin-top:20px; padding:14px 16px;
+  border-radius:var(--r-box);
+  font-size:14px; line-height:1.5;
+  display:none;
+}
+.login-state.show { display:block; }
+.login-state.info {
+  background:var(--primary-soft);
+  border:1px solid var(--primary);
+  color:var(--text);
+}
+.login-state.err {
+  background:transparent;
+  border-left:4px solid var(--stop);
+  border-radius:0 var(--r-box) var(--r-box) 0;
+  color:var(--text);
+}
+
+/* ========================================
+   KPI cards (RP DS) — the signature top-border blue line
+   ======================================== */
+.kpis {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:12px; margin-bottom:24px;
+}
+.kpi {
+  background:var(--surface); border:1px solid var(--line);
+  border-top:3px solid var(--primary);
+  border-radius:0 0 var(--r-box) var(--r-box);
+  padding:14px 16px;
+}
+.kpi .label {
+  font-size:13px; color:var(--muted);
+  letter-spacing:0.02em;
+}
+.kpi .value {
+  font-size:32px; font-weight:800;
+  font-stretch:var(--headline-wdth); line-height:1.1;
+  margin-top:4px;
+}
+.kpi .value small {
+  font-size:14px; font-weight:600; color:var(--muted);
+  margin-left:4px; font-stretch:100%;
+}
+.kpi .delta {
+  font-size:12px; font-weight:600; margin-top:4px;
+  color:var(--muted);
+}
+
+/* ========================================
+   Section
+   ======================================== */
+.section { margin-bottom:28px; }
+.section-header {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:14px;
+}
+.section-title {
+  font-size:14px; font-weight:700;
+  color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;
+}
+.empty-state {
+  background:var(--surface);
+  border:1px dashed var(--line);
+  border-radius:var(--r-box);
+  padding:32px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px; line-height:1.5;
+}
+
+/* ========================================
+   Loading
+   ======================================== */
+.loading {
+  min-height:100vh; min-height:100dvh;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--muted); font-size:14px;
+  letter-spacing:0.08em; text-transform:uppercase;
+}
+.loading::before {
+  content:""; width:14px; height:14px;
+  border:2px solid var(--line);
+  border-top-color:var(--primary);
+  border-radius:50%;
+  animation:spin 0.8s linear infinite;
+  margin-right:12px;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ========================================
+   Toast
+   ======================================== */
+.toast {
+  position:fixed; left:50%; bottom:24px;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--text); color:var(--bg);
+  padding:12px 18px; border-radius:var(--r-box);
+  font-size:14px; font-weight:600;
+  opacity:0; pointer-events:none;
+  transition:opacity .15s ease-out, transform .15s ease-out;
+  z-index:200; max-width:90vw;
+}
+.toast.show {
+  opacity:1; transform:translateX(-50%) translateY(0);
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+.app-footer {
+  margin-top:40px; padding-top:20px;
+  border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:12px; color:var(--muted);
+  letter-spacing:0.08em; text-transform:uppercase;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  * { transition:none !important; animation:none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="blueline" role="presentation"></div>
+
+<div id="app">
+  <div class="loading">Loading</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+// ========================================
+// Config
+// ========================================
+const SUPABASE_URL = 'https://wiyvkdjyqynhpeeiygqp.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_WdD0Ii2rIpAoJjM3zWU8kg_cOc68Toe';
+
+const sb = createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
+  }
+});
+
+const app = document.getElementById('app');
+
+// ========================================
+// Utils
+// ========================================
+function toast(msg, type='info') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show';
+  setTimeout(() => el.className = 'toast', 2800);
+}
+function todayISO() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function fmtDate() {
+  return new Date().toLocaleDateString('en-GB', {
+    weekday:'long', day:'numeric', month:'long'
+  });
+}
+
+// ========================================
+// Auth flow
+// ========================================
+async function sendMagicLink(email) {
+  const btn = document.getElementById('send-link');
+  const stateEl = document.getElementById('login-state');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  const { error } = await sb.auth.signInWithOtp({
+    email,
+    options: {
+      emailRedirectTo: window.location.href.split('#')[0],
+    }
+  });
+  btn.disabled = false;
+  btn.textContent = 'Send magic link';
+  if (error) {
+    stateEl.className = 'login-state err show';
+    stateEl.textContent = error.message || 'Could not send link. Try again.';
+    return;
+  }
+  stateEl.className = 'login-state info show';
+  stateEl.innerHTML = `Magic link sent to <strong>${email}</strong>. Check your inbox (and spam). Tap the link on <em>this</em> device.`;
+}
+
+async function signOut() {
+  await sb.auth.signOut();
+  toast('Signed out');
+}
+
+// ========================================
+// Screens
+// ========================================
+function renderLogin() {
+  app.innerHTML = `
+    <div class="screen">
+      <div class="app-header">
+        <div>
+          <div class="app-title">Nutrition</div>
+          <div class="app-sub">RaffTrack ecosystem</div>
+        </div>
+      </div>
+      <div class="login-wrap">
+        <div class="login-card">
+          <div class="login-title">Sign in</div>
+          <div class="login-sub">
+            Enter your email. You'll get a magic link —
+            tap it on this device to sign in.
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <div class="input">
+              <input type="email" id="email" inputmode="email"
+                autocomplete="email" placeholder="you@example.com">
+            </div>
+          </div>
+          <div style="margin-top:20px">
+            <button class="btn btn-primary btn-block" id="send-link">
+              Send magic link
+            </button>
+          </div>
+          <div class="login-state" id="login-state"></div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span>Nutrition v0.1</span>
+        <span>Session 1</span>
+      </div>
+    </div>
+  `;
+  const emailEl = document.getElementById('email');
+  const btn = document.getElementById('send-link');
+  const submit = () => {
+    const email = emailEl.value.trim();
+    if (!email || !email.includes('@')) {
+      toast('Enter a valid email');
+      return;
+    }
+    sendMagicLink(email);
+  };
+  btn.addEventListener('click', submit);
+  emailEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
+}
+
+async function renderToday(user) {
+  app.innerHTML = `
+    <div class="screen">
+      <div class="app-header">
+        <div>
+          <div class="app-title">Today</div>
+          <div class="app-sub">${fmtDate()}</div>
+        </div>
+        <div class="header-right">
+          <div class="user-pill">${user.email || user.id.slice(0,8)}</div>
+          <button class="btn btn-ghost btn-small" id="signout">Sign out</button>
+        </div>
+      </div>
+
+      <div class="kpis" id="kpis">
+        <div class="kpi"><div class="label">Protein</div><div class="value">0<small>g</small></div><div class="delta">of 200 floor</div></div>
+        <div class="kpi"><div class="label">Fat</div><div class="value">0<small>g</small></div><div class="delta">of 75 floor</div></div>
+        <div class="kpi"><div class="label">Carbs</div><div class="value">0<small>g</small></div><div class="delta">—</div></div>
+        <div class="kpi"><div class="label">Calories</div><div class="value">0<small>kcal</small></div><div class="delta">—</div></div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">Meals</div>
+          <button class="btn btn-primary btn-small" id="add-meal" disabled>+ Add</button>
+        </div>
+        <div class="empty-state">
+          Meal logging ships next session.<br>
+          Scaffold is live — auth works, data layer is ready.
+        </div>
+      </div>
+
+      <div class="app-footer">
+        <span>Nutrition v0.1</span>
+        <span>Scaffold OK</span>
+      </div>
+    </div>
+  `;
+  document.getElementById('signout').addEventListener('click', signOut);
+
+  // Fetch today's totals (empty on first run, but proves DB connection works)
+  try {
+    const { data, error } = await sb
+      .from('day_totals')
+      .select('*')
+      .eq('date', todayISO())
+      .maybeSingle();
+    if (error) {
+      console.error('day_totals fetch error:', error);
+      toast('DB connection: ' + error.message);
+    } else if (data) {
+      updateKPIs(data);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+function updateKPIs(d) {
+  const kpis = document.getElementById('kpis');
+  if (!kpis) return;
+  const rows = [
+    { label:'Protein', val:Math.round(d.protein_g||0), unit:'g', sub:'of 200 floor' },
+    { label:'Fat', val:Math.round(d.fat_g||0), unit:'g', sub:'of 75 floor' },
+    { label:'Carbs', val:Math.round(d.carbs_g||0), unit:'g', sub:d.alcohol_g ? `+${Math.round(d.alcohol_g)}g alcohol` : '—' },
+    { label:'Calories', val:Math.round(d.kcal||0), unit:'kcal', sub:`${d.entry_count||0} entries` },
+  ];
+  kpis.innerHTML = rows.map(r => `
+    <div class="kpi">
+      <div class="label">${r.label}</div>
+      <div class="value">${r.val}<small>${r.unit}</small></div>
+      <div class="delta">${r.sub}</div>
+    </div>
+  `).join('');
+}
+
+// ========================================
+// Init
+// ========================================
+async function init() {
+  // Get current session (handles both fresh load and magic-link redirect)
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    await renderToday(session.user);
+  } else {
+    renderLogin();
+  }
+}
+
+// React to auth state changes (sign-in, sign-out, token refresh)
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (event === 'SIGNED_IN' && session) {
+    // Clean URL (remove #access_token=... hash)
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+    await renderToday(session.user);
+    toast('Signed in');
+  } else if (event === 'SIGNED_OUT') {
+    renderLogin();
+  }
+});
+
+init();
+</script>
+
+</body>
+</html>
