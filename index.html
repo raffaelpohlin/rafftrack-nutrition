@@ -13,7 +13,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSIjMEExNjMzIi8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI4IiBmaWxsPSIjNkU5QkZGIi8+PHRleHQgeD0iOTAiIHk9IjEyNSIgZm9udC1mYW1pbHk9IkFyY2hpdm8sIEhlbHZldGljYSBOZXVlLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIxMTAiIGZpbGw9IiNFOEVFRjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSItMyI+TjwvdGV4dD48L3N2Zz4=">
 <style>
-/* RP Design System v0.2 — Private (dark) base */
 :root {
   --bg:#0A1633; --surface:#101F45; --surface-2:#16285A;
   --text:#E8EEF8; --muted:#9DAECB; --line:#24386E;
@@ -29,28 +28,13 @@
   color-scheme:dark;
 }
 * { box-sizing:border-box; margin:0; padding:0; }
-body {
-  background:var(--bg); color:var(--text);
-  font-family:var(--font); font-size:16px; line-height:1.55;
-  font-variant-numeric:tabular-nums;
-  -webkit-font-smoothing:antialiased;
-  min-height:100vh; min-height:100dvh; overflow-x:hidden;
-}
+body { background:var(--bg); color:var(--text); font-family:var(--font); font-size:16px; line-height:1.55; font-variant-numeric:tabular-nums; -webkit-font-smoothing:antialiased; min-height:100vh; min-height:100dvh; overflow-x:hidden; }
 :focus-visible { outline:2px solid var(--focus); outline-offset:2px; border-radius:2px; }
 code { font-family:var(--mono); font-size:13.5px; }
 
-.screen {
-  max-width:520px; margin:0 auto;
-  padding-top:max(55px, calc(env(safe-area-inset-top, 0px) + 35px));
-  padding-left:22px; padding-right:22px;
-  padding-bottom:calc(var(--tab-height) + env(safe-area-inset-bottom, 0px) + 40px);
-  position:relative;
-}
+.screen { max-width:520px; margin:0 auto; padding-top:max(55px, calc(env(safe-area-inset-top, 0px) + 35px)); padding-left:22px; padding-right:22px; padding-bottom:calc(var(--tab-height) + env(safe-area-inset-bottom, 0px) + 40px); position:relative; }
 .screen.no-tabs { padding-bottom:40px; }
-.blueline {
-  position:fixed; top:0; left:0; right:0;
-  height:6px; background:var(--primary); z-index:100;
-}
+.blueline { position:fixed; top:0; left:0; right:0; height:6px; background:var(--primary); z-index:100; }
 
 .app-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:28px; gap:16px; }
 .app-title { font-size:34px; font-weight:800; font-stretch:var(--headline-wdth); letter-spacing:-0.025em; line-height:1; }
@@ -58,13 +42,13 @@ code { font-family:var(--mono); font-size:13.5px; }
 .header-right { display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
 .user-pill { font-size:12px; color:var(--muted); font-family:var(--mono); max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 
-/* Bottom tab bar */
+/* Tab bar */
 .tab-bar { position:fixed; bottom:0; left:0; right:0; background:var(--surface); border-top:1px solid var(--line); padding-bottom:env(safe-area-inset-bottom, 0px); z-index:90; display:flex; justify-content:center; }
 .tab-bar-inner { max-width:520px; width:100%; display:flex; }
-.tab { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:10px 8px; background:none; border:0; cursor:pointer; color:var(--muted); font:inherit; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; min-height:var(--tab-height); position:relative; transition:color var(--t-fast) var(--ease-out); }
+.tab { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:10px 4px; background:none; border:0; cursor:pointer; color:var(--muted); font:inherit; font-size:10px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; min-height:var(--tab-height); position:relative; transition:color var(--t-fast) var(--ease-out); }
 .tab.active { color:var(--primary); }
-.tab.active::before { content:""; position:absolute; top:0; left:20%; right:20%; height:3px; background:var(--primary); border-radius:0 0 3px 3px; }
-.tab svg { width:24px; height:24px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.tab.active::before { content:""; position:absolute; top:0; left:15%; right:15%; height:3px; background:var(--primary); border-radius:0 0 3px 3px; }
+.tab svg { width:22px; height:22px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
 
 /* Buttons */
 .btn { font:inherit; font-size:15px; font-weight:600; border-radius:var(--r-control); padding:0 18px; min-height:44px; border:1.5px solid transparent; cursor:pointer; transition:background-color var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out); display:inline-flex; align-items:center; justify-content:center; gap:8px; white-space:nowrap; }
@@ -78,7 +62,6 @@ code { font-family:var(--mono); font-size:13.5px; }
 .btn-small { min-height:32px; padding:0 12px; font-size:13px; }
 .btn-lg { min-height:52px; padding:0 22px; font-size:16px; }
 .btn-block { width:100%; }
-.btn-link { background:none; border:0; color:var(--primary); font:inherit; font-size:14px; font-weight:600; cursor:pointer; padding:8px; text-align:center; width:100%; }
 
 /* Fields */
 .field { display:grid; gap:6px; margin-bottom:16px; }
@@ -111,13 +94,36 @@ code { font-family:var(--mono); font-size:13.5px; }
 .mode-toggle button { background:none; border:0; color:var(--primary); font:inherit; font-weight:600; cursor:pointer; padding:0 4px; }
 .mode-toggle button:hover { text-decoration:underline; }
 
-/* KPIs */
-.kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:24px; }
-.kpi { background:var(--surface); border:1px solid var(--line); border-top:3px solid var(--primary); border-radius:0 0 var(--r-box) var(--r-box); padding:14px 16px; }
-.kpi .label { font-size:13px; color:var(--muted); letter-spacing:0.02em; }
-.kpi .value { font-size:32px; font-weight:800; font-stretch:var(--headline-wdth); line-height:1.1; margin-top:4px; }
-.kpi .value small { font-size:14px; font-weight:600; color:var(--muted); margin-left:4px; font-stretch:100%; }
-.kpi .delta { font-size:12px; font-weight:600; margin-top:4px; color:var(--muted); }
+/* KPIs (supports 4 or 6 tile layouts) */
+.kpis { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:20px; }
+.kpi { background:var(--surface); border:1px solid var(--line); border-top:3px solid var(--primary); border-radius:0 0 var(--r-box) var(--r-box); padding:12px 14px; }
+.kpi .label { font-size:11px; color:var(--muted); letter-spacing:0.04em; font-weight:600; text-transform:uppercase; }
+.kpi .value { font-size:26px; font-weight:800; font-stretch:var(--headline-wdth); line-height:1.1; margin-top:4px; }
+.kpi .value small { font-size:12px; font-weight:600; color:var(--muted); margin-left:3px; font-stretch:100%; }
+.kpi .delta { font-size:11px; font-weight:600; margin-top:4px; color:var(--muted); }
+.kpi.balance { border-top-color:var(--go); }
+.kpi.balance.surplus { border-top-color:var(--caution); }
+.kpi.balance.heavy-surplus { border-top-color:var(--stop); }
+.kpi.expenditure { border-top-color:var(--caution); }
+.kpi .value.pos { color:var(--go); } .kpi .value.neg { color:var(--caution); } .kpi .value.heavy { color:var(--stop); }
+
+/* Active kcal input */
+.active-kcal-row {
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r-box); padding:10px 14px; margin-bottom:20px;
+  display:flex; align-items:center; gap:10px;
+}
+.active-kcal-row .ico { font-size:18px; }
+.active-kcal-row .lbl { flex:1; font-size:13px; font-weight:700; letter-spacing:0.04em; color:var(--muted); text-transform:uppercase; }
+.active-kcal-row input {
+  background:var(--surface-2); border:1.5px solid var(--line); border-radius:var(--r-control);
+  color:var(--text); font:inherit; font-size:15px; font-weight:700;
+  padding:6px 10px; width:90px; text-align:right;
+  font-variant-numeric:tabular-nums; outline:none;
+  min-height:36px;
+}
+.active-kcal-row input:focus { border-color:var(--primary); }
+.active-kcal-row .unit { font-size:12px; color:var(--muted); font-weight:700; }
 
 /* Section */
 .section { margin-bottom:28px; }
@@ -139,27 +145,25 @@ code { font-family:var(--mono); font-size:13.5px; }
 .meal-entry .info { flex:1; min-width:0; }
 .meal-entry .name { font-size:14px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .meal-entry .meta { font-size:11px; color:var(--muted); font-family:var(--mono); margin-top:1px; }
-.meal-entry .del {
-  background:none; border:0; color:var(--muted); font-size:14px;
-  cursor:pointer; padding:4px 8px; line-height:1;
-}
+.meal-entry .del { background:none; border:0; color:var(--muted); font-size:14px; cursor:pointer; padding:4px 8px; line-height:1; }
 .meal-entry .del:hover { color:var(--stop); }
+.meal-entry .dish-badge { font-size:9px; background:rgba(110,155,255,0.2); color:var(--primary); padding:2px 5px; border-radius:3px; font-weight:800; letter-spacing:0.08em; margin-left:6px; vertical-align:middle; }
 
-/* Food list */
+/* Food / Dish list rows */
 .food-search { margin-bottom:16px; }
 .food-list { display:flex; flex-direction:column; gap:8px; }
-.food-row { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-box); padding:12px 14px; display:flex; align-items:center; gap:12px; cursor:pointer; transition:border-color var(--t-fast) var(--ease-out), background-color var(--t-fast) var(--ease-out); }
-.food-row:hover { border-color:var(--primary); }
-.food-row:active { background:var(--surface-2); }
-.food-row .cat { width:36px; height:36px; border-radius:var(--r-control); background:var(--primary-soft); color:var(--primary); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
-.food-row .info { flex:1; min-width:0; }
-.food-row .name { font-size:15px; font-weight:700; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.food-row .brand { font-size:12px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.food-row .macros { font-size:12px; color:var(--muted); font-family:var(--mono); margin-top:2px; }
-.food-row .fav { color:var(--caution); font-size:16px; margin-left:auto; }
-.food-row .star-off { color:var(--line); }
+.food-row, .dish-row { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-box); padding:12px 14px; display:flex; align-items:center; gap:12px; cursor:pointer; transition:border-color var(--t-fast) var(--ease-out), background-color var(--t-fast) var(--ease-out); }
+.food-row:hover, .dish-row:hover { border-color:var(--primary); }
+.food-row:active, .dish-row:active { background:var(--surface-2); }
+.food-row .cat, .dish-row .cat { width:36px; height:36px; border-radius:var(--r-control); background:var(--primary-soft); color:var(--primary); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.food-row .info, .dish-row .info { flex:1; min-width:0; }
+.food-row .name, .dish-row .name { font-size:15px; font-weight:700; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.food-row .brand, .dish-row .brand { font-size:12px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.food-row .macros, .dish-row .macros { font-size:12px; color:var(--muted); font-family:var(--mono); margin-top:2px; }
+.food-row .fav, .dish-row .fav { color:var(--caution); font-size:16px; margin-left:auto; }
+.food-row .star-off, .dish-row .star-off { color:var(--line); }
 
-/* Food form sheet (bottom) */
+/* Sheet */
 .sheet-backdrop { position:fixed; inset:0; background:rgba(10,22,51,0.75); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); z-index:150; opacity:0; pointer-events:none; transition:opacity var(--t-base) var(--ease-out); }
 .sheet-backdrop.show { opacity:1; pointer-events:auto; }
 .sheet { position:fixed; bottom:0; left:0; right:0; background:var(--bg); border-top:1px solid var(--line); border-radius:var(--r-sheet) var(--r-sheet) 0 0; max-height:92vh; overflow-y:auto; z-index:151; transform:translateY(100%); transition:transform var(--t-base) var(--ease-out); padding-bottom:env(safe-area-inset-bottom, 0px); }
@@ -189,125 +193,119 @@ code { font-family:var(--mono); font-size:13.5px; }
 .kcal-preview .val { font-size:22px; font-weight:800; font-stretch:var(--headline-wdth); color:var(--text); }
 .kcal-preview .val small { font-size:13px; color:var(--muted); font-weight:600; margin-left:3px; font-stretch:100%; }
 
-/* ========================================
-   SESSION 3 — Meal Composer (fullscreen overlay)
-   ======================================== */
-.mc {
-  position:fixed; inset:0;
-  background:var(--bg);
-  z-index:200;
-  display:none;
-  flex-direction:column;
-  overflow:hidden;
+/* Dish form — ingredient list */
+.dish-ing-list {
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:var(--r-box); overflow:hidden; margin-bottom:10px;
 }
-.mc.show { display:flex; }
+.dish-ing-row {
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px;
+  border-top:1px solid var(--line);
+}
+.dish-ing-row:first-child { border-top:0; }
+.dish-ing-row .ico { font-size:16px; width:24px; text-align:center; }
+.dish-ing-row .info { flex:1; min-width:0; }
+.dish-ing-row .nm { font-size:13px; font-weight:700; }
+.dish-ing-row .m { font-size:10px; color:var(--muted); font-family:var(--mono); margin-top:1px; }
+.dish-ing-row .g {
+  background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-control);
+  padding:3px 8px; font-family:var(--mono); font-size:12px;
+  display:flex; align-items:center; gap:4px;
+}
+.dish-ing-row .g input { background:transparent; border:0; color:var(--text); font:inherit; width:46px; text-align:right; outline:none; }
+.dish-ing-row .rm { background:none; border:0; color:var(--muted); font-size:13px; cursor:pointer; padding:4px 6px; line-height:1; }
+.dish-ing-row .rm:hover { color:var(--stop); }
+.dish-ing-total {
+  background:linear-gradient(135deg, rgba(110,155,255,0.12), rgba(110,155,255,0.03));
+  border:1px solid var(--line); border-left:3px solid var(--primary);
+  border-radius:var(--r-box); padding:10px 14px; margin-bottom:12px;
+  display:flex; justify-content:space-between; align-items:baseline;
+}
+.dish-ing-total .lab { font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; font-weight:700; }
+.dish-ing-total .val { font-size:13px; color:var(--text); font-weight:700; font-family:var(--mono); }
 
-.mc-top {
-  flex-shrink:0;
-  padding:max(55px, calc(env(safe-area-inset-top, 0px) + 35px)) 22px 14px;
-  background:var(--bg);
-  border-bottom:1px solid var(--line);
+/* Ingredient picker (used inside dish form) */
+.ing-picker {
+  background:var(--surface-2); border:1px dashed var(--primary); border-radius:var(--r-box);
+  padding:12px 14px; margin-bottom:14px;
 }
-.mc-top-row {
-  display:flex; align-items:center; justify-content:space-between;
-  gap:16px; margin-bottom:14px;
+.ing-picker .ip-search {
+  background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-control);
+  display:flex; align-items:center; padding:0 10px; margin-bottom:8px; min-height:40px;
 }
-.mc-close-btn {
-  background:none; border:0; color:var(--muted);
-  font-size:22px; cursor:pointer; padding:0;
-  width:36px; height:36px; display:grid; place-items:center;
-  line-height:1;
+.ing-picker .ip-search input { background:transparent; border:0; color:var(--text); font:inherit; font-size:14px; flex:1; outline:none; min-width:0; }
+.ing-picker-list {
+  max-height:180px; overflow-y:auto;
+  display:flex; flex-direction:column; gap:4px;
 }
+.ing-picker .ip-row {
+  display:flex; align-items:center; gap:8px;
+  padding:7px 10px;
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r-control); cursor:pointer;
+}
+.ing-picker .ip-row:hover { border-color:var(--primary); }
+.ing-picker .ip-row .ico { font-size:14px; }
+.ing-picker .ip-row .nm { flex:1; font-size:12px; font-weight:600; }
+.ing-picker .ip-row .mac { font-size:10px; color:var(--muted); font-family:var(--mono); }
+.ing-picker-portion { display:flex; gap:8px; align-items:center; margin-top:10px; }
+.ing-picker-portion .ico-line { font-size:16px; }
+.ing-picker-portion .name { flex:1; font-size:13px; font-weight:700; }
+.ing-picker-portion .amount { background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-control); padding:0 10px; display:flex; align-items:center; gap:4px; min-height:36px; }
+.ing-picker-portion .amount input { background:transparent; border:0; color:var(--text); font:inherit; font-size:14px; width:50px; text-align:right; outline:none; }
+.ing-picker-portion .amount .u { font-size:11px; color:var(--muted); }
+
+/* Meal composer */
+.mc { position:fixed; inset:0; background:var(--bg); z-index:200; display:none; flex-direction:column; overflow:hidden; }
+.mc.show { display:flex; }
+.mc-top { flex-shrink:0; padding:max(55px, calc(env(safe-area-inset-top, 0px) + 35px)) 22px 14px; background:var(--bg); border-bottom:1px solid var(--line); }
+.mc-top-row { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:14px; }
+.mc-close-btn { background:none; border:0; color:var(--muted); font-size:22px; cursor:pointer; padding:0; width:36px; height:36px; display:grid; place-items:center; line-height:1; }
 .mc-close-btn:hover { color:var(--text); }
 .mc-top-title { font-size:24px; font-weight:800; font-stretch:var(--headline-wdth); letter-spacing:-0.02em; line-height:1; }
 .mc-top-sub { font-size:12px; color:var(--muted); margin-top:3px; }
-.mc-bucket-row {
-  display:flex; gap:6px;
-  overflow-x:auto; padding-bottom:4px;
-  margin:0 -22px; padding-left:22px; padding-right:22px;
-  scrollbar-width:none;
-}
+.mc-bucket-row { display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; margin:0 -22px; padding-left:22px; padding-right:22px; scrollbar-width:none; }
 .mc-bucket-row::-webkit-scrollbar { display:none; }
-.mc-bucket {
-  flex-shrink:0;
-  background:var(--surface); border:1.5px solid var(--line);
-  border-radius:999px;
-  padding:8px 14px;
-  font:inherit; font-size:13px; font-weight:700;
-  color:var(--muted); cursor:pointer;
-  display:inline-flex; align-items:center; gap:6px;
-  transition:all var(--t-fast) var(--ease-out);
-}
+.mc-bucket { flex-shrink:0; background:var(--surface); border:1.5px solid var(--line); border-radius:999px; padding:8px 14px; font:inherit; font-size:13px; font-weight:700; color:var(--muted); cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition:all var(--t-fast) var(--ease-out); }
 .mc-bucket.active { background:var(--primary-soft); border-color:var(--primary); color:var(--primary); }
 .mc-bucket .ico { font-size:15px; }
 
-.mc-body {
-  flex:1; overflow-y:auto;
-  padding:16px 22px 24px;
-  max-width:520px; margin:0 auto; width:100%;
-}
+.mc-body { flex:1; overflow-y:auto; padding:16px 22px 24px; max-width:520px; margin:0 auto; width:100%; }
 
-/* Draft section */
-.mc-draft {
-  background:var(--surface);
-  border:1px solid var(--primary);
-  border-radius:var(--r-box);
-  margin-bottom:20px;
-  overflow:hidden;
+.mc-source-toggle {
+  display:flex; background:var(--surface-2); border:1.5px solid var(--line);
+  border-radius:var(--r-control); overflow:hidden; margin-bottom:14px;
 }
-.mc-draft-head {
-  padding:10px 14px;
-  background:linear-gradient(135deg, rgba(110,155,255,0.15), rgba(110,155,255,0.05));
-  display:flex; justify-content:space-between; align-items:center;
+.mc-source-toggle button {
+  flex:1; background:transparent; border:0;
+  padding:8px; color:var(--muted); font:inherit; font-size:13px; font-weight:800;
+  cursor:pointer; letter-spacing:0.05em;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  min-height:40px;
 }
+.mc-source-toggle button.on { background:var(--primary); color:var(--primary-ink); }
+
+.mc-draft { background:var(--surface); border:1px solid var(--primary); border-radius:var(--r-box); margin-bottom:20px; overflow:hidden; }
+.mc-draft-head { padding:10px 14px; background:linear-gradient(135deg, rgba(110,155,255,0.15), rgba(110,155,255,0.05)); display:flex; justify-content:space-between; align-items:center; }
 .mc-draft-label { font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--primary); }
 .mc-draft-total { font-size:12px; color:var(--text); font-family:var(--mono); font-weight:700; }
-.mc-draft-item {
-  display:flex; align-items:center; gap:10px;
-  padding:10px 14px;
-  border-top:1px solid var(--line);
-}
+.mc-draft-item { display:flex; align-items:center; gap:10px; padding:10px 14px; border-top:1px solid var(--line); }
 .mc-draft-item:first-of-type { border-top:0; }
 .mc-draft-item .ico { font-size:18px; width:26px; text-align:center; }
 .mc-draft-item .info { flex:1; min-width:0; }
 .mc-draft-item .name { font-size:14px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .mc-draft-item .meta { font-size:11px; color:var(--muted); font-family:var(--mono); margin-top:1px; }
-.mc-draft-item .rm {
-  background:none; border:0; color:var(--muted);
-  font-size:14px; cursor:pointer; padding:4px 8px; line-height:1;
-}
+.mc-draft-item .rm { background:none; border:0; color:var(--muted); font-size:14px; cursor:pointer; padding:4px 8px; line-height:1; }
 .mc-draft-item .rm:hover { color:var(--stop); }
 
-/* Food picker */
-.mc-search-box {
-  background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-control);
-  min-height:44px; display:flex; align-items:center;
-  padding:0 12px; margin-bottom:14px;
-}
+.mc-search-box { background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-control); min-height:44px; display:flex; align-items:center; padding:0 12px; margin-bottom:14px; }
 .mc-search-box:focus-within { border-color:var(--primary); }
-.mc-search-box input {
-  background:transparent; border:0; color:var(--text);
-  font:inherit; font-size:15px; outline:none;
-  flex:1; min-width:0;
-}
+.mc-search-box input { background:transparent; border:0; color:var(--text); font:inherit; font-size:15px; outline:none; flex:1; min-width:0; }
 .mc-search-box input::placeholder { color:var(--muted); opacity:0.6; }
 
-.mc-group-head {
-  font-size:11px; font-weight:800;
-  letter-spacing:0.12em; text-transform:uppercase;
-  color:var(--muted);
-  padding:10px 0 8px;
-}
-.mc-food-row {
-  display:flex; align-items:center; gap:12px;
-  padding:10px 12px;
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:var(--r-box);
-  margin-bottom:6px;
-  cursor:pointer;
-  transition:border-color var(--t-fast) var(--ease-out);
-}
+.mc-group-head { font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); padding:10px 0 8px; }
+.mc-food-row { display:flex; align-items:center; gap:12px; padding:10px 12px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-box); margin-bottom:6px; cursor:pointer; transition:border-color var(--t-fast) var(--ease-out); }
 .mc-food-row:hover { border-color:var(--primary); }
 .mc-food-row:active { background:var(--surface-2); }
 .mc-food-row.selected { border-color:var(--primary); background:var(--primary-soft); }
@@ -315,92 +313,31 @@ code { font-family:var(--mono); font-size:13.5px; }
 .mc-food-row .info { flex:1; min-width:0; }
 .mc-food-row .name { font-size:14px; font-weight:700; }
 .mc-food-row .macros { font-size:11px; color:var(--muted); font-family:var(--mono); margin-top:1px; }
+.mc-food-row .dish-tag { font-size:9px; background:rgba(110,155,255,0.2); color:var(--primary); padding:2px 5px; border-radius:3px; font-weight:800; letter-spacing:0.08em; margin-left:auto; }
 
-/* Bottom bar — transforms between log state and portion state */
-.mc-foot {
-  flex-shrink:0;
-  background:var(--surface);
-  border-top:1px solid var(--line);
-  padding:14px 22px calc(env(safe-area-inset-bottom, 0px) + 14px);
-}
+.mc-foot { flex-shrink:0; background:var(--surface); border-top:1px solid var(--line); padding:14px 22px calc(env(safe-area-inset-bottom, 0px) + 14px); }
 .mc-foot-inner { max-width:520px; margin:0 auto; }
-
-.mc-portion-head {
-  display:flex; align-items:center; gap:10px;
-  padding-bottom:10px;
-  border-bottom:1px solid var(--line);
-  margin-bottom:12px;
-}
+.mc-portion-head { display:flex; align-items:center; gap:10px; padding-bottom:10px; border-bottom:1px solid var(--line); margin-bottom:12px; }
 .mc-portion-head .ico { font-size:22px; }
 .mc-portion-head .info { flex:1; min-width:0; }
 .mc-portion-head .name { font-size:14px; font-weight:800; }
 .mc-portion-head .per100 { font-size:10px; color:var(--muted); font-family:var(--mono); letter-spacing:0.05em; margin-top:1px; }
-.mc-portion-head .cancel {
-  background:none; border:0; color:var(--muted);
-  font-size:18px; cursor:pointer; padding:4px 8px; line-height:1;
-}
+.mc-portion-head .cancel { background:none; border:0; color:var(--muted); font-size:18px; cursor:pointer; padding:4px 8px; line-height:1; }
 .mc-portion-ctl { display:grid; grid-template-columns:1fr auto; gap:10px; margin-bottom:10px; align-items:stretch; }
-.mc-stepper {
-  display:flex; align-items:center;
-  background:var(--surface-2);
-  border:1.5px solid var(--line);
-  border-radius:var(--r-control);
-  overflow:hidden;
-}
+.mc-stepper { display:flex; align-items:center; background:var(--surface-2); border:1.5px solid var(--line); border-radius:var(--r-control); overflow:hidden; }
 .mc-stepper:focus-within { border-color:var(--primary); }
-.mc-stepper button {
-  background:transparent; border:0; color:var(--primary);
-  font-size:22px; font-weight:800; cursor:pointer;
-  width:44px; height:48px;
-  font-family:var(--font);
-  display:grid; place-items:center;
-}
+.mc-stepper button { background:transparent; border:0; color:var(--primary); font-size:22px; font-weight:800; cursor:pointer; width:44px; height:48px; font-family:var(--font); display:grid; place-items:center; }
 .mc-stepper button:hover { background:var(--primary-soft); }
-.mc-stepper input {
-  background:transparent; border:0; color:var(--text);
-  font:inherit; font-size:18px; font-weight:800; text-align:center;
-  flex:1; min-width:0; outline:none;
-  font-variant-numeric:tabular-nums;
-  height:48px;
-}
-.mc-unit-switch {
-  display:flex;
-  background:var(--surface-2);
-  border:1.5px solid var(--line);
-  border-radius:var(--r-control);
-  overflow:hidden;
-}
-.mc-unit-switch button {
-  background:transparent; border:0; color:var(--muted);
-  font:inherit; font-size:12px; font-weight:800;
-  padding:0 12px; cursor:pointer;
-  letter-spacing:0.05em;
-  display:grid; place-items:center;
-}
+.mc-stepper input { background:transparent; border:0; color:var(--text); font:inherit; font-size:18px; font-weight:800; text-align:center; flex:1; min-width:0; outline:none; font-variant-numeric:tabular-nums; height:48px; }
+.mc-unit-switch { display:flex; background:var(--surface-2); border:1.5px solid var(--line); border-radius:var(--r-control); overflow:hidden; }
+.mc-unit-switch button { background:transparent; border:0; color:var(--muted); font:inherit; font-size:12px; font-weight:800; padding:0 12px; cursor:pointer; letter-spacing:0.05em; display:grid; place-items:center; }
 .mc-unit-switch button.on { background:var(--primary); color:var(--primary-ink); }
-
-.mc-portion-preview {
-  background:var(--surface-2); border:1px solid var(--line);
-  border-left:3px solid var(--primary);
-  border-radius:var(--r-box); padding:10px 12px;
-  display:flex; justify-content:space-between; align-items:baseline;
-  margin-bottom:12px;
-  font-family:var(--mono);
-}
+.mc-portion-preview { background:var(--surface-2); border:1px solid var(--line); border-left:3px solid var(--primary); border-radius:var(--r-box); padding:10px 12px; display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; font-family:var(--mono); }
 .mc-portion-preview .lab { font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; font-weight:700; font-family:var(--font); }
 .mc-portion-preview .val { font-size:14px; color:var(--text); font-weight:700; }
 .mc-portion-preview .kcal { color:var(--primary); margin-left:6px; }
-
 .mc-action-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-
-/* Log-only state (no food selected) */
-.mc-log-totals {
-  background:var(--surface-2); border:1px solid var(--line);
-  border-top:3px solid var(--primary);
-  border-radius:0 0 var(--r-box) var(--r-box);
-  padding:10px 14px; margin-bottom:12px;
-  display:flex; justify-content:space-between; align-items:baseline;
-}
+.mc-log-totals { background:var(--surface-2); border:1px solid var(--line); border-top:3px solid var(--primary); border-radius:0 0 var(--r-box) var(--r-box); padding:10px 14px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:baseline; }
 .mc-log-totals .lab { font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; font-weight:700; }
 .mc-log-totals .val { font-size:15px; color:var(--text); font-weight:800; font-family:var(--mono); }
 
@@ -413,26 +350,17 @@ code { font-family:var(--mono); font-size:13.5px; }
 .toast { position:fixed; left:50%; bottom:calc(var(--tab-height) + env(safe-area-inset-bottom, 0px) + 16px); transform:translateX(-50%) translateY(20px); background:var(--text); color:var(--bg); padding:12px 18px; border-radius:var(--r-box); font-size:14px; font-weight:600; opacity:0; pointer-events:none; transition:opacity .15s ease-out, transform .15s ease-out; z-index:300; max-width:90vw; }
 .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
-.app-footer { margin-top:40px; padding-top:20px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
-
 @media (prefers-reduced-motion:reduce) { * { transition:none !important; animation:none !important; } }
 </style>
 </head>
 <body>
 
 <div class="blueline" role="presentation"></div>
+<div id="app"><div class="loading" style="min-height:100vh">Loading</div></div>
 
-<div id="app">
-  <div class="loading" style="min-height:100vh">Loading</div>
-</div>
-
-<!-- Shared sheet (food form) -->
 <div class="sheet-backdrop" id="sheet-backdrop"></div>
-<div class="sheet" id="sheet">
-  <div class="sheet-inner" id="sheet-inner"></div>
-</div>
+<div class="sheet" id="sheet"><div class="sheet-inner" id="sheet-inner"></div></div>
 
-<!-- Meal composer (fullscreen) -->
 <div class="mc" id="mc">
   <div class="mc-top">
     <div class="mc-top-row">
@@ -446,14 +374,16 @@ code { font-family:var(--mono); font-size:13.5px; }
   </div>
   <div class="mc-body" id="mc-body">
     <div class="mc-draft" id="mc-draft" style="display:none"></div>
+    <div class="mc-source-toggle" id="mc-source-toggle">
+      <button data-src="foods" class="on">🥦 Foods</button>
+      <button data-src="dishes">🍲 My dishes</button>
+    </div>
     <div class="mc-search-box">
-      <input type="search" id="mc-search" placeholder="Search foods…" autocomplete="off" />
+      <input type="search" id="mc-search" placeholder="Search…" autocomplete="off" />
     </div>
     <div id="mc-food-list"></div>
   </div>
-  <div class="mc-foot">
-    <div class="mc-foot-inner" id="mc-foot-inner"></div>
-  </div>
+  <div class="mc-foot"><div class="mc-foot-inner" id="mc-foot-inner"></div></div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -464,1097 +394,1033 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const SUPABASE_URL = 'https://wiyvkdjyqynhpeeiygqp.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_WdD0Ii2rIpAoJjM3zWU8kg_cOc68Toe';
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { autoRefreshToken:true, persistSession:true, detectSessionInUrl:true } });
-
 const app = document.getElementById('app');
 
-// ==========================================
-// Global state
-// ==========================================
+// State
 let currentUser = null;
 let currentTab = 'today';
 let loginMode = 'signin';
 let foodsCache = [];
+let dishesCache = [];         // recipes + recipe_items
 let foodSearch = '';
-let todayMealsCache = [];        // today's meals with entries nested
-let mealDraft = null;            // { slot, items: [...] }
-let mcSelectedFood = null;       // currently-portioning food
-let mcPortionMode = 'g';         // 'g' or 'serving'
+let todayMealsCache = [];
+let userSettings = null;
+let todayActiveKcal = 0;
+let mealDraft = null;
+let mcSource = 'foods';        // 'foods' | 'dishes'
+let mcSelected = null;         // { type:'food'|'dish', data: {...} }
+let mcPortionMode = 'g';       // 'g' | 'serving' (for foods) | 'servings' (for dishes)
 let mcPortionValue = 100;
 
-// Constants
+// Dish form state (used while editing/creating a dish)
+let dishDraft = null;
+let dishIngPicker = null;   // { search, selectedFood, grams }
+
 const CATEGORIES = [
-  { id:'protein',   label:'Protein',   icon:'🥩' },
-  { id:'carb',      label:'Carb',      icon:'🍚' },
-  { id:'fat',       label:'Fat',       icon:'🥑' },
-  { id:'vegetable', label:'Vegetable', icon:'🥦' },
-  { id:'fruit',     label:'Fruit',     icon:'🍎' },
-  { id:'dairy',     label:'Dairy',     icon:'🥛' },
-  { id:'drink',     label:'Drink',     icon:'🥤' },
-  { id:'alcohol',   label:'Alcohol',   icon:'🍺' },
-  { id:'mixed',     label:'Mixed',     icon:'🍱' },
-  { id:'other',     label:'Other',     icon:'🔹' },
+  { id:'protein',label:'Protein',icon:'🥩' }, { id:'carb',label:'Carb',icon:'🍚' },
+  { id:'fat',label:'Fat',icon:'🥑' }, { id:'vegetable',label:'Vegetable',icon:'🥦' },
+  { id:'fruit',label:'Fruit',icon:'🍎' }, { id:'dairy',label:'Dairy',icon:'🥛' },
+  { id:'drink',label:'Drink',icon:'🥤' }, { id:'alcohol',label:'Alcohol',icon:'🍺' },
+  { id:'mixed',label:'Mixed',icon:'🍱' }, { id:'other',label:'Other',icon:'🔹' },
 ];
 const CAT_MAP = Object.fromEntries(CATEGORIES.map(c => [c.id, c]));
 
 const MEAL_SLOTS = [
-  { id:'breakfast',    label:'Breakfast', icon:'🌅' },
-  { id:'pre_workout',  label:'Pre-WO',    icon:'💪' },
-  { id:'post_workout', label:'Post-WO',   icon:'🥤' },
-  { id:'lunch',        label:'Lunch',     icon:'🍽' },
-  { id:'dinner',       label:'Dinner',    icon:'🍳' },
-  { id:'snacks',       label:'Snacks',    icon:'🍎' },
+  { id:'breakfast',label:'Breakfast',icon:'🌅' }, { id:'pre_workout',label:'Pre-WO',icon:'💪' },
+  { id:'post_workout',label:'Post-WO',icon:'🥤' }, { id:'lunch',label:'Lunch',icon:'🍽' },
+  { id:'dinner',label:'Dinner',icon:'🍳' }, { id:'snacks',label:'Snacks',icon:'🍎' },
 ];
 const SLOT_MAP = Object.fromEntries(MEAL_SLOTS.map(s => [s.id, s]));
 
-// ==========================================
 // Utils
-// ==========================================
-function toast(msg) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = 'toast show';
-  setTimeout(() => el.className = 'toast', 2800);
-}
-function todayISO() {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-function fmtDate() {
-  return new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' });
-}
-function esc(s) { return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
-function kcalFromMacros(p, f, c, a=0) { return (Number(p)||0)*4 + (Number(c)||0)*4 + (Number(f)||0)*9 + (Number(a)||0)*7; }
-function defaultSlotByTime() {
-  const h = new Date().getHours();
-  if (h < 10) return 'breakfast';
-  if (h < 14) return 'lunch';
-  if (h < 17) return 'snacks';
-  if (h < 22) return 'dinner';
-  return 'snacks';
-}
-function round1(x) { return Math.round((x || 0) * 10) / 10; }
-function round0(x) { return Math.round(x || 0); }
+function toast(msg) { const el=document.getElementById('toast'); el.textContent=msg; el.className='toast show'; setTimeout(()=>el.className='toast',2800); }
+function todayISO() { const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function fmtDate() { return new Date().toLocaleDateString('en-GB', {weekday:'long',day:'numeric',month:'long'}); }
+function esc(s) { return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
+function kcalFromMacros(p,f,c,a=0) { return (Number(p)||0)*4 + (Number(c)||0)*4 + (Number(f)||0)*9 + (Number(a)||0)*7; }
+function defaultSlotByTime() { const h=new Date().getHours(); if (h<10) return 'breakfast'; if (h<14) return 'lunch'; if (h<17) return 'snacks'; if (h<22) return 'dinner'; return 'snacks'; }
+function round1(x) { return Math.round((x||0)*10)/10; }
+function round0(x) { return Math.round(x||0); }
 
-// Sheet control
-function openSheet(html) {
-  document.getElementById('sheet-inner').innerHTML = html;
-  document.getElementById('sheet-backdrop').classList.add('show');
-  document.getElementById('sheet').classList.add('show');
-  document.body.style.overflow = 'hidden';
+// Compute TEF from entries (protein 25% / fat 3% / carbs 8% of their caloric contribution)
+function computeTEF(entries) {
+  let t = 0;
+  for (const e of entries) {
+    t += (e.protein_g||0) * 4 * 0.25;
+    t += (e.fat_g||0) * 9 * 0.03;
+    t += (e.carbs_g||0) * 4 * 0.08;
+  }
+  return t;
 }
-function closeSheet() {
-  document.getElementById('sheet-backdrop').classList.remove('show');
-  document.getElementById('sheet').classList.remove('show');
-  document.body.style.overflow = '';
-}
+
+// Sheet
+function openSheet(html) { document.getElementById('sheet-inner').innerHTML=html; document.getElementById('sheet-backdrop').classList.add('show'); document.getElementById('sheet').classList.add('show'); document.body.style.overflow='hidden'; }
+function closeSheet() { document.getElementById('sheet-backdrop').classList.remove('show'); document.getElementById('sheet').classList.remove('show'); document.body.style.overflow=''; }
 document.getElementById('sheet-backdrop').addEventListener('click', closeSheet);
 
-// ==========================================
-// Auth
-// ==========================================
-function setLoginState(type, msg) {
-  const el = document.getElementById('login-state');
-  if (!el) return;
-  if (!msg) { el.className = 'login-state'; el.innerHTML = ''; return; }
-  el.className = `login-state ${type} show`;
-  el.innerHTML = msg;
+// ====== Auth ======
+function setLoginState(type,msg) { const el=document.getElementById('login-state'); if (!el) return; if (!msg) { el.className='login-state'; el.innerHTML=''; return; } el.className=`login-state ${type} show`; el.innerHTML=msg; }
+async function signInWithPassword(email,password) {
+  const btn=document.getElementById('submit-btn'); btn.disabled=true; btn.textContent='Signing in…'; setLoginState();
+  const {error,data}=await sb.auth.signInWithPassword({email,password});
+  btn.disabled=false; btn.textContent='Sign in';
+  if (error) { setLoginState('err', error.message.toLowerCase().includes('invalid') ? 'Wrong email or password.' : error.message); return; }
+  try { localStorage.setItem('rt_auto_email',email); localStorage.setItem('rt_auto_pw',password); } catch(e){}
 }
-async function signInWithPassword(email, password) {
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true; btn.textContent = 'Signing in…';
-  setLoginState();
-  const { error, data } = await sb.auth.signInWithPassword({ email, password });
-  btn.disabled = false; btn.textContent = 'Sign in';
-  if (error) {
-    const msg = error.message || 'Could not sign in';
-    setLoginState('err', msg.toLowerCase().includes('invalid') ? 'Wrong email or password. Try again, or create an account below.' : msg);
-    return;
-  }
-  // Save credentials for silent auto-login next time
-  try {
-    localStorage.setItem('rt_auto_email', email);
-    localStorage.setItem('rt_auto_pw', password);
-  } catch(e) {}
-}
-async function signUp(email, password) {
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true; btn.textContent = 'Creating account…';
-  setLoginState();
-  const { data, error } = await sb.auth.signUp({ email, password, options: { emailRedirectTo: window.location.href.split('#')[0] } });
-  btn.disabled = false; btn.textContent = 'Create account';
-  if (error) { setLoginState('err', error.message || 'Could not create account'); return; }
+async function signUp(email,password) {
+  const btn=document.getElementById('submit-btn'); btn.disabled=true; btn.textContent='Creating…'; setLoginState();
+  const {data,error}=await sb.auth.signUp({email,password,options:{emailRedirectTo:window.location.href.split('#')[0]}});
+  btn.disabled=false; btn.textContent='Create account';
+  if (error) { setLoginState('err',error.message); return; }
   if (data.session) toast('Account created');
-  else {
-    setLoginState('ok', 'Account created. Sign in with your email + password.');
-    setTimeout(() => { loginMode = 'signin'; renderLogin(email); }, 1500);
-  }
+  else { setLoginState('ok','Account created. Sign in now.'); setTimeout(()=>{loginMode='signin'; renderLogin(email);},1500); }
 }
 async function sendMagicLink(email) {
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true; btn.textContent = 'Sending…';
-  setLoginState();
-  const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.href.split('#')[0] } });
-  btn.disabled = false; btn.textContent = 'Send magic link';
-  if (error) { setLoginState('err', error.message || 'Could not send link.'); return; }
-  setLoginState('info', `Magic link sent to <strong>${esc(email)}</strong>. Check your inbox and tap the link on this device.`);
+  const btn=document.getElementById('submit-btn'); btn.disabled=true; btn.textContent='Sending…'; setLoginState();
+  const {error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:window.location.href.split('#')[0]}});
+  btn.disabled=false; btn.textContent='Send magic link';
+  if (error) { setLoginState('err',error.message); return; }
+  setLoginState('info',`Magic link sent to <strong>${esc(email)}</strong>.`);
 }
 async function signOut() {
   await sb.auth.signOut();
-  // Clear auto-login credentials so next load shows login screen again
-  try {
-    localStorage.removeItem('rt_auto_email');
-    localStorage.removeItem('rt_auto_pw');
-  } catch(e) {}
-  foodsCache = []; todayMealsCache = [];
-  toast('Signed out');
+  try { localStorage.removeItem('rt_auto_email'); localStorage.removeItem('rt_auto_pw'); } catch(e){}
+  foodsCache=[]; dishesCache=[]; todayMealsCache=[]; toast('Signed out');
 }
 
-function renderLogin(prefillEmail = '') {
-  const isSignin = loginMode === 'signin';
-  const isSignup = loginMode === 'signup';
-  const isMagic = loginMode === 'magic';
-  const titles = { signin:'Sign in', signup:'Create account', magic:'Magic link' };
-  const subs = {
-    signin:'Enter your email and password to continue.',
-    signup:"Set up a new account. You'll stay signed in on this device.",
-    magic:"Enter your email. You'll get a link — tap it on this device.",
-  };
-  const submitLabels = { signin:'Sign in', signup:'Create account', magic:'Send magic link' };
-  const showPassword = !isMagic;
-
-  app.innerHTML = `
-    <div class="screen no-tabs">
-      <div class="app-header">
-        <div>
-          <div class="app-title">Nutrition</div>
-          <div class="app-sub">RaffTrack ecosystem</div>
-        </div>
-      </div>
-      <div class="login-wrap">
-        <div class="login-card">
-          <div class="login-title">${titles[loginMode]}</div>
-          <div class="login-sub">${subs[loginMode]}</div>
-          <div class="field">
-            <label for="email">Email</label>
-            <div class="input"><input type="email" id="email" inputmode="email" autocomplete="email" placeholder="you@example.com" value="${esc(prefillEmail)}"></div>
-          </div>
-          ${showPassword ? `
-          <div class="field">
-            <label for="password">Password</label>
-            <div class="input"><input type="password" id="password" autocomplete="${isSignup ? 'new-password' : 'current-password'}" placeholder="${isSignup ? 'Choose a password (min 6 chars)' : 'Your password'}"></div>
-            ${isSignup ? '<div class="hint">At least 6 characters</div>' : ''}
-          </div>
-          ` : ''}
-          <div style="margin-top:20px">
-            <button class="btn btn-primary btn-block" id="submit-btn">${submitLabels[loginMode]}</button>
-          </div>
-          <div class="login-state" id="login-state"></div>
-          <div class="login-divider">or</div>
-          ${isSignin ? `
-            <div class="mode-toggle">No account? <button type="button" data-mode="signup">Create one</button></div>
-            <div class="mode-toggle">Forgot password? <button type="button" data-mode="magic">Use magic link</button></div>
-          ` : ''}
-          ${isSignup ? `<div class="mode-toggle">Already have an account? <button type="button" data-mode="signin">Sign in</button></div>` : ''}
-          ${isMagic ? `<div class="mode-toggle">Have a password? <button type="button" data-mode="signin">Sign in with password</button></div>` : ''}
-        </div>
-      </div>
-    </div>
-  `;
-  const emailEl = document.getElementById('email');
-  const passwordEl = document.getElementById('password');
-  const btn = document.getElementById('submit-btn');
-  const submit = () => {
-    const email = emailEl.value.trim();
-    if (!email || !email.includes('@')) { setLoginState('err', 'Enter a valid email.'); return; }
-    if (showPassword) {
-      const password = passwordEl.value;
-      if (!password || password.length < 6) { setLoginState('err', 'Password must be at least 6 characters.'); return; }
-      if (isSignup) signUp(email, password); else signInWithPassword(email, password);
-    } else sendMagicLink(email);
-  };
-  btn.addEventListener('click', submit);
-  emailEl.addEventListener('keydown', e => { if (e.key === 'Enter') { if (showPassword && passwordEl) passwordEl.focus(); else submit(); } });
-  if (passwordEl) passwordEl.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
-  document.querySelectorAll('[data-mode]').forEach(el => el.addEventListener('click', () => { loginMode = el.dataset.mode; renderLogin(emailEl.value.trim()); }));
-  setTimeout(() => { if (prefillEmail && showPassword && passwordEl) passwordEl.focus(); else emailEl.focus(); }, 100);
+function renderLogin(prefillEmail='') {
+  const isSignin=loginMode==='signin', isSignup=loginMode==='signup', isMagic=loginMode==='magic';
+  const titles={signin:'Sign in',signup:'Create account',magic:'Magic link'};
+  const subs={signin:'Enter your email and password.',signup:'Set up a new account.',magic:'Get a link via email.'};
+  const lbl={signin:'Sign in',signup:'Create account',magic:'Send magic link'};
+  const showPassword=!isMagic;
+  app.innerHTML=`<div class="screen no-tabs"><div class="app-header"><div><div class="app-title">Nutrition</div><div class="app-sub">RaffTrack ecosystem</div></div></div>
+    <div class="login-wrap"><div class="login-card">
+      <div class="login-title">${titles[loginMode]}</div><div class="login-sub">${subs[loginMode]}</div>
+      <div class="field"><label for="email">Email</label><div class="input"><input type="email" id="email" autocomplete="email" placeholder="you@example.com" value="${esc(prefillEmail)}"></div></div>
+      ${showPassword?`<div class="field"><label for="password">Password</label><div class="input"><input type="password" id="password" autocomplete="${isSignup?'new-password':'current-password'}"></div></div>`:''}
+      <div style="margin-top:20px"><button class="btn btn-primary btn-block" id="submit-btn">${lbl[loginMode]}</button></div>
+      <div class="login-state" id="login-state"></div><div class="login-divider">or</div>
+      ${isSignin?`<div class="mode-toggle">No account? <button type="button" data-mode="signup">Create one</button></div><div class="mode-toggle">Forgot password? <button type="button" data-mode="magic">Magic link</button></div>`:''}
+      ${isSignup?`<div class="mode-toggle">Have an account? <button type="button" data-mode="signin">Sign in</button></div>`:''}
+      ${isMagic?`<div class="mode-toggle">Have a password? <button type="button" data-mode="signin">Sign in</button></div>`:''}
+    </div></div></div>`;
+  const emailEl=document.getElementById('email'), passEl=document.getElementById('password'), btn=document.getElementById('submit-btn');
+  const submit=()=>{ const e=emailEl.value.trim(); if (!e||!e.includes('@')) {setLoginState('err','Enter a valid email.');return;} if (showPassword) { const p=passEl.value; if (!p||p.length<6) {setLoginState('err','Password must be at least 6 characters.');return;} if (isSignup) signUp(e,p); else signInWithPassword(e,p); } else sendMagicLink(e); };
+  btn.addEventListener('click',submit);
+  emailEl.addEventListener('keydown',ev=>{if (ev.key==='Enter') {if (showPassword&&passEl) passEl.focus(); else submit();}});
+  if (passEl) passEl.addEventListener('keydown',ev=>{if (ev.key==='Enter') submit();});
+  document.querySelectorAll('[data-mode]').forEach(el=>el.addEventListener('click',()=>{loginMode=el.dataset.mode; renderLogin(emailEl.value.trim());}));
+  setTimeout(()=>{if (prefillEmail&&showPassword&&passEl) passEl.focus(); else emailEl.focus();},100);
 }
 
-// ==========================================
-// Tab bar
-// ==========================================
+// ====== Tab bar (3 tabs now: Today / Foods / Dishes) ======
 function tabBarHTML() {
-  return `
-    <nav class="tab-bar">
-      <div class="tab-bar-inner">
-        <button class="tab ${currentTab === 'today' ? 'active' : ''}" data-tab="today">
-          <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>
-          Today
-        </button>
-        <button class="tab ${currentTab === 'foods' ? 'active' : ''}" data-tab="foods">
-          <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7c0 2.5 1 5 3 7l4 6 4-6c2-2 3-4.5 3-7a7 7 0 00-7-7z"/><circle cx="12" cy="9" r="2"/></svg>
-          Foods
-        </button>
-      </div>
-    </nav>
-  `;
+  return `<nav class="tab-bar"><div class="tab-bar-inner">
+    <button class="tab ${currentTab==='today'?'active':''}" data-tab="today">
+      <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>Today
+    </button>
+    <button class="tab ${currentTab==='foods'?'active':''}" data-tab="foods">
+      <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7c0 2.5 1 5 3 7l4 6 4-6c2-2 3-4.5 3-7a7 7 0 00-7-7z"/><circle cx="12" cy="9" r="2"/></svg>Foods
+    </button>
+    <button class="tab ${currentTab==='dishes'?'active':''}" data-tab="dishes">
+      <svg viewBox="0 0 24 24"><path d="M4 11h16a4 4 0 01-4 4H8a4 4 0 01-4-4z"/><path d="M12 7v-3M9 5l3-3 3 3"/><path d="M3 19h18"/></svg>Dishes
+    </button>
+  </div></nav>`;
 }
-function wireTabBar() {
-  document.querySelectorAll('.tab').forEach(t => {
-    t.addEventListener('click', () => {
-      const tab = t.dataset.tab;
-      if (tab === currentTab) return;
-      currentTab = tab;
-      renderCurrentTab();
-    });
-  });
-}
-function renderCurrentTab() {
-  if (currentTab === 'today') renderToday();
-  else if (currentTab === 'foods') renderFoods();
-}
+function wireTabBar() { document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{if (t.dataset.tab===currentTab) return; currentTab=t.dataset.tab; renderCurrentTab();})); }
+function renderCurrentTab() { if (currentTab==='today') renderToday(); else if (currentTab==='foods') renderFoods(); else if (currentTab==='dishes') renderDishes(); }
 
-// ==========================================
-// Data loaders
-// ==========================================
+// ====== Data loaders ======
 async function fetchFoods() {
-  const { data, error } = await sb.from('foods').select('*')
-    .order('favorite', { ascending: false })
-    .order('used_count', { ascending: false })
-    .order('name', { ascending: true });
+  const {data,error}=await sb.from('foods').select('*').order('favorite',{ascending:false}).order('used_count',{ascending:false}).order('name',{ascending:true});
   if (error) { console.error(error); toast('Failed to load foods'); return []; }
-  return data || [];
+  return data||[];
+}
+async function fetchDishes() {
+  const {data:recipes,error:re}=await sb.from('recipes').select('*').order('favorite',{ascending:false}).order('used_count',{ascending:false}).order('name',{ascending:true});
+  if (re) { console.error(re); return []; }
+  const ids=(recipes||[]).map(r=>r.id);
+  if (!ids.length) return recipes||[];
+  const {data:items,error:ie}=await sb.from('recipe_items').select('*').in('recipe_id',ids).order('sort_order',{ascending:true});
+  if (ie) { console.error(ie); return recipes; }
+  const byRecipe={}; for (const it of (items||[])) { if (!byRecipe[it.recipe_id]) byRecipe[it.recipe_id]=[]; byRecipe[it.recipe_id].push(it); }
+  return (recipes||[]).map(r=>({...r, items: byRecipe[r.id]||[]}));
 }
 async function fetchTodayMeals() {
-  const date = todayISO();
-  const { data: meals, error: me } = await sb.from('meals')
-    .select('*').eq('date', date).order('time', { ascending: true });
+  const date=todayISO();
+  const {data:meals,error:me}=await sb.from('meals').select('*').eq('date',date).order('time',{ascending:true});
   if (me) { console.error(me); return []; }
-  const mealIds = (meals||[]).map(m => m.id);
-  if (mealIds.length === 0) return [];
-  const { data: entries, error: ee } = await sb.from('entries')
-    .select('*').in('meal_id', mealIds).order('logged_at', { ascending: true });
+  const ids=(meals||[]).map(m=>m.id); if (!ids.length) return [];
+  const {data:entries,error:ee}=await sb.from('entries').select('*').in('meal_id',ids).order('logged_at',{ascending:true});
   if (ee) { console.error(ee); return meals; }
-  const byMeal = {};
-  for (const e of (entries||[])) {
-    if (!byMeal[e.meal_id]) byMeal[e.meal_id] = [];
-    byMeal[e.meal_id].push(e);
-  }
-  return (meals||[]).map(m => ({ ...m, entries: byMeal[m.id] || [] }));
+  const byMeal={}; for (const e of (entries||[])) { if (!byMeal[e.meal_id]) byMeal[e.meal_id]=[]; byMeal[e.meal_id].push(e); }
+  return (meals||[]).map(m=>({...m, entries: byMeal[m.id]||[]}));
+}
+async function fetchUserSettings() {
+  const {data}=await sb.from('user_settings').select('*').maybeSingle();
+  return data || { bmr:2046, protein_floor_g:200, fat_floor_g:75, kcal_rest:2400, kcal_training:2900 };
+}
+async function fetchActiveKcal() {
+  const {data}=await sb.from('daily_activity').select('active_kcal').eq('date',todayISO()).maybeSingle();
+  return data ? Number(data.active_kcal) || 0 : 0;
+}
+async function saveActiveKcal(val) {
+  const payload={ user_id: currentUser.id, date: todayISO(), active_kcal: val, updated_at: new Date().toISOString() };
+  const {error}=await sb.from('daily_activity').upsert(payload, { onConflict: 'user_id,date' });
+  if (error) { console.error(error); toast('Save failed'); }
 }
 
-// ==========================================
-// Today screen
-// ==========================================
+// Compute per-serving macros for a dish from its items (sum items / dish.servings)
+function dishPerServing(dish) {
+  if (!dish.items || !dish.items.length) return { protein_g:0, fat_g:0, carbs_g:0, alcohol_g:0, fiber_g:0, sodium_mg:0, kcal:0 };
+  const svs = Math.max(1, Number(dish.servings) || 1);
+  let p=0,f=0,c=0,a=0,fi=0,na=0;
+  for (const it of dish.items) {
+    const food = foodsCache.find(x=>x.id===it.food_id);
+    if (!food) continue;
+    const r = (Number(it.grams)||0) / 100;
+    p += (food.protein_g||0) * r;
+    f += (food.fat_g||0) * r;
+    c += (food.carbs_g||0) * r;
+    a += (food.alcohol_g||0) * r;
+    fi += (food.fiber_g||0) * r;
+    na += (food.sodium_mg||0) * r;
+  }
+  return { protein_g:p/svs, fat_g:f/svs, carbs_g:c/svs, alcohol_g:a/svs, fiber_g:fi/svs, sodium_mg:na/svs, kcal:kcalFromMacros(p/svs,f/svs,c/svs,a/svs) };
+}
+
+// ====== Today ======
 async function renderToday() {
-  app.innerHTML = `
-    <div class="screen">
-      <div class="app-header">
-        <div>
-          <div class="app-title">Today</div>
-          <div class="app-sub">${fmtDate()}</div>
-        </div>
-        <div class="header-right">
-          <div class="user-pill">${esc(currentUser.email || currentUser.id.slice(0,8))}</div>
-          <button class="btn btn-ghost btn-small" id="signout">Sign out</button>
-        </div>
-      </div>
-
-      <div class="kpis" id="kpis">
-        <div class="kpi"><div class="label">Protein</div><div class="value">0<small>g</small></div><div class="delta">of 200 floor</div></div>
-        <div class="kpi"><div class="label">Fat</div><div class="value">0<small>g</small></div><div class="delta">of 75 floor</div></div>
-        <div class="kpi"><div class="label">Carbs</div><div class="value">0<small>g</small></div><div class="delta">—</div></div>
-        <div class="kpi"><div class="label">Calories</div><div class="value">0<small>kcal</small></div><div class="delta">—</div></div>
-      </div>
-
-      <div class="section">
-        <div class="section-header">
-          <div class="section-title">Meals</div>
-          <button class="btn btn-primary btn-small" id="add-meal-btn">+ Add meal</button>
-        </div>
-        <div id="meals-list"></div>
-      </div>
+  app.innerHTML=`<div class="screen">
+    <div class="app-header"><div><div class="app-title">Today</div><div class="app-sub">${fmtDate()}</div></div>
+      <div class="header-right"><div class="user-pill">${esc(currentUser.email||currentUser.id.slice(0,8))}</div><button class="btn btn-ghost btn-small" id="signout">Sign out</button></div>
     </div>
-    ${tabBarHTML()}
-  `;
-  document.getElementById('signout').addEventListener('click', signOut);
-  document.getElementById('add-meal-btn').addEventListener('click', () => openMealComposer());
+
+    <div class="kpis" id="kpis-intake">
+      <div class="kpi"><div class="label">Protein</div><div class="value">0<small>g</small></div><div class="delta">of 200 floor</div></div>
+      <div class="kpi"><div class="label">Fat</div><div class="value">0<small>g</small></div><div class="delta">of 75 floor</div></div>
+      <div class="kpi"><div class="label">Carbs</div><div class="value">0<small>g</small></div><div class="delta">—</div></div>
+      <div class="kpi"><div class="label">Calories in</div><div class="value">0<small>kcal</small></div><div class="delta">—</div></div>
+    </div>
+
+    <div class="active-kcal-row">
+      <span class="ico">🔥</span>
+      <span class="lbl">Active kcal today</span>
+      <input type="number" inputmode="numeric" id="active-kcal-input" value="0" min="0" step="10">
+      <span class="unit">kcal</span>
+    </div>
+
+    <div class="kpis" id="kpis-balance">
+      <div class="kpi expenditure"><div class="label">Expenditure (TDEE)</div><div class="value">0<small>kcal</small></div><div class="delta">BMR + NEAT + TEF + Active</div></div>
+      <div class="kpi balance"><div class="label">Balance</div><div class="value">0<small>kcal</small></div><div class="delta">Intake − TDEE</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">Meals</div><button class="btn btn-primary btn-small" id="add-meal-btn">+ Add meal</button></div>
+      <div id="meals-list"></div>
+    </div>
+  </div>${tabBarHTML()}`;
+
+  document.getElementById('signout').addEventListener('click',signOut);
+  document.getElementById('add-meal-btn').addEventListener('click',()=>openMealComposer());
   wireTabBar();
 
-  // Fetch today's data
+  // Hydrate data
   try {
-    // Make sure foods are loaded (for emoji + name lookup)
-    if (foodsCache.length === 0) foodsCache = await fetchFoods();
+    if (foodsCache.length===0) foodsCache = await fetchFoods();
+    if (dishesCache.length===0) dishesCache = await fetchDishes();
+    if (!userSettings) userSettings = await fetchUserSettings();
+    todayActiveKcal = await fetchActiveKcal();
     todayMealsCache = await fetchTodayMeals();
-    renderMealsList();
 
-    const { data: tot } = await sb.from('day_totals').select('*')
-      .eq('date', todayISO()).maybeSingle();
-    if (tot) updateKPIs(tot);
-  } catch (e) { console.error(e); }
+    const akEl = document.getElementById('active-kcal-input');
+    akEl.value = todayActiveKcal;
+    let akTimer;
+    akEl.addEventListener('input', () => {
+      todayActiveKcal = Number(akEl.value) || 0;
+      clearTimeout(akTimer);
+      akTimer = setTimeout(() => { saveActiveKcal(todayActiveKcal); recomputeTodayKPIs(); }, 400);
+      recomputeTodayKPIs();
+    });
+
+    renderMealsList();
+    recomputeTodayKPIs();
+  } catch(e) { console.error(e); }
 }
 
-function updateKPIs(d) {
-  const kpis = document.getElementById('kpis');
-  if (!kpis) return;
-  const rows = [
-    { label:'Protein', val:round0(d.protein_g), unit:'g', sub:'of 200 floor' },
-    { label:'Fat', val:round0(d.fat_g), unit:'g', sub:'of 75 floor' },
-    { label:'Carbs', val:round0(d.carbs_g), unit:'g', sub:d.alcohol_g ? `+${round0(d.alcohol_g)}g alcohol` : '—' },
-    { label:'Calories', val:round0(d.kcal), unit:'kcal', sub:`${d.entry_count||0} entries` },
-  ];
-  kpis.innerHTML = rows.map(r => `
-    <div class="kpi">
-      <div class="label">${r.label}</div>
-      <div class="value">${r.val}<small>${r.unit}</small></div>
-      <div class="delta">${r.sub}</div>
-    </div>
-  `).join('');
+function recomputeTodayKPIs() {
+  // Aggregate intake from today's entries
+  const entries = todayMealsCache.flatMap(m => m.entries || []);
+  const protein = entries.reduce((s,e)=>s+(e.protein_g||0),0);
+  const fat = entries.reduce((s,e)=>s+(e.fat_g||0),0);
+  const carbs = entries.reduce((s,e)=>s+(e.carbs_g||0),0);
+  const alcohol = entries.reduce((s,e)=>s+(e.alcohol_g||0),0);
+  const intakeKcal = entries.reduce((s,e)=>s+(e.kcal||0),0);
+
+  const kpis = document.getElementById('kpis-intake');
+  if (kpis) {
+    const rows = [
+      {label:'Protein', val:round0(protein), unit:'g', sub:`of ${userSettings?.protein_floor_g||200} floor`},
+      {label:'Fat', val:round0(fat), unit:'g', sub:`of ${userSettings?.fat_floor_g||75} floor`},
+      {label:'Carbs', val:round0(carbs), unit:'g', sub: alcohol ? `+${round0(alcohol)}g alcohol` : '—'},
+      {label:'Calories in', val:round0(intakeKcal), unit:'kcal', sub:`${entries.length} items logged`},
+    ];
+    kpis.innerHTML = rows.map(r=>`<div class="kpi"><div class="label">${r.label}</div><div class="value">${r.val}<small>${r.unit}</small></div><div class="delta">${r.sub}</div></div>`).join('');
+  }
+
+  // Expenditure + balance
+  const bmr = Number(userSettings?.bmr) || 2046;
+  const neat = 250;
+  const tef = computeTEF(entries);
+  const active = todayActiveKcal;
+  const tdee = bmr + neat + tef + active;
+  const balance = intakeKcal - tdee;
+
+  const el = document.getElementById('kpis-balance');
+  if (el) {
+    const balClass = balance <= 0 ? '' : (balance > 300 ? 'heavy-surplus' : 'surplus');
+    const balValClass = balance <= 0 ? 'pos' : (balance > 300 ? 'heavy' : 'neg');
+    const balSign = balance > 0 ? '+' : '';
+    el.innerHTML = `
+      <div class="kpi expenditure">
+        <div class="label">Expenditure (TDEE)</div>
+        <div class="value">${round0(tdee).toLocaleString()}<small>kcal</small></div>
+        <div class="delta">BMR ${bmr} · NEAT ${neat} · TEF ${round0(tef)} · Act ${round0(active)}</div>
+      </div>
+      <div class="kpi balance ${balClass}">
+        <div class="label">Balance</div>
+        <div class="value ${balValClass}">${balSign}${round0(balance).toLocaleString()}<small>kcal</small></div>
+        <div class="delta">${balance < -50 ? 'Deficit' : (balance > 100 ? 'Surplus' : 'Maintenance')}</div>
+      </div>
+    `;
+  }
 }
 
 function renderMealsList() {
-  const el = document.getElementById('meals-list');
-  if (!el) return;
-  if (!todayMealsCache || todayMealsCache.length === 0) {
-    el.innerHTML = `
-      <div class="empty-state">
-        <div class="big">Nothing logged yet</div>
-        Tap <strong>+ Add meal</strong> to log your first meal of the day.
-      </div>
-    `;
+  const el = document.getElementById('meals-list'); if (!el) return;
+  if (!todayMealsCache || !todayMealsCache.length) {
+    el.innerHTML = `<div class="empty-state"><div class="big">Nothing logged yet</div>Tap <strong>+ Add meal</strong> to log your first meal.</div>`;
     return;
   }
-  // Group by slot (one meal_slot_group per actual meal row)
   el.innerHTML = todayMealsCache.map(m => {
-    const slot = SLOT_MAP[m.slot] || { label: m.slot, icon: '🍽' };
+    const slot = SLOT_MAP[m.slot] || { label:m.slot, icon:'🍽' };
     const entries = m.entries || [];
-    const totP = entries.reduce((s,e) => s + (e.protein_g||0), 0);
-    const totF = entries.reduce((s,e) => s + (e.fat_g||0), 0);
-    const totC = entries.reduce((s,e) => s + (e.carbs_g||0), 0);
-    const totK = entries.reduce((s,e) => s + (e.kcal||0), 0);
-    return `
-      <div class="meal-slot-group">
-        <div class="meal-slot-head">
-          <div class="left">
-            <span class="slot-icon">${slot.icon}</span>
-            <span class="slot-name">${slot.label}</span>
-          </div>
-          <div class="slot-total">P${round0(totP)} F${round0(totF)} C${round0(totC)} · ${round0(totK)} kcal</div>
-        </div>
-        ${entries.map(e => renderEntryRow(e)).join('')}
-      </div>
-    `;
+    const totP=entries.reduce((s,e)=>s+(e.protein_g||0),0);
+    const totF=entries.reduce((s,e)=>s+(e.fat_g||0),0);
+    const totC=entries.reduce((s,e)=>s+(e.carbs_g||0),0);
+    const totK=entries.reduce((s,e)=>s+(e.kcal||0),0);
+    return `<div class="meal-slot-group">
+      <div class="meal-slot-head"><div class="left"><span class="slot-icon">${slot.icon}</span><span class="slot-name">${slot.label}</span></div>
+        <div class="slot-total">P${round0(totP)} F${round0(totF)} C${round0(totC)} · ${round0(totK)} kcal</div></div>
+      ${entries.map(e=>renderEntryRow(e)).join('')}
+    </div>`;
   }).join('');
-  // Wire entry delete
-  document.querySelectorAll('[data-del-entry]').forEach(b => {
-    b.addEventListener('click', () => deleteEntry(b.dataset.delEntry));
+  document.querySelectorAll('[data-del-entry]').forEach(b=>b.addEventListener('click',()=>deleteEntry(b.dataset.delEntry)));
+}
+function renderEntryRow(entry) {
+  let name, brand='', icon='🔹', dishBadge='';
+  if (entry.food_id) {
+    const food = foodsCache.find(f=>f.id===entry.food_id);
+    if (food) { name=food.name; brand=food.brand||''; icon=food.icon||CAT_MAP[food.category]?.icon||'🔹'; }
+    else name='Unknown food';
+  } else if (entry.recipe_id) {
+    const dish = dishesCache.find(d=>d.id===entry.recipe_id);
+    name = dish?.name || 'Dish';
+    icon = dish?.icon || '🍲';
+    dishBadge = `<span class="dish-badge">Dish</span>`;
+  } else name = entry.manual_name || 'Unknown';
+  const unit = entry.servings ? `${round1(entry.servings)} serving${entry.servings===1?'':'s'}` : (entry.grams ? `${round0(entry.grams)}g` : '');
+  return `<div class="meal-entry"><div class="ico">${icon}</div>
+    <div class="info"><div class="name">${esc(name)}${brand?' · '+esc(brand):''}${dishBadge}</div>
+    <div class="meta">${unit} · P${round0(entry.protein_g)} F${round0(entry.fat_g)} C${round0(entry.carbs_g)} · ${round0(entry.kcal)} kcal</div></div>
+    <button class="del" data-del-entry="${entry.id}" title="Remove">✕</button></div>`;
+}
+async function deleteEntry(id) {
+  if (!confirm('Remove this item?')) return;
+  const {error}=await sb.from('entries').delete().eq('id',id);
+  if (error) { toast('Failed'); return; }
+  toast('Removed'); await renderToday();
+}
+
+// ====== Foods tab (all raw foods) ======
+async function renderFoods() {
+  app.innerHTML=`<div class="screen"><div class="app-header"><div><div class="app-title">Foods</div><div class="app-sub">All raw ingredients</div></div>
+    <div class="header-right"><button class="btn btn-primary btn-small" id="add-food">+ Add food</button></div></div>
+    <div class="field food-search"><div class="input"><input type="search" id="food-search" placeholder="Search foods…" value="${esc(foodSearch)}"></div></div>
+    <div id="foods-content"><div class="loading" style="min-height:40vh">Loading</div></div>
+  </div>${tabBarHTML()}`;
+  wireTabBar();
+  document.getElementById('add-food').addEventListener('click',()=>openFoodForm(null));
+  const sEl=document.getElementById('food-search');
+  sEl.addEventListener('input',()=>{foodSearch=sEl.value.toLowerCase(); renderFoodList();});
+  foodsCache=await fetchFoods();
+  renderFoodList();
+}
+function renderFoodList() {
+  const content=document.getElementById('foods-content'); if (!content) return;
+  if (!foodsCache.length) { content.innerHTML=`<div class="empty-state"><div class="big">No foods yet</div>Add staples to use in meal logging.<br><button class="btn btn-primary" id="empty-add">Add first food</button></div>`; document.getElementById('empty-add').addEventListener('click',()=>openFoodForm(null)); return; }
+  const filtered=foodSearch?foodsCache.filter(f=>(f.name||'').toLowerCase().includes(foodSearch)||(f.brand||'').toLowerCase().includes(foodSearch)):foodsCache;
+  if (!filtered.length) { content.innerHTML=`<div class="empty-state">No foods match "<strong>${esc(foodSearch)}</strong>".</div>`; return; }
+  content.innerHTML=`<div class="food-list">${filtered.map(f=>{
+    const cat=CAT_MAP[f.category]||CAT_MAP.other; const icon=f.icon||cat.icon;
+    const k=Math.round(f.kcal_per_100g||kcalFromMacros(f.protein_g,f.fat_g,f.carbs_g,f.alcohol_g));
+    return `<div class="food-row" data-id="${f.id}"><div class="cat">${icon}</div><div class="info"><div class="name">${esc(f.name)}</div>${f.brand?`<div class="brand">${esc(f.brand)}</div>`:''}<div class="macros">P${round0(f.protein_g)} · F${round0(f.fat_g)} · C${round0(f.carbs_g)} · ${k} kcal /100g</div></div><div class="fav ${f.favorite?'':'star-off'}">★</div></div>`;
+  }).join('')}</div>`;
+  document.querySelectorAll('.food-row').forEach(r=>r.addEventListener('click',()=>{const f=foodsCache.find(x=>x.id===r.dataset.id); if (f) openFoodForm(f);}));
+}
+
+function openFoodForm(food) {
+  const isEdit=!!food;
+  const f=food||{name:'',brand:'',protein_g:0,fat_g:0,carbs_g:0,alcohol_g:0,fiber_g:0,sodium_mg:0,default_serving_g:null,default_serving_label:'',category:'other',suggested_meals:[],favorite:false,icon:''};
+  openSheet(`<div class="sheet-handle"></div><div class="sheet-header"><div class="sheet-title">${isEdit?'Edit food':'Add food'}</div><button class="sheet-close" id="sheet-close">✕</button></div>
+    <div class="row-2" style="margin-bottom:16px">
+      <div class="field"><label>Name</label><div class="input"><input type="text" id="f-name" placeholder="e.g. Chicken breast" value="${esc(f.name)}"></div></div>
+      <div class="field"><label>Icon <span style="color:var(--muted); font-weight:400">· emoji</span></label><div class="input"><input type="text" id="f-icon" placeholder="🍗" value="${esc(f.icon||'')}" maxlength="4"></div></div>
+    </div>
+    <div class="field"><label>Brand <span style="color:var(--muted); font-weight:400">· optional</span></label><div class="input"><input type="text" id="f-brand" value="${esc(f.brand||'')}"></div></div>
+    <div class="section-header" style="margin-top:8px; margin-bottom:8px"><div class="section-title">Per 100g</div></div>
+    <div class="row-3" style="margin-bottom:16px">
+      <div class="field"><label>Protein</label><div class="input"><input type="number" inputmode="decimal" step="0.1" min="0" id="f-p" value="${f.protein_g??''}"><div class="unit">g</div></div></div>
+      <div class="field"><label>Fat</label><div class="input"><input type="number" inputmode="decimal" step="0.1" min="0" id="f-f" value="${f.fat_g??''}"><div class="unit">g</div></div></div>
+      <div class="field"><label>Carbs</label><div class="input"><input type="number" inputmode="decimal" step="0.1" min="0" id="f-c" value="${f.carbs_g??''}"><div class="unit">g</div></div></div>
+    </div>
+    <div class="kcal-preview"><span class="lab">Calculated kcal /100g</span><span class="val"><span id="f-kcal">0</span><small>kcal</small></span></div>
+    <div class="row-3" style="margin-bottom:16px">
+      <div class="field"><label>Fiber</label><div class="input"><input type="number" step="0.1" min="0" id="f-fiber" value="${f.fiber_g??''}"><div class="unit">g</div></div></div>
+      <div class="field"><label>Sodium</label><div class="input"><input type="number" step="1" min="0" id="f-sodium" value="${f.sodium_mg??''}"><div class="unit">mg</div></div></div>
+      <div class="field"><label>Alcohol</label><div class="input"><input type="number" step="0.1" min="0" id="f-alc" value="${f.alcohol_g??''}"><div class="unit">g</div></div></div>
+    </div>
+    <div class="section-header" style="margin-top:12px; margin-bottom:8px"><div class="section-title">Default serving <span style="text-transform:none; letter-spacing:0; font-weight:400; color:var(--muted)">· optional</span></div></div>
+    <div class="row-2" style="margin-bottom:16px">
+      <div class="field"><label>Size</label><div class="input"><input type="number" step="1" min="0" id="f-serving-g" value="${f.default_serving_g??''}"><div class="unit">g</div></div></div>
+      <div class="field"><label>Label</label><div class="input"><input type="text" id="f-serving-label" placeholder="e.g. 1 scoop" value="${esc(f.default_serving_label||'')}"></div></div>
+    </div>
+    <div class="field"><label>Category</label><div class="input"><select id="f-category">${CATEGORIES.map(c=>`<option value="${c.id}" ${f.category===c.id?'selected':''}>${c.icon} ${c.label}</option>`).join('')}</select></div></div>
+    <div class="field"><label>Suggested meal buckets</label><div class="chips" id="f-meals">${MEAL_SLOTS.map(m=>`<button type="button" class="chip ${(f.suggested_meals||[]).includes(m.id)?'active':''}" data-meal="${m.id}">${m.label}</button>`).join('')}</div></div>
+    <div class="toggle-row"><div class="label-group"><div class="label">Favorite</div><div class="hint">Surface at top of list</div></div><button type="button" class="toggle ${f.favorite?'on':''}" id="f-fav"></button></div>
+    <div style="display:flex; gap:12px; margin-top:24px">${isEdit?`<button class="btn btn-danger" id="f-delete">Delete</button>`:''}<button class="btn btn-primary btn-block" id="f-save" style="flex:1">${isEdit?'Save':'Add'}</button></div>`);
+  const getVals=()=>({name:document.getElementById('f-name').value.trim(),brand:document.getElementById('f-brand').value.trim(),icon:document.getElementById('f-icon').value.trim(),protein_g:Number(document.getElementById('f-p').value)||0,fat_g:Number(document.getElementById('f-f').value)||0,carbs_g:Number(document.getElementById('f-c').value)||0,fiber_g:Number(document.getElementById('f-fiber').value)||0,sodium_mg:Number(document.getElementById('f-sodium').value)||0,alcohol_g:Number(document.getElementById('f-alc').value)||0,default_serving_g:document.getElementById('f-serving-g').value?Number(document.getElementById('f-serving-g').value):null,default_serving_label:document.getElementById('f-serving-label').value.trim()||null,category:document.getElementById('f-category').value,suggested_meals:Array.from(document.querySelectorAll('#f-meals .chip.active')).map(c=>c.dataset.meal),favorite:document.getElementById('f-fav').classList.contains('on')});
+  const upd=()=>{const v=getVals(); document.getElementById('f-kcal').textContent=Math.round(kcalFromMacros(v.protein_g,v.fat_g,v.carbs_g,v.alcohol_g));};
+  ['f-p','f-f','f-c','f-alc'].forEach(id=>document.getElementById(id).addEventListener('input',upd)); upd();
+  document.querySelectorAll('#f-meals .chip').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('active')));
+  document.getElementById('f-fav').addEventListener('click',()=>document.getElementById('f-fav').classList.toggle('on'));
+  document.getElementById('sheet-close').addEventListener('click',closeSheet);
+  document.getElementById('f-save').addEventListener('click',async()=>{
+    const v=getVals(); if (!v.name) {toast('Name required');return;}
+    if (!v.protein_g&&!v.fat_g&&!v.carbs_g&&!v.alcohol_g) {toast('Enter at least one macro');return;}
+    const payload={...v, brand:v.brand||null, icon:v.icon||null, user_id:currentUser.id, updated_at:new Date().toISOString()};
+    const r = isEdit ? await sb.from('foods').update(payload).eq('id',food.id) : await sb.from('foods').insert(payload);
+    if (r.error) {toast('Save failed'); console.error(r.error); return;}
+    toast(isEdit?'Updated':'Added'); closeSheet(); foodsCache=await fetchFoods(); renderFoodList();
+  });
+  if (isEdit) document.getElementById('f-delete').addEventListener('click',async()=>{
+    if (!confirm(`Delete "${food.name}"?`)) return;
+    const {error}=await sb.from('foods').delete().eq('id',food.id);
+    if (error) {toast('Delete failed'); return;}
+    toast('Deleted'); closeSheet(); foodsCache=await fetchFoods(); renderFoodList();
+  });
+  setTimeout(()=>{if (!isEdit) document.getElementById('f-name').focus();},200);
+}
+
+// ====== DISHES TAB — NEW ======
+async function renderDishes() {
+  app.innerHTML=`<div class="screen"><div class="app-header"><div><div class="app-title">Dishes</div><div class="app-sub">Your saved recipes</div></div>
+    <div class="header-right"><button class="btn btn-primary btn-small" id="add-dish">+ Add dish</button></div></div>
+    <div class="field food-search"><div class="input"><input type="search" id="dish-search" placeholder="Search dishes…"></div></div>
+    <div id="dishes-content"><div class="loading" style="min-height:40vh">Loading</div></div>
+  </div>${tabBarHTML()}`;
+  wireTabBar();
+  document.getElementById('add-dish').addEventListener('click',()=>openDishForm(null));
+  // Ensure foods loaded (for per-serving macro calc)
+  if (foodsCache.length===0) foodsCache=await fetchFoods();
+  dishesCache=await fetchDishes();
+  renderDishList();
+  document.getElementById('dish-search').addEventListener('input',e=>renderDishList(e.target.value.toLowerCase()));
+}
+function renderDishList(q='') {
+  const content=document.getElementById('dishes-content'); if (!content) return;
+  if (!dishesCache.length) {
+    content.innerHTML=`<div class="empty-state"><div class="big">No dishes yet</div>Create reusable dishes (like "Chicken bowl" or "Protein oats") that combine multiple foods. Pick a dish in the meal logger and just set the number of servings.<br><button class="btn btn-primary" id="empty-add">Create first dish</button></div>`;
+    document.getElementById('empty-add').addEventListener('click',()=>openDishForm(null));
+    return;
+  }
+  const filtered=q?dishesCache.filter(d=>(d.name||'').toLowerCase().includes(q)||(d.description||'').toLowerCase().includes(q)):dishesCache;
+  if (!filtered.length) { content.innerHTML=`<div class="empty-state">No dishes match "<strong>${esc(q)}</strong>".</div>`; return; }
+  content.innerHTML=`<div class="food-list">${filtered.map(d=>{
+    const per=dishPerServing(d);
+    const icon=d.icon||'🍲';
+    return `<div class="dish-row" data-id="${d.id}"><div class="cat">${icon}</div><div class="info"><div class="name">${esc(d.name)}</div><div class="brand">${(d.items||[]).length} ingredients · ${d.servings||1} serving${d.servings==1?'':'s'}</div><div class="macros">per serving: P${round0(per.protein_g)} · F${round0(per.fat_g)} · C${round0(per.carbs_g)} · ${round0(per.kcal)} kcal</div></div><div class="fav ${d.favorite?'':'star-off'}">★</div></div>`;
+  }).join('')}</div>`;
+  document.querySelectorAll('.dish-row').forEach(r=>r.addEventListener('click',()=>{const d=dishesCache.find(x=>x.id===r.dataset.id); if (d) openDishForm(d);}));
+}
+
+function openDishForm(dish) {
+  const isEdit=!!dish;
+  // Initialize dishDraft (working copy)
+  dishDraft = dish ? {
+    id: dish.id, name: dish.name, icon: dish.icon||'', description: dish.description||'',
+    servings: dish.servings || 1, category: dish.category||'mixed',
+    suggested_meals: dish.suggested_meals || [], favorite: !!dish.favorite,
+    items: (dish.items||[]).map(it => ({...it})),
+  } : {
+    name: '', icon: '', description: '', servings: 1, category: 'mixed',
+    suggested_meals: [], favorite: false, items: [],
+  };
+  dishIngPicker = null;
+  renderDishForm(isEdit);
+}
+
+function renderDishForm(isEdit) {
+  const d = dishDraft;
+  // Compute total ingredient macros
+  let tp=0,tf=0,tc=0,ta=0;
+  for (const it of d.items) {
+    const food = foodsCache.find(x=>x.id===it.food_id); if (!food) continue;
+    const r=(Number(it.grams)||0)/100;
+    tp += (food.protein_g||0)*r; tf += (food.fat_g||0)*r; tc += (food.carbs_g||0)*r; ta += (food.alcohol_g||0)*r;
+  }
+  const tk = kcalFromMacros(tp,tf,tc,ta);
+  const svs = Math.max(1, Number(d.servings) || 1);
+  const perP = tp/svs, perF = tf/svs, perC = tc/svs, perK = tk/svs;
+
+  openSheet(`<div class="sheet-handle"></div>
+    <div class="sheet-header"><div class="sheet-title">${isEdit?'Edit dish':'Add dish'}</div><button class="sheet-close" id="sheet-close">✕</button></div>
+    <div class="row-2" style="margin-bottom:16px">
+      <div class="field"><label>Name</label><div class="input"><input type="text" id="d-name" placeholder="e.g. Chicken bowl" value="${esc(d.name)}"></div></div>
+      <div class="field"><label>Icon</label><div class="input"><input type="text" id="d-icon" placeholder="🍲" value="${esc(d.icon)}" maxlength="4"></div></div>
+    </div>
+    <div class="row-2" style="margin-bottom:16px">
+      <div class="field"><label>Servings this makes</label><div class="input"><input type="number" inputmode="decimal" step="0.5" min="1" id="d-servings" value="${d.servings}"></div></div>
+      <div class="field"><label>Category</label><div class="input"><select id="d-category">${CATEGORIES.map(c=>`<option value="${c.id}" ${d.category===c.id?'selected':''}>${c.icon} ${c.label}</option>`).join('')}</select></div></div>
+    </div>
+
+    <div class="section-header" style="margin-top:8px; margin-bottom:10px"><div class="section-title">Ingredients</div><button class="btn btn-ghost btn-small" id="d-add-ing">+ Add ingredient</button></div>
+
+    ${d.items.length ? `
+      <div class="dish-ing-list" id="d-ing-list">
+        ${d.items.map((it, i) => {
+          const food = foodsCache.find(x=>x.id===it.food_id);
+          if (!food) return '';
+          const icon = food.icon || CAT_MAP[food.category]?.icon || '🔹';
+          const r = (Number(it.grams)||0)/100;
+          const k = kcalFromMacros((food.protein_g||0)*r,(food.fat_g||0)*r,(food.carbs_g||0)*r,(food.alcohol_g||0)*r);
+          return `<div class="dish-ing-row">
+            <div class="ico">${icon}</div>
+            <div class="info"><div class="nm">${esc(food.name)}</div>
+              <div class="m">P${round1((food.protein_g||0)*r)} · F${round1((food.fat_g||0)*r)} · C${round1((food.carbs_g||0)*r)} · ${round0(k)} kcal</div></div>
+            <div class="g"><input type="number" inputmode="decimal" step="1" min="0" data-ing-idx="${i}" value="${round0(it.grams)}"><span>g</span></div>
+            <button class="rm" data-rm-idx="${i}">✕</button>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="dish-ing-total">
+        <span class="lab">Per serving</span>
+        <span class="val">P${round0(perP)} · F${round0(perF)} · C${round0(perC)} · ${round0(perK)} kcal</span>
+      </div>
+      <div class="dish-ing-total" style="background:transparent; border-left-color:var(--muted); opacity:0.75">
+        <span class="lab">Recipe total (${svs} serving${svs==1?'':'s'})</span>
+        <span class="val">P${round0(tp)} · F${round0(tf)} · C${round0(tc)} · ${round0(tk)} kcal</span>
+      </div>
+    ` : `
+      <div class="empty-state" style="padding:20px 14px; margin-bottom:12px">No ingredients yet. Tap <strong>+ Add ingredient</strong>.</div>
+    `}
+
+    ${dishIngPicker ? renderIngPicker() : ''}
+
+    <div class="field" style="margin-top:14px"><label>Suggested meal buckets</label><div class="chips" id="d-meals">${MEAL_SLOTS.map(m=>`<button type="button" class="chip ${(d.suggested_meals||[]).includes(m.id)?'active':''}" data-meal="${m.id}">${m.label}</button>`).join('')}</div></div>
+    <div class="toggle-row"><div class="label-group"><div class="label">Favorite</div><div class="hint">Surface at top of dishes list</div></div><button type="button" class="toggle ${d.favorite?'on':''}" id="d-fav"></button></div>
+
+    <div style="display:flex; gap:12px; margin-top:24px">
+      ${isEdit?`<button class="btn btn-danger" id="d-delete">Delete</button>`:''}
+      <button class="btn btn-primary btn-block" id="d-save" style="flex:1">${isEdit?'Save dish':'Save dish'}</button>
+    </div>`);
+
+  // Wire inputs
+  document.getElementById('sheet-close').addEventListener('click',closeSheet);
+  document.getElementById('d-name').addEventListener('input',e=>d.name=e.target.value);
+  document.getElementById('d-icon').addEventListener('input',e=>d.icon=e.target.value);
+  document.getElementById('d-servings').addEventListener('input',e=>{ d.servings = Number(e.target.value) || 1; renderDishForm(isEdit); });
+  document.getElementById('d-category').addEventListener('change',e=>d.category=e.target.value);
+  document.querySelectorAll('#d-meals .chip').forEach(c=>c.addEventListener('click',()=>{c.classList.toggle('active'); d.suggested_meals = Array.from(document.querySelectorAll('#d-meals .chip.active')).map(c=>c.dataset.meal);}));
+  document.getElementById('d-fav').addEventListener('click',()=>{const b=document.getElementById('d-fav'); b.classList.toggle('on'); d.favorite=b.classList.contains('on');});
+
+  // Ingredient grams editing
+  document.querySelectorAll('[data-ing-idx]').forEach(inp => inp.addEventListener('input', e => {
+    d.items[Number(inp.dataset.ingIdx)].grams = Number(e.target.value) || 0;
+    renderDishForm(isEdit);
+  }));
+  document.querySelectorAll('[data-rm-idx]').forEach(b => b.addEventListener('click', () => {
+    d.items.splice(Number(b.dataset.rmIdx), 1);
+    renderDishForm(isEdit);
+  }));
+
+  // Add ingredient
+  document.getElementById('d-add-ing').addEventListener('click', () => {
+    dishIngPicker = { search: '', selectedFood: null, grams: 100 };
+    renderDishForm(isEdit);
+    setTimeout(()=>{ const s=document.getElementById('ing-search'); if (s) s.focus(); }, 50);
+  });
+  wireIngPicker(isEdit);
+
+  // Save
+  document.getElementById('d-save').addEventListener('click', async () => {
+    if (!d.name.trim()) { toast('Name required'); return; }
+    if (!d.items.length) { toast('Add at least one ingredient'); return; }
+    const payload = {
+      user_id: currentUser.id, name: d.name.trim(), icon: d.icon.trim() || null,
+      description: d.description || null, servings: d.servings,
+      category: d.category, suggested_meals: d.suggested_meals, favorite: d.favorite,
+      updated_at: new Date().toISOString(),
+    };
+    let dishId;
+    if (isEdit) {
+      const r = await sb.from('recipes').update(payload).eq('id', d.id);
+      if (r.error) { toast('Save failed: '+r.error.message); return; }
+      dishId = d.id;
+      // Replace items
+      await sb.from('recipe_items').delete().eq('recipe_id', d.id);
+    } else {
+      const r = await sb.from('recipes').insert(payload).select().single();
+      if (r.error) { toast('Save failed: '+r.error.message); return; }
+      dishId = r.data.id;
+    }
+    // Insert items
+    const itemRows = d.items.map((it, i) => ({
+      recipe_id: dishId, food_id: it.food_id, grams: it.grams, sort_order: i, notes: it.notes || null,
+    }));
+    if (itemRows.length) {
+      const r = await sb.from('recipe_items').insert(itemRows);
+      if (r.error) { toast('Items save failed: '+r.error.message); console.error(r.error); return; }
+    }
+    toast(isEdit?'Dish saved':'Dish created');
+    closeSheet();
+    dishesCache = await fetchDishes();
+    renderDishList();
+  });
+
+  if (isEdit) document.getElementById('d-delete').addEventListener('click', async () => {
+    if (!confirm(`Delete "${d.name}"?`)) return;
+    const {error} = await sb.from('recipes').delete().eq('id', d.id);
+    if (error) { toast('Delete failed'); return; }
+    toast('Deleted'); closeSheet(); dishesCache = await fetchDishes(); renderDishList();
   });
 }
 
-function renderEntryRow(entry) {
-  const food = entry.food_id ? foodsCache.find(f => f.id === entry.food_id) : null;
-  const name = food ? food.name : (entry.manual_name || 'Unknown');
-  const brand = food ? food.brand : '';
-  const icon = food ? (food.icon || (CAT_MAP[food.category]?.icon) || '🔹') : '🔹';
-  const unit = entry.grams ? `${round0(entry.grams)}g` : '';
-  return `
-    <div class="meal-entry">
-      <div class="ico">${icon}</div>
-      <div class="info">
-        <div class="name">${esc(name)}${brand ? ' · '+esc(brand) : ''}</div>
-        <div class="meta">${unit} · P${round0(entry.protein_g)} F${round0(entry.fat_g)} C${round0(entry.carbs_g)} · ${round0(entry.kcal)} kcal</div>
-      </div>
-      <button class="del" data-del-entry="${entry.id}" title="Remove">✕</button>
+function renderIngPicker() {
+  const p = dishIngPicker; if (!p) return '';
+  const q = (p.search||'').toLowerCase();
+  const filtered = foodsCache.filter(f => (f.name||'').toLowerCase().includes(q) || (f.brand||'').toLowerCase().includes(q)).slice(0, 10);
+  const selected = p.selectedFood;
+  return `<div class="ing-picker">
+    <div class="ip-search">
+      <input type="search" id="ing-search" placeholder="Search a food…" value="${esc(p.search||'')}">
+      <button class="sheet-close" id="ing-cancel" style="font-size:18px">✕</button>
     </div>
-  `;
+    ${!selected ? `
+      <div class="ing-picker-list">
+        ${filtered.length ? filtered.map(f => {
+          const icon = f.icon || CAT_MAP[f.category]?.icon || '🔹';
+          return `<div class="ip-row" data-pick="${f.id}">
+            <div class="ico">${icon}</div>
+            <div class="nm">${esc(f.name)}${f.brand?' · '+esc(f.brand):''}</div>
+            <div class="mac">P${round0(f.protein_g)} F${round0(f.fat_g)} C${round0(f.carbs_g)}</div>
+          </div>`;
+        }).join('') : '<div style="padding:10px; color:var(--muted); font-size:12px">No matches.</div>'}
+      </div>
+    ` : (() => {
+      const icon = selected.icon || CAT_MAP[selected.category]?.icon || '🔹';
+      const r = p.grams / 100;
+      const k = kcalFromMacros((selected.protein_g||0)*r,(selected.fat_g||0)*r,(selected.carbs_g||0)*r,(selected.alcohol_g||0)*r);
+      return `
+        <div class="ing-picker-portion">
+          <span class="ico-line">${icon}</span>
+          <span class="name">${esc(selected.name)}</span>
+          <div class="amount"><input type="number" inputmode="decimal" step="1" min="0" id="ing-grams" value="${p.grams}"><span class="u">g</span></div>
+        </div>
+        <div style="font-size:11px; color:var(--muted); font-family:var(--mono); margin-top:6px; text-align:right">= P${round1((selected.protein_g||0)*r)} · F${round1((selected.fat_g||0)*r)} · C${round1((selected.carbs_g||0)*r)} · ${round0(k)} kcal</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px">
+          <button class="btn btn-secondary btn-small" id="ing-back">← Back</button>
+          <button class="btn btn-primary btn-small" id="ing-add">+ Add to dish</button>
+        </div>
+      `;
+    })()}
+  </div>`;
+}
+function wireIngPicker(isEdit) {
+  if (!dishIngPicker) return;
+  const cancel = document.getElementById('ing-cancel');
+  if (cancel) cancel.addEventListener('click', () => { dishIngPicker = null; renderDishForm(isEdit); });
+  const sEl = document.getElementById('ing-search');
+  if (sEl) sEl.addEventListener('input', e => { dishIngPicker.search = e.target.value; renderDishForm(isEdit); setTimeout(()=>document.getElementById('ing-search')?.focus(),30); });
+  document.querySelectorAll('[data-pick]').forEach(r => r.addEventListener('click', () => {
+    const f = foodsCache.find(x => x.id === r.dataset.pick); if (!f) return;
+    dishIngPicker.selectedFood = f;
+    dishIngPicker.grams = f.default_serving_g || 100;
+    renderDishForm(isEdit);
+    setTimeout(()=>{ const i=document.getElementById('ing-grams'); if (i) { i.focus(); i.select(); } },50);
+  }));
+  const gEl = document.getElementById('ing-grams');
+  if (gEl) gEl.addEventListener('input', e => { dishIngPicker.grams = Number(e.target.value) || 0; });
+  const back = document.getElementById('ing-back');
+  if (back) back.addEventListener('click', () => { dishIngPicker.selectedFood = null; renderDishForm(isEdit); });
+  const add = document.getElementById('ing-add');
+  if (add) add.addEventListener('click', () => {
+    if (!dishIngPicker.selectedFood || !dishIngPicker.grams || dishIngPicker.grams <= 0) { toast('Enter grams'); return; }
+    dishDraft.items.push({ food_id: dishIngPicker.selectedFood.id, grams: dishIngPicker.grams, sort_order: dishDraft.items.length });
+    // Reset picker to search state so you can add another
+    dishIngPicker = { search: '', selectedFood: null, grams: 100 };
+    renderDishForm(isEdit);
+    setTimeout(()=>document.getElementById('ing-search')?.focus(), 50);
+  });
 }
 
-async function deleteEntry(entryId) {
-  if (!confirm('Remove this item?')) return;
-  const { error } = await sb.from('entries').delete().eq('id', entryId);
-  if (error) { toast('Failed to remove'); console.error(error); return; }
-  toast('Removed');
-  await renderToday();
-}
-
-// ==========================================
-// MEAL COMPOSER — Session 3
-// ==========================================
+// ====== MEAL COMPOSER ======
 async function openMealComposer(presetSlot) {
-  // Ensure foods are loaded
-  if (foodsCache.length === 0) foodsCache = await fetchFoods();
-  if (foodsCache.length === 0) {
-    toast('Add foods first in the Foods tab');
-    return;
-  }
-  mealDraft = {
-    slot: presetSlot || defaultSlotByTime(),
-    items: []
-  };
-  mcSelectedFood = null;
-  mcPortionMode = 'g';
-  mcPortionValue = 100;
+  if (foodsCache.length===0) foodsCache=await fetchFoods();
+  if (dishesCache.length===0) dishesCache=await fetchDishes();
+  if (!foodsCache.length) { toast('Add foods first in the Foods tab'); return; }
+  mealDraft = { slot: presetSlot || defaultSlotByTime(), items: [] };
+  mcSelected = null; mcSource = 'foods'; mcPortionMode = 'g'; mcPortionValue = 100;
+  foodSearch = '';
   renderMealComposer();
   document.getElementById('mc').classList.add('show');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
 function closeMealComposer() {
   document.getElementById('mc').classList.remove('show');
-  document.body.style.overflow = '';
-  mealDraft = null;
-  mcSelectedFood = null;
+  document.body.style.overflow='';
+  mealDraft=null; mcSelected=null;
 }
-document.getElementById('mc-close-btn').addEventListener('click', () => {
-  if (mealDraft && mealDraft.items.length > 0) {
-    if (!confirm(`Discard ${mealDraft.items.length} item${mealDraft.items.length===1?'':'s'}?`)) return;
-  }
+document.getElementById('mc-close-btn').addEventListener('click',()=>{
+  if (mealDraft && mealDraft.items.length>0) { if (!confirm(`Discard ${mealDraft.items.length} item${mealDraft.items.length===1?'':'s'}?`)) return; }
   closeMealComposer();
 });
 
 function renderMealComposer() {
-  // Top sub
   const slot = SLOT_MAP[mealDraft.slot];
   document.getElementById('mc-top-sub').textContent = `${fmtDate()} · ${slot.label}`;
+  document.getElementById('mc-bucket-row').innerHTML = MEAL_SLOTS.map(s=>`<button class="mc-bucket ${s.id===mealDraft.slot?'active':''}" data-slot="${s.id}"><span class="ico">${s.icon}</span><span>${s.label}</span></button>`).join('');
+  document.querySelectorAll('.mc-bucket').forEach(b=>b.addEventListener('click',()=>{mealDraft.slot=b.dataset.slot; renderMealComposer();}));
 
-  // Bucket row
-  document.getElementById('mc-bucket-row').innerHTML = MEAL_SLOTS.map(s => `
-    <button class="mc-bucket ${s.id === mealDraft.slot ? 'active' : ''}" data-slot="${s.id}">
-      <span class="ico">${s.icon}</span>
-      <span>${s.label}</span>
-    </button>
-  `).join('');
-  document.querySelectorAll('.mc-bucket').forEach(b => {
-    b.addEventListener('click', () => {
-      mealDraft.slot = b.dataset.slot;
+  // Source toggle
+  document.querySelectorAll('#mc-source-toggle button').forEach(b => {
+    b.classList.toggle('on', b.dataset.src === mcSource);
+    b.onclick = () => {
+      if (b.dataset.src === mcSource) return;
+      mcSource = b.dataset.src;
+      mcSelected = null;
       renderMealComposer();
-    });
+      setTimeout(()=>document.getElementById('mc-search')?.focus(), 50);
+    };
   });
 
-  // Draft section
+  // Draft
   const draftEl = document.getElementById('mc-draft');
-  if (mealDraft.items.length === 0) {
-    draftEl.style.display = 'none';
-  } else {
+  if (mealDraft.items.length === 0) draftEl.style.display = 'none';
+  else {
     draftEl.style.display = 'block';
-    const totals = mealDraft.items.reduce((a, it) => ({
-      p: a.p + it.macros.protein_g,
-      f: a.f + it.macros.fat_g,
-      c: a.c + it.macros.carbs_g,
-      k: a.k + kcalFromMacros(it.macros.protein_g, it.macros.fat_g, it.macros.carbs_g, it.macros.alcohol_g),
-    }), { p:0, f:0, c:0, k:0 });
-    draftEl.innerHTML = `
-      <div class="mc-draft-head">
-        <div class="mc-draft-label">Current meal · ${mealDraft.items.length} item${mealDraft.items.length===1?'':'s'}</div>
-        <div class="mc-draft-total">P${round0(totals.p)} F${round0(totals.f)} C${round0(totals.c)} · ${round0(totals.k)} kcal</div>
-      </div>
-      ${mealDraft.items.map((it, idx) => {
-        const food = it.food;
-        const icon = food.icon || (CAT_MAP[food.category]?.icon) || '🔹';
-        const unit = it.unit === 'serving' ? `${it.servings} × ${esc(food.default_serving_label || 'serving')}` : `${round0(it.grams)}g`;
-        return `
-          <div class="mc-draft-item">
-            <div class="ico">${icon}</div>
-            <div class="info">
-              <div class="name">${esc(food.name)}</div>
-              <div class="meta">${unit} · P${round0(it.macros.protein_g)} F${round0(it.macros.fat_g)} C${round0(it.macros.carbs_g)} · ${round0(kcalFromMacros(it.macros.protein_g, it.macros.fat_g, it.macros.carbs_g, it.macros.alcohol_g))} kcal</div>
-            </div>
-            <button class="rm" data-draft-idx="${idx}">✕</button>
-          </div>
-        `;
-      }).join('')}
-    `;
-    draftEl.querySelectorAll('[data-draft-idx]').forEach(b => {
-      b.addEventListener('click', () => {
-        mealDraft.items.splice(Number(b.dataset.draftIdx), 1);
-        renderMealComposer();
-      });
-    });
+    const tot = mealDraft.items.reduce((a,it)=>({p:a.p+it.macros.protein_g,f:a.f+it.macros.fat_g,c:a.c+it.macros.carbs_g,k:a.k+kcalFromMacros(it.macros.protein_g,it.macros.fat_g,it.macros.carbs_g,it.macros.alcohol_g)}),{p:0,f:0,c:0,k:0});
+    draftEl.innerHTML = `<div class="mc-draft-head"><div class="mc-draft-label">Current meal · ${mealDraft.items.length} item${mealDraft.items.length===1?'':'s'}</div><div class="mc-draft-total">P${round0(tot.p)} F${round0(tot.f)} C${round0(tot.c)} · ${round0(tot.k)} kcal</div></div>
+      ${mealDraft.items.map((it,i)=>{
+        const icon = it.icon || '🔹';
+        const unit = it.type === 'dish' ? `${round1(it.servings)} serving${it.servings==1?'':'s'}` : (it.unit==='serving' ? `${it.servings} × ${esc(it.servingLabel||'serving')}` : `${round0(it.grams)}g`);
+        return `<div class="mc-draft-item"><div class="ico">${icon}</div><div class="info"><div class="name">${esc(it.name)}${it.type==='dish'?' <span class="dish-badge">Dish</span>':''}</div><div class="meta">${unit} · P${round0(it.macros.protein_g)} F${round0(it.macros.fat_g)} C${round0(it.macros.carbs_g)} · ${round0(kcalFromMacros(it.macros.protein_g,it.macros.fat_g,it.macros.carbs_g,it.macros.alcohol_g))} kcal</div></div><button class="rm" data-draft-idx="${i}">✕</button></div>`;
+      }).join('')}`;
+    draftEl.querySelectorAll('[data-draft-idx]').forEach(b=>b.addEventListener('click',()=>{mealDraft.items.splice(Number(b.dataset.draftIdx),1); renderMealComposer();}));
   }
 
-  // Food list
-  renderMcFoodList();
-
-  // Foot bar
+  renderMcList();
   renderMcFoot();
 }
 
-function renderMcFoodList() {
+function renderMcList() {
   const el = document.getElementById('mc-food-list');
-  const slot = mealDraft.slot;
   const q = foodSearch.toLowerCase();
+  const slot = mealDraft.slot;
 
-  // Filter
-  let foods = foodsCache;
-  if (q) {
-    foods = foods.filter(f =>
-      (f.name || '').toLowerCase().includes(q) ||
-      (f.brand || '').toLowerCase().includes(q)
-    );
-  }
-
-  if (foods.length === 0) {
-    el.innerHTML = `<div class="empty-state" style="margin-top:14px">No matches.</div>`;
-    return;
-  }
-
-  // Split: suggested for this slot first, then others
-  let suggested, others;
-  if (q) {
-    // Search active — don't split, just show results
-    suggested = [];
-    others = foods;
-  } else {
-    suggested = foods.filter(f => Array.isArray(f.suggested_meals) && f.suggested_meals.includes(slot));
-    others = foods.filter(f => !suggested.includes(f));
-  }
-
-  const renderRow = f => {
-    const icon = f.icon || (CAT_MAP[f.category]?.icon) || '🔹';
-    const kcal = Math.round(f.kcal_per_100g || kcalFromMacros(f.protein_g, f.fat_g, f.carbs_g, f.alcohol_g));
-    return `
-      <div class="mc-food-row" data-food-id="${f.id}">
-        <div class="ico">${icon}</div>
-        <div class="info">
-          <div class="name">${esc(f.name)}${f.brand ? ' <span style="color:var(--muted); font-weight:500">· '+esc(f.brand)+'</span>' : ''}</div>
-          <div class="macros">P${round1(f.protein_g)} · F${round1(f.fat_g)} · C${round1(f.carbs_g)} · ${kcal} kcal /100g</div>
-        </div>
-      </div>
+  if (mcSource === 'foods') {
+    let foods = foodsCache;
+    if (q) foods = foods.filter(f => (f.name||'').toLowerCase().includes(q) || (f.brand||'').toLowerCase().includes(q));
+    if (!foods.length) { el.innerHTML = `<div class="empty-state" style="margin-top:14px">No matches.</div>`; return; }
+    let suggested, others;
+    if (q) { suggested = []; others = foods; }
+    else {
+      suggested = foods.filter(f => Array.isArray(f.suggested_meals) && f.suggested_meals.includes(slot));
+      others = foods.filter(f => !suggested.includes(f));
+    }
+    const row = f => {
+      const icon = f.icon || CAT_MAP[f.category]?.icon || '🔹';
+      const k = Math.round(f.kcal_per_100g || kcalFromMacros(f.protein_g, f.fat_g, f.carbs_g, f.alcohol_g));
+      return `<div class="mc-food-row" data-food-id="${f.id}"><div class="ico">${icon}</div><div class="info"><div class="name">${esc(f.name)}${f.brand?' <span style="color:var(--muted); font-weight:500">· '+esc(f.brand)+'</span>':''}</div><div class="macros">P${round1(f.protein_g)} · F${round1(f.fat_g)} · C${round1(f.carbs_g)} · ${k} kcal /100g</div></div></div>`;
+    };
+    el.innerHTML = `
+      ${suggested.length ? `<div class="mc-group-head">Suggested for ${SLOT_MAP[slot].label.toLowerCase()}</div>${suggested.map(row).join('')}` : ''}
+      ${others.length ? `<div class="mc-group-head">${suggested.length ? 'All other foods' : (q ? 'Search results' : 'All foods')}</div>${others.map(row).join('')}` : ''}
     `;
-  };
-
-  el.innerHTML = `
-    ${suggested.length > 0 ? `
-      <div class="mc-group-head">Suggested for ${SLOT_MAP[slot].label.toLowerCase()}</div>
-      ${suggested.map(renderRow).join('')}
-    ` : ''}
-    ${others.length > 0 ? `
-      <div class="mc-group-head">${suggested.length > 0 ? 'All other foods' : (q ? 'Search results' : 'All foods')}</div>
-      ${others.map(renderRow).join('')}
-    ` : ''}
-  `;
-
-  el.querySelectorAll('[data-food-id]').forEach(row => {
-    row.addEventListener('click', () => {
-      const food = foodsCache.find(f => f.id === row.dataset.foodId);
-      if (!food) return;
-      mcSelectedFood = food;
-      // Reset portion to default
-      if (food.default_serving_g) {
-        mcPortionMode = 'serving';
-        mcPortionValue = 1;
-      } else {
-        mcPortionMode = 'g';
-        mcPortionValue = 100;
-      }
-      renderMcFoot();
-      document.querySelectorAll('.mc-food-row').forEach(r => r.classList.remove('selected'));
-      row.classList.add('selected');
-      // Focus bottom bar
-      setTimeout(() => {
-        const inp = document.getElementById('mc-portion-input');
-        if (inp) { inp.focus(); inp.select(); }
-      }, 50);
-    });
-  });
+    el.querySelectorAll('[data-food-id]').forEach(r => r.addEventListener('click', () => pickFood(r.dataset.foodId)));
+  } else {
+    // Dishes
+    if (!dishesCache.length) { el.innerHTML = `<div class="empty-state" style="margin-top:14px">No dishes yet. Create some in the <strong>Dishes</strong> tab.</div>`; return; }
+    let dishes = dishesCache;
+    if (q) dishes = dishes.filter(d => (d.name||'').toLowerCase().includes(q));
+    if (!dishes.length) { el.innerHTML = `<div class="empty-state" style="margin-top:14px">No dishes match.</div>`; return; }
+    let suggested, others;
+    if (q) { suggested = []; others = dishes; }
+    else {
+      suggested = dishes.filter(d => Array.isArray(d.suggested_meals) && d.suggested_meals.includes(slot));
+      others = dishes.filter(d => !suggested.includes(d));
+    }
+    const row = d => {
+      const per = dishPerServing(d);
+      const icon = d.icon || '🍲';
+      return `<div class="mc-food-row" data-dish-id="${d.id}"><div class="ico">${icon}</div><div class="info"><div class="name">${esc(d.name)} <span class="dish-tag">Dish</span></div><div class="macros">per serving · P${round0(per.protein_g)} F${round0(per.fat_g)} C${round0(per.carbs_g)} · ${round0(per.kcal)} kcal</div></div></div>`;
+    };
+    el.innerHTML = `
+      ${suggested.length ? `<div class="mc-group-head">Suggested for ${SLOT_MAP[slot].label.toLowerCase()}</div>${suggested.map(row).join('')}` : ''}
+      ${others.length ? `<div class="mc-group-head">${suggested.length ? 'All other dishes' : 'All dishes'}</div>${others.map(row).join('')}` : ''}
+    `;
+    el.querySelectorAll('[data-dish-id]').forEach(r => r.addEventListener('click', () => pickDish(r.dataset.dishId)));
+  }
 }
 
-// Portion → grams conversion
+function pickFood(id) {
+  const food = foodsCache.find(f=>f.id===id); if (!food) return;
+  mcSelected = { type:'food', data:food };
+  if (food.default_serving_g) { mcPortionMode = 'serving'; mcPortionValue = 1; }
+  else { mcPortionMode = 'g'; mcPortionValue = 100; }
+  renderMcFoot();
+  document.querySelectorAll('.mc-food-row').forEach(r=>r.classList.remove('selected'));
+  const row = document.querySelector(`[data-food-id="${id}"]`); if (row) row.classList.add('selected');
+  setTimeout(()=>{ const i=document.getElementById('mc-portion-input'); if (i) { i.focus(); i.select(); } }, 50);
+}
+function pickDish(id) {
+  const dish = dishesCache.find(d=>d.id===id); if (!dish) return;
+  mcSelected = { type:'dish', data:dish };
+  mcPortionMode = 'servings';
+  mcPortionValue = 1;
+  renderMcFoot();
+  document.querySelectorAll('.mc-food-row').forEach(r=>r.classList.remove('selected'));
+  const row = document.querySelector(`[data-dish-id="${id}"]`); if (row) row.classList.add('selected');
+  setTimeout(()=>{ const i=document.getElementById('mc-portion-input'); if (i) { i.focus(); i.select(); } }, 50);
+}
+
 function portionToGrams(food, mode, value) {
-  if (mode === 'serving' && food.default_serving_g) {
-    return value * food.default_serving_g;
-  }
+  if (mode === 'serving' && food.default_serving_g) return value * food.default_serving_g;
   return value;
 }
-
 function computeEntryMacros(food, grams) {
   const r = grams / 100;
   return {
-    protein_g: (food.protein_g || 0) * r,
-    fat_g: (food.fat_g || 0) * r,
-    carbs_g: (food.carbs_g || 0) * r,
-    alcohol_g: (food.alcohol_g || 0) * r,
-    fiber_g: (food.fiber_g || 0) * r,
-    sodium_mg: (food.sodium_mg || 0) * r,
+    protein_g: (food.protein_g||0)*r, fat_g: (food.fat_g||0)*r,
+    carbs_g: (food.carbs_g||0)*r, alcohol_g: (food.alcohol_g||0)*r,
+    fiber_g: (food.fiber_g||0)*r, sodium_mg: (food.sodium_mg||0)*r,
+  };
+}
+function computeDishMacros(dish, servings) {
+  const per = dishPerServing(dish);
+  return {
+    protein_g: per.protein_g * servings, fat_g: per.fat_g * servings,
+    carbs_g: per.carbs_g * servings, alcohol_g: per.alcohol_g * servings,
+    fiber_g: per.fiber_g * servings, sodium_mg: per.sodium_mg * servings,
   };
 }
 
 function renderMcFoot() {
   const el = document.getElementById('mc-foot-inner');
-  if (!mcSelectedFood) {
-    // Log state
+  if (!mcSelected) {
     const canLog = mealDraft.items.length > 0;
-    const totals = mealDraft.items.reduce((a, it) => ({
-      p: a.p + it.macros.protein_g,
-      f: a.f + it.macros.fat_g,
-      c: a.c + it.macros.carbs_g,
-      k: a.k + kcalFromMacros(it.macros.protein_g, it.macros.fat_g, it.macros.carbs_g, it.macros.alcohol_g),
-    }), { p:0, f:0, c:0, k:0 });
-    el.innerHTML = `
-      ${canLog ? `
-        <div class="mc-log-totals">
-          <span class="lab">Meal total</span>
-          <span class="val">P${round0(totals.p)} · F${round0(totals.f)} · C${round0(totals.c)} · ${round0(totals.k)} kcal</span>
-        </div>
-      ` : ''}
-      <button class="btn btn-primary btn-block btn-lg" id="mc-log-btn" ${canLog ? '' : 'disabled'}>
-        ${canLog ? `Log meal (${mealDraft.items.length})` : 'Pick a food to start'}
-      </button>
-    `;
-    const logBtn = document.getElementById('mc-log-btn');
-    if (logBtn && canLog) logBtn.addEventListener('click', logMeal);
+    const tot = mealDraft.items.reduce((a,it)=>({p:a.p+it.macros.protein_g,f:a.f+it.macros.fat_g,c:a.c+it.macros.carbs_g,k:a.k+kcalFromMacros(it.macros.protein_g,it.macros.fat_g,it.macros.carbs_g,it.macros.alcohol_g)}),{p:0,f:0,c:0,k:0});
+    el.innerHTML = `${canLog?`<div class="mc-log-totals"><span class="lab">Meal total</span><span class="val">P${round0(tot.p)} · F${round0(tot.f)} · C${round0(tot.c)} · ${round0(tot.k)} kcal</span></div>`:''}<button class="btn btn-primary btn-block btn-lg" id="mc-log-btn" ${canLog?'':'disabled'}>${canLog?`Log meal (${mealDraft.items.length})`:'Pick a food or dish'}</button>`;
+    const b = document.getElementById('mc-log-btn'); if (b && canLog) b.addEventListener('click', logMeal);
     return;
   }
 
   // Portion state
-  const food = mcSelectedFood;
-  const icon = food.icon || (CAT_MAP[food.category]?.icon) || '🔹';
-  const hasServing = !!food.default_serving_g;
-  const grams = portionToGrams(food, mcPortionMode, mcPortionValue);
-  const macros = computeEntryMacros(food, grams);
-  const k = kcalFromMacros(macros.protein_g, macros.fat_g, macros.carbs_g, macros.alcohol_g);
+  if (mcSelected.type === 'food') {
+    const food = mcSelected.data;
+    const icon = food.icon || CAT_MAP[food.category]?.icon || '🔹';
+    const hasServing = !!food.default_serving_g;
+    const grams = portionToGrams(food, mcPortionMode, mcPortionValue);
+    const macros = computeEntryMacros(food, grams);
+    const k = kcalFromMacros(macros.protein_g, macros.fat_g, macros.carbs_g, macros.alcohol_g);
+    el.innerHTML = `<div class="mc-portion-head"><div class="ico">${icon}</div><div class="info"><div class="name">${esc(food.name)}</div><div class="per100">P${round1(food.protein_g)} · F${round1(food.fat_g)} · C${round1(food.carbs_g)} per 100g</div></div><button class="cancel" id="mc-cancel-portion">✕</button></div>
+      <div class="mc-portion-ctl"><div class="mc-stepper"><button id="mc-dec">−</button><input type="number" inputmode="decimal" step="${mcPortionMode==='serving'?'0.25':'1'}" min="0" id="mc-portion-input" value="${mcPortionValue}"><button id="mc-inc">+</button></div>
+      ${hasServing?`<div class="mc-unit-switch"><button class="${mcPortionMode==='serving'?'on':''}" data-mode="serving">${esc(food.default_serving_label||'serving')}</button><button class="${mcPortionMode==='g'?'on':''}" data-mode="g">grams</button></div>`:`<div class="mc-unit-switch"><button class="on">grams</button></div>`}</div>
+      <div class="mc-portion-preview"><span class="lab">${round0(grams)}g = </span><span class="val">P${round1(macros.protein_g)} · F${round1(macros.fat_g)} · C${round1(macros.carbs_g)}<span class="kcal">· ${round0(k)} kcal</span></span></div>
+      <div class="mc-action-row"><button class="btn btn-secondary" id="mc-add-another">+ Add to meal</button><button class="btn btn-primary" id="mc-add-and-log">Add & Log</button></div>`;
+  } else {
+    // Dish portion
+    const dish = mcSelected.data;
+    const icon = dish.icon || '🍲';
+    const per = dishPerServing(dish);
+    const servings = Number(mcPortionValue) || 0;
+    const macros = computeDishMacros(dish, servings);
+    const k = kcalFromMacros(macros.protein_g, macros.fat_g, macros.carbs_g, macros.alcohol_g);
+    el.innerHTML = `<div class="mc-portion-head"><div class="ico">${icon}</div><div class="info"><div class="name">${esc(dish.name)}</div><div class="per100">per serving: P${round0(per.protein_g)} · F${round0(per.fat_g)} · C${round0(per.carbs_g)} · ${round0(per.kcal)} kcal</div></div><button class="cancel" id="mc-cancel-portion">✕</button></div>
+      <div class="mc-portion-ctl"><div class="mc-stepper"><button id="mc-dec">−</button><input type="number" inputmode="decimal" step="0.25" min="0" id="mc-portion-input" value="${mcPortionValue}"><button id="mc-inc">+</button></div>
+      <div class="mc-unit-switch"><button class="on">serving${servings==1?'':'s'}</button></div></div>
+      <div class="mc-portion-preview"><span class="lab">${servings} × serving = </span><span class="val">P${round0(macros.protein_g)} · F${round0(macros.fat_g)} · C${round0(macros.carbs_g)}<span class="kcal">· ${round0(k)} kcal</span></span></div>
+      <div class="mc-action-row"><button class="btn btn-secondary" id="mc-add-another">+ Add to meal</button><button class="btn btn-primary" id="mc-add-and-log">Add & Log</button></div>`;
+  }
 
-  el.innerHTML = `
-    <div class="mc-portion-head">
-      <div class="ico">${icon}</div>
-      <div class="info">
-        <div class="name">${esc(food.name)}</div>
-        <div class="per100">P${round1(food.protein_g)} · F${round1(food.fat_g)} · C${round1(food.carbs_g)} per 100g</div>
-      </div>
-      <button class="cancel" id="mc-cancel-portion">✕</button>
-    </div>
-    <div class="mc-portion-ctl">
-      <div class="mc-stepper">
-        <button id="mc-dec">−</button>
-        <input type="number" inputmode="decimal" step="${mcPortionMode==='serving' ? '0.25' : '1'}" min="0" id="mc-portion-input" value="${mcPortionValue}">
-        <button id="mc-inc">+</button>
-      </div>
-      ${hasServing ? `
-        <div class="mc-unit-switch">
-          <button class="${mcPortionMode==='serving' ? 'on' : ''}" data-mode="serving">${esc(food.default_serving_label || 'serving')}</button>
-          <button class="${mcPortionMode==='g' ? 'on' : ''}" data-mode="g">grams</button>
-        </div>
-      ` : `
-        <div class="mc-unit-switch"><button class="on">grams</button></div>
-      `}
-    </div>
-    <div class="mc-portion-preview">
-      <span class="lab">${round0(grams)}g = </span>
-      <span class="val">P${round1(macros.protein_g)} · F${round1(macros.fat_g)} · C${round1(macros.carbs_g)}<span class="kcal">· ${round0(k)} kcal</span></span>
-    </div>
-    <div class="mc-action-row">
-      <button class="btn btn-secondary" id="mc-add-another">+ Add to meal</button>
-      <button class="btn btn-primary" id="mc-add-and-log">Add & Log</button>
-    </div>
-  `;
-
+  // Wire
   const inp = document.getElementById('mc-portion-input');
   inp.addEventListener('input', () => {
     mcPortionValue = Number(inp.value) || 0;
-    // Recompute preview inline (lightweight — don't rerender whole bar)
-    const g = portionToGrams(food, mcPortionMode, mcPortionValue);
-    const m = computeEntryMacros(food, g);
-    const kk = kcalFromMacros(m.protein_g, m.fat_g, m.carbs_g, m.alcohol_g);
-    document.querySelector('.mc-portion-preview').innerHTML = `
-      <span class="lab">${round0(g)}g = </span>
-      <span class="val">P${round1(m.protein_g)} · F${round1(m.fat_g)} · C${round1(m.carbs_g)}<span class="kcal">· ${round0(kk)} kcal</span></span>
-    `;
+    // Recompute inline
+    if (mcSelected.type === 'food') {
+      const food = mcSelected.data;
+      const g = portionToGrams(food, mcPortionMode, mcPortionValue);
+      const m = computeEntryMacros(food, g);
+      const kk = kcalFromMacros(m.protein_g, m.fat_g, m.carbs_g, m.alcohol_g);
+      document.querySelector('.mc-portion-preview').innerHTML = `<span class="lab">${round0(g)}g = </span><span class="val">P${round1(m.protein_g)} · F${round1(m.fat_g)} · C${round1(m.carbs_g)}<span class="kcal">· ${round0(kk)} kcal</span></span>`;
+    } else {
+      const dish = mcSelected.data;
+      const m = computeDishMacros(dish, mcPortionValue);
+      const kk = kcalFromMacros(m.protein_g, m.fat_g, m.carbs_g, m.alcohol_g);
+      document.querySelector('.mc-portion-preview').innerHTML = `<span class="lab">${mcPortionValue} × serving = </span><span class="val">P${round0(m.protein_g)} · F${round0(m.fat_g)} · C${round0(m.carbs_g)}<span class="kcal">· ${round0(kk)} kcal</span></span>`;
+    }
   });
   document.getElementById('mc-dec').addEventListener('click', () => {
-    const step = mcPortionMode === 'serving' ? 0.25 : (mcPortionValue > 20 ? 10 : 1);
+    const step = (mcSelected.type==='dish' || mcPortionMode==='serving') ? 0.25 : (mcPortionValue > 20 ? 10 : 1);
     mcPortionValue = Math.max(0, mcPortionValue - step);
-    inp.value = mcPortionValue;
-    inp.dispatchEvent(new Event('input'));
+    inp.value = mcPortionValue; inp.dispatchEvent(new Event('input'));
   });
   document.getElementById('mc-inc').addEventListener('click', () => {
-    const step = mcPortionMode === 'serving' ? 0.25 : (mcPortionValue >= 20 ? 10 : 1);
-    mcPortionValue = mcPortionValue + step;
-    inp.value = mcPortionValue;
-    inp.dispatchEvent(new Event('input'));
+    const step = (mcSelected.type==='dish' || mcPortionMode==='serving') ? 0.25 : (mcPortionValue >= 20 ? 10 : 1);
+    mcPortionValue += step; inp.value = mcPortionValue; inp.dispatchEvent(new Event('input'));
   });
-  document.querySelectorAll('.mc-unit-switch [data-mode]').forEach(b => {
-    b.addEventListener('click', () => {
-      const newMode = b.dataset.mode;
-      if (newMode === mcPortionMode) return;
-      // Convert current value
-      if (newMode === 'g') {
-        mcPortionValue = portionToGrams(food, mcPortionMode, mcPortionValue);
-      } else {
-        mcPortionValue = food.default_serving_g ? mcPortionValue / food.default_serving_g : mcPortionValue;
-      }
-      mcPortionMode = newMode;
-      renderMcFoot();
-    });
-  });
+  document.querySelectorAll('.mc-unit-switch [data-mode]').forEach(b => b.addEventListener('click', () => {
+    const newMode = b.dataset.mode; if (newMode === mcPortionMode) return;
+    const food = mcSelected.data;
+    if (newMode === 'g') mcPortionValue = portionToGrams(food, mcPortionMode, mcPortionValue);
+    else mcPortionValue = food.default_serving_g ? mcPortionValue / food.default_serving_g : mcPortionValue;
+    mcPortionMode = newMode;
+    renderMcFoot();
+    // Focus the input after switching units
+    setTimeout(()=>{ const i=document.getElementById('mc-portion-input'); if (i) { i.focus(); i.select(); } }, 30);
+  }));
   document.getElementById('mc-cancel-portion').addEventListener('click', () => {
-    mcSelectedFood = null;
+    mcSelected = null;
     document.querySelectorAll('.mc-food-row').forEach(r => r.classList.remove('selected'));
     renderMcFoot();
+    setTimeout(()=>document.getElementById('mc-search')?.focus(), 30);
   });
   document.getElementById('mc-add-another').addEventListener('click', () => addToDraft(false));
   document.getElementById('mc-add-and-log').addEventListener('click', () => addToDraft(true));
 }
 
 function addToDraft(thenLog) {
-  if (!mcSelectedFood || !mcPortionValue || mcPortionValue <= 0) {
-    toast('Enter a portion size');
-    return;
+  if (!mcSelected || !mcPortionValue || mcPortionValue <= 0) { toast('Enter a portion'); return; }
+  if (mcSelected.type === 'food') {
+    const food = mcSelected.data;
+    const grams = portionToGrams(food, mcPortionMode, mcPortionValue);
+    if (grams <= 0) { toast('Portion must be > 0'); return; }
+    const macros = computeEntryMacros(food, grams);
+    mealDraft.items.push({
+      type:'food', food_id: food.id, name: food.name, icon: food.icon || CAT_MAP[food.category]?.icon || '🔹',
+      grams, servings: mcPortionMode==='serving' ? mcPortionValue : null,
+      unit: mcPortionMode, servingLabel: food.default_serving_label, macros,
+    });
+  } else {
+    const dish = mcSelected.data;
+    const macros = computeDishMacros(dish, mcPortionValue);
+    mealDraft.items.push({
+      type:'dish', recipe_id: dish.id, name: dish.name, icon: dish.icon || '🍲',
+      servings: mcPortionValue, macros,
+    });
   }
-  const grams = portionToGrams(mcSelectedFood, mcPortionMode, mcPortionValue);
-  if (grams <= 0) { toast('Portion must be greater than 0'); return; }
-  const macros = computeEntryMacros(mcSelectedFood, grams);
-  mealDraft.items.push({
-    food_id: mcSelectedFood.id,
-    food: mcSelectedFood,
-    grams: grams,
-    servings: mcPortionMode === 'serving' ? mcPortionValue : null,
-    unit: mcPortionMode,
-    macros: macros,
-  });
-  mcSelectedFood = null;
-  // Clear search to show full list again
+  mcSelected = null;
+  // Clear search + focus search bar (UX fix #3)
   document.getElementById('mc-search').value = '';
   foodSearch = '';
   renderMealComposer();
-
-  if (thenLog) {
-    logMeal();
-  } else {
-    // Scroll the body up a bit to show the draft
+  if (thenLog) logMeal();
+  else {
     document.getElementById('mc-body').scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(()=>document.getElementById('mc-search')?.focus(), 80);
   }
 }
 
 async function logMeal() {
-  if (!mealDraft || mealDraft.items.length === 0) {
-    toast('Add at least one item first');
-    return;
-  }
+  if (!mealDraft || !mealDraft.items.length) { toast('Add at least one item'); return; }
   const logBtn = document.getElementById('mc-log-btn') || document.getElementById('mc-add-and-log');
-  if (logBtn) { logBtn.disabled = true; }
+  if (logBtn) logBtn.disabled = true;
 
   const date = todayISO();
-  // 1. Create meal row
   const timeNow = new Date().toTimeString().slice(0, 8);
-  const { data: meal, error: mealErr } = await sb.from('meals')
-    .insert({ user_id: currentUser.id, date: date, slot: mealDraft.slot, time: timeNow })
-    .select().single();
-  if (mealErr) {
-    console.error(mealErr); toast('Failed to log: ' + mealErr.message);
-    if (logBtn) logBtn.disabled = false;
-    return;
-  }
+  const { data: meal, error: me } = await sb.from('meals').insert({ user_id: currentUser.id, date, slot: mealDraft.slot, time: timeNow }).select().single();
+  if (me) { toast('Failed: '+me.message); if (logBtn) logBtn.disabled=false; return; }
 
-  // 2. Create entries
-  const entries = mealDraft.items.map(it => ({
-    user_id: currentUser.id,
-    meal_id: meal.id,
-    date: date,
-    slot: mealDraft.slot,
-    food_id: it.food_id,
-    grams: round1(it.grams),
-    servings: it.servings,
-    protein_g: round1(it.macros.protein_g),
-    fat_g: round1(it.macros.fat_g),
-    carbs_g: round1(it.macros.carbs_g),
-    alcohol_g: round1(it.macros.alcohol_g),
-    fiber_g: round1(it.macros.fiber_g),
-    sodium_mg: round0(it.macros.sodium_mg),
-  }));
-  const { error: entryErr } = await sb.from('entries').insert(entries);
-  if (entryErr) {
-    console.error(entryErr); toast('Failed to save entries: ' + entryErr.message);
-    // Rollback meal
-    await sb.from('meals').delete().eq('id', meal.id);
-    if (logBtn) logBtn.disabled = false;
-    return;
-  }
-
-  // 3. Increment used_count for each food (best-effort, don't block)
-  const foodCounts = {};
-  mealDraft.items.forEach(it => { foodCounts[it.food_id] = (foodCounts[it.food_id] || 0) + 1; });
-  for (const [foodId, n] of Object.entries(foodCounts)) {
-    const food = foodsCache.find(f => f.id === foodId);
-    if (food) {
-      sb.from('foods').update({
-        used_count: (food.used_count || 0) + n,
-        last_used_at: new Date().toISOString(),
-      }).eq('id', foodId).then(() => {
-        food.used_count = (food.used_count || 0) + n;
-        food.last_used_at = new Date().toISOString();
-      });
+  const entries = mealDraft.items.map(it => {
+    if (it.type === 'food') {
+      return {
+        user_id: currentUser.id, meal_id: meal.id, date, slot: mealDraft.slot,
+        food_id: it.food_id, grams: round1(it.grams), servings: it.servings,
+        protein_g: round1(it.macros.protein_g), fat_g: round1(it.macros.fat_g),
+        carbs_g: round1(it.macros.carbs_g), alcohol_g: round1(it.macros.alcohol_g),
+        fiber_g: round1(it.macros.fiber_g), sodium_mg: round0(it.macros.sodium_mg),
+      };
+    } else {
+      return {
+        user_id: currentUser.id, meal_id: meal.id, date, slot: mealDraft.slot,
+        recipe_id: it.recipe_id, grams: null, servings: round1(it.servings),
+        protein_g: round1(it.macros.protein_g), fat_g: round1(it.macros.fat_g),
+        carbs_g: round1(it.macros.carbs_g), alcohol_g: round1(it.macros.alcohol_g),
+        fiber_g: round1(it.macros.fiber_g), sodium_mg: round0(it.macros.sodium_mg),
+      };
     }
+  });
+  const { error: ee } = await sb.from('entries').insert(entries);
+  if (ee) { toast('Entries failed: '+ee.message); await sb.from('meals').delete().eq('id', meal.id); if (logBtn) logBtn.disabled=false; return; }
+
+  // Bump usage counters (fire-and-forget)
+  const foodCounts = {}, dishCounts = {};
+  mealDraft.items.forEach(it => {
+    if (it.type === 'food') foodCounts[it.food_id] = (foodCounts[it.food_id]||0) + 1;
+    else dishCounts[it.recipe_id] = (dishCounts[it.recipe_id]||0) + 1;
+  });
+  for (const [id, n] of Object.entries(foodCounts)) {
+    const f = foodsCache.find(x=>x.id===id);
+    if (f) { sb.from('foods').update({ used_count: (f.used_count||0)+n, last_used_at: new Date().toISOString() }).eq('id', id); f.used_count = (f.used_count||0)+n; }
+  }
+  for (const [id, n] of Object.entries(dishCounts)) {
+    const d = dishesCache.find(x=>x.id===id);
+    if (d) { sb.from('recipes').update({ used_count: (d.used_count||0)+n, last_used_at: new Date().toISOString() }).eq('id', id); d.used_count = (d.used_count||0)+n; }
   }
 
-  const slotLabel = SLOT_MAP[mealDraft.slot].label;
-  const cnt = mealDraft.items.length;
-  toast(`Logged ${cnt} item${cnt===1?'':'s'} to ${slotLabel}`);
+  const slotLbl = SLOT_MAP[mealDraft.slot].label;
+  toast(`Logged ${mealDraft.items.length} to ${slotLbl}`);
   closeMealComposer();
   await renderToday();
 }
 
-// ==========================================
-// Foods screen (CRUD library)
-// ==========================================
-async function renderFoods() {
-  app.innerHTML = `
-    <div class="screen">
-      <div class="app-header">
-        <div>
-          <div class="app-title">Foods</div>
-          <div class="app-sub">Your library</div>
-        </div>
-        <div class="header-right">
-          <button class="btn btn-primary btn-small" id="add-food">+ Add food</button>
-        </div>
-      </div>
-      <div class="field food-search">
-        <div class="input"><input type="search" id="food-search" placeholder="Search foods…" value="${esc(foodSearch)}"></div>
-      </div>
-      <div id="foods-content"><div class="loading" style="min-height:40vh">Loading</div></div>
-    </div>
-    ${tabBarHTML()}
-  `;
-  wireTabBar();
-  document.getElementById('add-food').addEventListener('click', () => openFoodForm(null));
-  const searchEl = document.getElementById('food-search');
-  searchEl.addEventListener('input', () => { foodSearch = searchEl.value.toLowerCase(); renderFoodList(); });
+// Wire meal composer search once
+document.getElementById('mc-search').addEventListener('input', e => { foodSearch = e.target.value.toLowerCase(); renderMcList(); });
 
-  foodsCache = await fetchFoods();
-  renderFoodList();
-}
-
-function renderFoodList() {
-  const content = document.getElementById('foods-content');
-  if (!content) return;
-  if (foodsCache.length === 0) {
-    content.innerHTML = `<div class="empty-state">
-        <div class="big">No foods yet</div>
-        Add your staples one by one and they'll show up here.
-        <br><button class="btn btn-primary" id="empty-add">Add your first food</button>
-      </div>`;
-    document.getElementById('empty-add').addEventListener('click', () => openFoodForm(null));
-    return;
-  }
-  const filtered = foodSearch
-    ? foodsCache.filter(f => (f.name || '').toLowerCase().includes(foodSearch) || (f.brand || '').toLowerCase().includes(foodSearch))
-    : foodsCache;
-  if (filtered.length === 0) {
-    content.innerHTML = `<div class="empty-state">No foods match "<strong>${esc(foodSearch)}</strong>".</div>`;
-    return;
-  }
-  content.innerHTML = `
-    <div class="food-list" id="food-list">
-      ${filtered.map(f => {
-        const cat = CAT_MAP[f.category] || CAT_MAP.other;
-        const icon = f.icon || cat.icon;
-        const kcal = Math.round(f.kcal_per_100g || kcalFromMacros(f.protein_g, f.fat_g, f.carbs_g, f.alcohol_g));
-        return `
-          <div class="food-row" data-id="${f.id}">
-            <div class="cat" title="${cat.label}">${icon}</div>
-            <div class="info">
-              <div class="name">${esc(f.name)}</div>
-              ${f.brand ? `<div class="brand">${esc(f.brand)}</div>` : ''}
-              <div class="macros">P${round0(f.protein_g)} · F${round0(f.fat_g)} · C${round0(f.carbs_g)} · ${kcal} kcal /100g</div>
-            </div>
-            <div class="fav ${f.favorite ? '' : 'star-off'}">★</div>
-          </div>
-        `;
-      }).join('')}
-    </div>
-  `;
-  document.querySelectorAll('.food-row').forEach(row => {
-    row.addEventListener('click', () => {
-      const food = foodsCache.find(f => f.id === row.dataset.id);
-      if (food) openFoodForm(food);
-    });
-  });
-}
-
-function openFoodForm(food) {
-  const isEdit = !!food;
-  const f = food || { name:'', brand:'', barcode:'', protein_g:0, fat_g:0, carbs_g:0, alcohol_g:0, fiber_g:0, sodium_mg:0, default_serving_g:null, default_serving_label:'', category:'other', suggested_meals:[], favorite:false, icon:'' };
-  openSheet(`
-    <div class="sheet-handle"></div>
-    <div class="sheet-header">
-      <div class="sheet-title">${isEdit ? 'Edit food' : 'Add food'}</div>
-      <button class="sheet-close" id="sheet-close">✕</button>
-    </div>
-    <div class="row-2" style="margin-bottom:16px">
-      <div class="field">
-        <label>Name</label>
-        <div class="input"><input type="text" id="f-name" placeholder="e.g. Chicken breast" value="${esc(f.name)}"></div>
-      </div>
-      <div class="field">
-        <label>Icon <span style="color:var(--muted); font-weight:400">· emoji</span></label>
-        <div class="input"><input type="text" id="f-icon" placeholder="🍗" value="${esc(f.icon || '')}" maxlength="4"></div>
-      </div>
-    </div>
-    <div class="field">
-      <label>Brand <span style="color:var(--muted); font-weight:400">· optional</span></label>
-      <div class="input"><input type="text" id="f-brand" placeholder="e.g. Barebells" value="${esc(f.brand || '')}"></div>
-    </div>
-    <div class="section-header" style="margin-top:8px; margin-bottom:8px"><div class="section-title">Per 100g</div></div>
-    <div class="row-3" style="margin-bottom:16px">
-      <div class="field"><label>Protein</label><div class="input"><input type="number" inputmode="decimal" step="0.1" min="0" id="f-p" placeholder="0" value="${f.protein_g ?? ''}"><div class="unit">g</div></div></div>
-      <div class="field"><label>Fat</label><div class="input"><input type="number" inputmode="decimal" step="0.1" min="0" id="f-f" placeholder="0" value="${f.fat_g ?? ''}"><div class="unit">g</div></div></div>
-      <div class="field"><label>Carbs</label><div class="input"><input type="number" inputmode="decimal" step="0.1" min="0" id="f-c" placeholder="0" value="${f.carbs_g ?? ''}"><div class="unit">g</div></div></div>
-    </div>
-    <div class="kcal-preview"><span class="lab">Calculated kcal /100g</span><span class="val"><span id="f-kcal">0</span><small>kcal</small></span></div>
-    <div class="row-3" style="margin-bottom:16px">
-      <div class="field"><label>Fiber</label><div class="input"><input type="number" inputmode="decimal" step="0.1" min="0" id="f-fiber" placeholder="0" value="${f.fiber_g ?? ''}"><div class="unit">g</div></div></div>
-      <div class="field"><label>Sodium</label><div class="input"><input type="number" inputmode="decimal" step="1" min="0" id="f-sodium" placeholder="0" value="${f.sodium_mg ?? ''}"><div class="unit">mg</div></div></div>
-      <div class="field"><label>Alcohol</label><div class="input"><input type="number" inputmode="decimal" step="0.1" min="0" id="f-alc" placeholder="0" value="${f.alcohol_g ?? ''}"><div class="unit">g</div></div></div>
-    </div>
-    <div class="section-header" style="margin-top:12px; margin-bottom:8px"><div class="section-title">Default serving <span style="text-transform:none; letter-spacing:0; font-weight:400; color:var(--muted)">· optional</span></div></div>
-    <div class="row-2" style="margin-bottom:16px">
-      <div class="field"><label>Size</label><div class="input"><input type="number" inputmode="decimal" step="1" min="0" id="f-serving-g" placeholder="30" value="${f.default_serving_g ?? ''}"><div class="unit">g</div></div></div>
-      <div class="field"><label>Label</label><div class="input"><input type="text" id="f-serving-label" placeholder="e.g. 1 scoop" value="${esc(f.default_serving_label || '')}"></div></div>
-    </div>
-    <div class="field">
-      <label>Category</label>
-      <div class="input">
-        <select id="f-category">${CATEGORIES.map(c => `<option value="${c.id}" ${f.category === c.id ? 'selected' : ''}>${c.icon} ${c.label}</option>`).join('')}</select>
-      </div>
-    </div>
-    <div class="field">
-      <label>Suggested meal buckets</label>
-      <div class="chips" id="f-meals">${MEAL_SLOTS.map(m => `<button type="button" class="chip ${(f.suggested_meals || []).includes(m.id) ? 'active' : ''}" data-meal="${m.id}">${m.label}</button>`).join('')}</div>
-      <div class="hint">Where this food typically fits. Tap to toggle.</div>
-    </div>
-    <div class="toggle-row">
-      <div class="label-group">
-        <div class="label">Favorite</div>
-        <div class="hint">Always surface at the top of the list</div>
-      </div>
-      <button type="button" class="toggle ${f.favorite ? 'on' : ''}" id="f-fav" aria-pressed="${f.favorite}"></button>
-    </div>
-    <div style="display:flex; gap:12px; margin-top:24px">
-      ${isEdit ? `<button class="btn btn-danger" id="f-delete" style="flex:0 0 auto">Delete</button>` : ''}
-      <button class="btn btn-primary btn-block" id="f-save" style="flex:1">${isEdit ? 'Save' : 'Add to library'}</button>
-    </div>
-  `);
-
-  const getVals = () => ({
-    name: document.getElementById('f-name').value.trim(),
-    brand: document.getElementById('f-brand').value.trim(),
-    icon: document.getElementById('f-icon').value.trim(),
-    protein_g: Number(document.getElementById('f-p').value) || 0,
-    fat_g: Number(document.getElementById('f-f').value) || 0,
-    carbs_g: Number(document.getElementById('f-c').value) || 0,
-    fiber_g: Number(document.getElementById('f-fiber').value) || 0,
-    sodium_mg: Number(document.getElementById('f-sodium').value) || 0,
-    alcohol_g: Number(document.getElementById('f-alc').value) || 0,
-    default_serving_g: document.getElementById('f-serving-g').value ? Number(document.getElementById('f-serving-g').value) : null,
-    default_serving_label: document.getElementById('f-serving-label').value.trim() || null,
-    category: document.getElementById('f-category').value,
-    suggested_meals: Array.from(document.querySelectorAll('#f-meals .chip.active')).map(c => c.dataset.meal),
-    favorite: document.getElementById('f-fav').classList.contains('on'),
-  });
-  const updateKcal = () => {
-    const v = getVals();
-    document.getElementById('f-kcal').textContent = Math.round(kcalFromMacros(v.protein_g, v.fat_g, v.carbs_g, v.alcohol_g));
-  };
-  ['f-p','f-f','f-c','f-alc'].forEach(id => document.getElementById(id).addEventListener('input', updateKcal));
-  updateKcal();
-  document.querySelectorAll('#f-meals .chip').forEach(c => c.addEventListener('click', () => c.classList.toggle('active')));
-  document.getElementById('f-fav').addEventListener('click', () => {
-    const btn = document.getElementById('f-fav');
-    btn.classList.toggle('on');
-    btn.setAttribute('aria-pressed', btn.classList.contains('on'));
-  });
-  document.getElementById('sheet-close').addEventListener('click', closeSheet);
-  document.getElementById('f-save').addEventListener('click', async () => {
-    const v = getVals();
-    if (!v.name) { toast('Name is required'); return; }
-    if (!v.protein_g && !v.fat_g && !v.carbs_g && !v.alcohol_g) { toast('Enter at least one macro'); return; }
-    const saveBtn = document.getElementById('f-save');
-    saveBtn.disabled = true; saveBtn.textContent = 'Saving…';
-    const payload = {
-      name: v.name, brand: v.brand || null, icon: v.icon || null,
-      protein_g: v.protein_g, fat_g: v.fat_g, carbs_g: v.carbs_g,
-      fiber_g: v.fiber_g, sodium_mg: v.sodium_mg, alcohol_g: v.alcohol_g,
-      default_serving_g: v.default_serving_g, default_serving_label: v.default_serving_label,
-      category: v.category, suggested_meals: v.suggested_meals, favorite: v.favorite,
-      user_id: currentUser.id, updated_at: new Date().toISOString(),
-    };
-    let result;
-    if (isEdit) result = await sb.from('foods').update(payload).eq('id', food.id);
-    else result = await sb.from('foods').insert(payload);
-    if (result.error) {
-      saveBtn.disabled = false; saveBtn.textContent = isEdit ? 'Save' : 'Add to library';
-      toast('Save failed: ' + result.error.message); console.error(result.error); return;
-    }
-    toast(isEdit ? 'Food updated' : 'Food added');
-    closeSheet();
-    foodsCache = await fetchFoods();
-    renderFoodList();
-  });
-  if (isEdit) {
-    document.getElementById('f-delete').addEventListener('click', async () => {
-      if (!confirm(`Delete "${food.name}"?`)) return;
-      const { error } = await sb.from('foods').delete().eq('id', food.id);
-      if (error) { toast('Delete failed'); console.error(error); return; }
-      toast('Food deleted');
-      closeSheet();
-      foodsCache = await fetchFoods();
-      renderFoodList();
-    });
-  }
-  setTimeout(() => { if (!isEdit) document.getElementById('f-name').focus(); }, 200);
-}
-
-// ==========================================
-// Meal composer — wire the search input once
-// ==========================================
-document.getElementById('mc-search').addEventListener('input', (e) => {
-  foodSearch = e.target.value.toLowerCase();
-  renderMcFoodList();
-});
-
-// ==========================================
-// Init
-// ==========================================
+// ====== Init ======
 async function init() {
-  // 1. Existing session?
   const { data: { session } } = await sb.auth.getSession();
   if (session) { currentUser = session.user; renderCurrentTab(); return; }
-
-  // 2. Try silent auto-login with saved credentials (set on first sign-in)
-  let savedEmail = null, savedPw = null;
-  try {
-    savedEmail = localStorage.getItem('rt_auto_email');
-    savedPw = localStorage.getItem('rt_auto_pw');
-  } catch(e) {}
-
+  let savedEmail=null, savedPw=null;
+  try { savedEmail = localStorage.getItem('rt_auto_email'); savedPw = localStorage.getItem('rt_auto_pw'); } catch(e){}
   if (savedEmail && savedPw) {
     try {
       const { data, error } = await sb.auth.signInWithPassword({ email: savedEmail, password: savedPw });
-      if (!error && data.session) {
-        currentUser = data.session.user;
-        renderCurrentTab();
-        return;
-      }
-      // Saved creds no longer work — clear them so we don't retry forever
-      try { localStorage.removeItem('rt_auto_pw'); } catch(e) {}
-    } catch(e) { console.error('auto-login failed', e); }
+      if (!error && data.session) { currentUser = data.session.user; renderCurrentTab(); return; }
+      try { localStorage.removeItem('rt_auto_pw'); } catch(e){}
+    } catch(e){ console.error('auto-login failed', e); }
   }
-
-  // 3. Fallback: show login screen (one more time, then never again)
   renderLogin();
 }
 sb.auth.onAuthStateChange(async (event, session) => {
   if (event === 'SIGNED_IN' && session) {
-    history.replaceState(null, '', window.location.pathname + window.location.search);
-    currentUser = session.user;
-    currentTab = 'today';
-    renderCurrentTab();
-    toast('Signed in');
-  } else if (event === 'SIGNED_OUT') {
-    currentUser = null;
-    renderLogin();
-  }
+    history.replaceState(null,'', window.location.pathname + window.location.search);
+    currentUser = session.user; currentTab = 'today'; renderCurrentTab(); toast('Signed in');
+  } else if (event === 'SIGNED_OUT') { currentUser = null; renderLogin(); }
 });
 init();
 </script>
-
 </body>
 </html>
