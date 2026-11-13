@@ -769,7 +769,15 @@ function renderFoodList() {
   const content=document.getElementById('foods-content'); if (!content) return;
   if (!foodsCache.length) { content.innerHTML=`<div class="empty-state"><div class="big">No foods yet</div>Add staples to use in meal logging.<br><button class="btn btn-primary" id="empty-add">Add first food</button></div>`; document.getElementById('empty-add').addEventListener('click',()=>openFoodForm(null)); return; }
   const filtered=foodSearch?foodsCache.filter(f=>(f.name||'').toLowerCase().includes(foodSearch)||(f.brand||'').toLowerCase().includes(foodSearch)):foodsCache;
-  if (!filtered.length) { content.innerHTML=`<div class="empty-state">No foods match "<strong>${esc(foodSearch)}</strong>".</div>`; return; }
+  if (!filtered.length) {
+    content.innerHTML = `<div class="empty-state">
+      <div class="big">No match for "${esc(foodSearch)}"</div>
+      Not in your library yet. Let Claude look it up and add it automatically.<br>
+      <button class="btn btn-primary" id="ai-lookup-btn" style="margin-top:14px">🤖 Ask Claude for macros</button>
+    </div>`;
+    document.getElementById('ai-lookup-btn').addEventListener('click', () => askClaudeForFood(foodSearch));
+    return;
+  }
   content.innerHTML=`<div class="food-list">${filtered.map(f=>{
     const cat=CAT_MAP[f.category]||CAT_MAP.other; const icon=f.icon||cat.icon;
     const k=Math.round(f.kcal_per_100g||kcalFromMacros(f.protein_g,f.fat_g,f.carbs_g,f.alcohol_g));
@@ -778,10 +786,49 @@ function renderFoodList() {
   document.querySelectorAll('.food-row').forEach(r=>r.addEventListener('click',()=>{const f=foodsCache.find(x=>x.id===r.dataset.id); if (f) openFoodForm(f);}));
 }
 
-function openFoodForm(food) {
-  const isEdit=!!food;
-  const f=food||{name:'',brand:'',protein_g:0,fat_g:0,carbs_g:0,alcohol_g:0,fiber_g:0,sodium_mg:0,default_serving_g:null,default_serving_label:'',category:'other',suggested_meals:[],favorite:false,icon:''};
+async function askClaudeForFood(query) {
+  if (!query || !query.trim()) { toast('Type a food name first'); return; }
+  const btn = document.getElementById('ai-lookup-btn');
+  if (btn) { btn.disabled = true; btn.innerHTML = '<span style="opacity:0.7">Asking Claude…</span>'; }
+  try {
+    const { data, error } = await sb.functions.invoke('ai-food-lookup', { body: { query } });
+    if (error) { toast('Lookup failed: ' + error.message); if (btn) { btn.disabled=false; btn.textContent='🤖 Ask Claude for macros'; } return; }
+    if (data?.error) {
+      if (data.suggestion) toast(`Claude didn't recognize "${query}". Try "${data.suggestion}"?`);
+      else toast('Lookup failed: ' + data.error);
+      if (btn) { btn.disabled=false; btn.textContent='🤖 Ask Claude for macros'; }
+      return;
+    }
+    // Open food form prefilled with AI data (no id → isEdit=false → insert on save)
+    openFoodForm({
+      name: data.name || query,
+      brand: data.brand || '',
+      category: data.category || 'other',
+      protein_g: data.protein_g || 0,
+      fat_g: data.fat_g || 0,
+      carbs_g: data.carbs_g || 0,
+      fiber_g: data.fiber_g || 0,
+      sodium_mg: data.sodium_mg || 0,
+      alcohol_g: data.alcohol_g || 0,
+      default_serving_g: data.default_serving_g || null,
+      default_serving_label: data.default_serving_label || '',
+      micronutrients: data.micronutrients || {},
+      suggested_meals: [],
+      favorite: false,
+      icon: '',
+    }, { aiSource: data.source || 'Claude', aiConfidence: data.confidence });
+  } catch (e) {
+    toast('Lookup failed: ' + (e.message || e));
+    if (btn) { btn.disabled=false; btn.textContent='🤖 Ask Claude for macros'; }
+  }
+}
+
+function openFoodForm(food, opts={}) {
+  const isEdit=!!(food && food.id);
+  const f=food||{name:'',brand:'',protein_g:0,fat_g:0,carbs_g:0,alcohol_g:0,fiber_g:0,sodium_mg:0,default_serving_g:null,default_serving_label:'',category:'other',suggested_meals:[],favorite:false,icon:'',micronutrients:{}};
+  const aiBanner = opts.aiSource ? `<div style="background:linear-gradient(135deg, rgba(110,155,255,0.18), rgba(110,155,255,0.05)); border:1px solid var(--primary); border-radius:var(--r-box); padding:10px 14px; margin-bottom:16px; font-size:12px; color:var(--text); display:flex; align-items:center; gap:8px"><span style="font-size:16px">🤖</span><span><strong>Claude suggested these values</strong> · source: ${esc(opts.aiSource)} · confidence: ${esc(opts.aiConfidence||'medium')}. Review and save.</span></div>` : '';
   openSheet(`<div class="sheet-handle"></div><div class="sheet-header"><div class="sheet-title">${isEdit?'Edit food':'Add food'}</div><button class="sheet-close" id="sheet-close">✕</button></div>
+    ${aiBanner}
     <div class="row-2" style="margin-bottom:16px">
       <div class="field"><label>Name</label><div class="input"><input type="text" id="f-name" placeholder="e.g. Chicken breast" value="${esc(f.name)}"></div></div>
       <div class="field"><label>Icon <span style="color:var(--muted); font-weight:400">· emoji</span></label><div class="input"><input type="text" id="f-icon" placeholder="🍗" value="${esc(f.icon||'')}" maxlength="4"></div></div>
@@ -818,6 +865,7 @@ function openFoodForm(food) {
     const v=getVals(); if (!v.name) {toast('Name required');return;}
     if (!v.protein_g&&!v.fat_g&&!v.carbs_g&&!v.alcohol_g) {toast('Enter at least one macro');return;}
     const payload={...v, brand:v.brand||null, icon:v.icon||null, user_id:currentUser.id, updated_at:new Date().toISOString()};
+    if (f.micronutrients && Object.keys(f.micronutrients).length) payload.micronutrients = f.micronutrients;
     const r = isEdit ? await sb.from('foods').update(payload).eq('id',food.id) : await sb.from('foods').insert(payload);
     if (r.error) {toast('Save failed'); console.error(r.error); return;}
     toast(isEdit?'Updated':'Added'); closeSheet(); foodsCache=await fetchFoods(); renderFoodList();
