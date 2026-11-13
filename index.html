@@ -432,6 +432,14 @@ const MEAL_SLOTS = [
 ];
 const SLOT_MAP = Object.fromEntries(MEAL_SLOTS.map(s => [s.id, s]));
 
+// Dishes auto-pick their icon from the first selected meal bucket
+const DISH_ICON_BY_SLOT = { breakfast:'🥣', pre_workout:'⚡', post_workout:'🥤', lunch:'🍽', dinner:'🍲', snacks:'🍎' };
+function iconForDish(d) {
+  const sm = d?.suggested_meals || [];
+  if (sm.length) return DISH_ICON_BY_SLOT[sm[0]] || '🍲';
+  return '🍲';
+}
+
 // Utils
 function toast(msg) { const el=document.getElementById('toast'); el.textContent=msg; el.className='toast show'; setTimeout(()=>el.className='toast',2800); }
 function todayISO() { const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
@@ -727,7 +735,7 @@ function renderEntryRow(entry) {
   } else if (entry.recipe_id) {
     const dish = dishesCache.find(d=>d.id===entry.recipe_id);
     name = dish?.name || 'Dish';
-    icon = dish?.icon || '🍲';
+    icon = dish ? iconForDish(dish) : '🍲';
     dishBadge = `<span class="dish-badge">Dish</span>`;
   } else name = entry.manual_name || 'Unknown';
   const unit = entry.servings ? `${round1(entry.servings)} serving${entry.servings===1?'':'s'}` : (entry.grams ? `${round0(entry.grams)}g` : '');
@@ -849,7 +857,7 @@ function renderDishList(q='') {
   if (!filtered.length) { content.innerHTML=`<div class="empty-state">No dishes match "<strong>${esc(q)}</strong>".</div>`; return; }
   content.innerHTML=`<div class="food-list">${filtered.map(d=>{
     const per=dishPerServing(d);
-    const icon=d.icon||'🍲';
+    const icon=iconForDish(d);
     return `<div class="dish-row" data-id="${d.id}"><div class="cat">${icon}</div><div class="info"><div class="name">${esc(d.name)}</div><div class="brand">${(d.items||[]).length} ingredients · ${d.servings||1} serving${d.servings==1?'':'s'}</div><div class="macros">per serving: P${round0(per.protein_g)} · F${round0(per.fat_g)} · C${round0(per.carbs_g)} · ${round0(per.kcal)} kcal</div></div><div class="fav ${d.favorite?'':'star-off'}">★</div></div>`;
   }).join('')}</div>`;
   document.querySelectorAll('.dish-row').forEach(r=>r.addEventListener('click',()=>{const d=dishesCache.find(x=>x.id===r.dataset.id); if (d) openDishForm(d);}));
@@ -886,14 +894,8 @@ function renderDishForm(isEdit) {
 
   openSheet(`<div class="sheet-handle"></div>
     <div class="sheet-header"><div class="sheet-title">${isEdit?'Edit dish':'Add dish'}</div><button class="sheet-close" id="sheet-close">✕</button></div>
-    <div class="row-2" style="margin-bottom:16px">
-      <div class="field"><label>Name</label><div class="input"><input type="text" id="d-name" placeholder="e.g. Chicken bowl" value="${esc(d.name)}"></div></div>
-      <div class="field"><label>Icon</label><div class="input"><input type="text" id="d-icon" placeholder="🍲" value="${esc(d.icon)}" maxlength="4"></div></div>
-    </div>
-    <div class="row-2" style="margin-bottom:16px">
-      <div class="field"><label>Servings this makes</label><div class="input"><input type="number" inputmode="decimal" step="0.5" min="1" id="d-servings" value="${d.servings}"></div></div>
-      <div class="field"><label>Category</label><div class="input"><select id="d-category">${CATEGORIES.map(c=>`<option value="${c.id}" ${d.category===c.id?'selected':''}>${c.icon} ${c.label}</option>`).join('')}</select></div></div>
-    </div>
+    <div class="field" style="margin-bottom:16px"><label>Name</label><div class="input"><input type="text" id="d-name" placeholder="e.g. Chicken bowl" value="${esc(d.name)}"></div></div>
+    <div class="field" style="margin-bottom:16px"><label>Servings this makes <span style="color:var(--muted); font-weight:400">· how many portions this recipe yields</span></label><div class="input"><input type="number" inputmode="decimal" step="0.5" min="1" id="d-servings" value="${d.servings}"></div></div>
 
     <div class="section-header" style="margin-top:8px; margin-bottom:10px"><div class="section-title">Ingredients</div><button class="btn btn-ghost btn-small" id="d-add-ing">+ Add ingredient</button></div>
 
@@ -916,11 +918,11 @@ function renderDishForm(isEdit) {
       </div>
       <div class="dish-ing-total">
         <span class="lab">Per serving</span>
-        <span class="val">P${round0(perP)} · F${round0(perF)} · C${round0(perC)} · ${round0(perK)} kcal</span>
+        <span class="val" id="d-per-val">P${round0(perP)} · F${round0(perF)} · C${round0(perC)} · ${round0(perK)} kcal</span>
       </div>
       <div class="dish-ing-total" style="background:transparent; border-left-color:var(--muted); opacity:0.75">
-        <span class="lab">Recipe total (${svs} serving${svs==1?'':'s'})</span>
-        <span class="val">P${round0(tp)} · F${round0(tf)} · C${round0(tc)} · ${round0(tk)} kcal</span>
+        <span class="lab" id="d-tot-lab">Recipe total (${svs} serving${svs==1?'':'s'})</span>
+        <span class="val" id="d-tot-val">P${round0(tp)} · F${round0(tf)} · C${round0(tc)} · ${round0(tk)} kcal</span>
       </div>
     ` : `
       <div class="empty-state" style="padding:20px 14px; margin-bottom:12px">No ingredients yet. Tap <strong>+ Add ingredient</strong>.</div>
@@ -936,19 +938,39 @@ function renderDishForm(isEdit) {
       <button class="btn btn-primary btn-block" id="d-save" style="flex:1">${isEdit?'Save dish':'Save dish'}</button>
     </div>`);
 
+  // Lightweight updater — only redraws the macro totals, doesn't rebuild the form (keeps input focus alive)
+  function updateDishTotals() {
+    let xp=0,xf=0,xc=0,xa=0;
+    for (const it of d.items) {
+      const food = foodsCache.find(x=>x.id===it.food_id); if (!food) continue;
+      const r=(Number(it.grams)||0)/100;
+      xp += (food.protein_g||0)*r; xf += (food.fat_g||0)*r; xc += (food.carbs_g||0)*r; xa += (food.alcohol_g||0)*r;
+    }
+    const xk = kcalFromMacros(xp,xf,xc,xa);
+    const xsvs = Math.max(1, Number(d.servings) || 1);
+    const perEl = document.getElementById('d-per-val');
+    const totEl = document.getElementById('d-tot-val');
+    const totLab = document.getElementById('d-tot-lab');
+    if (perEl) perEl.textContent = `P${round0(xp/xsvs)} · F${round0(xf/xsvs)} · C${round0(xc/xsvs)} · ${round0(xk/xsvs)} kcal`;
+    if (totEl) totEl.textContent = `P${round0(xp)} · F${round0(xf)} · C${round0(xc)} · ${round0(xk)} kcal`;
+    if (totLab) totLab.textContent = `Recipe total (${xsvs} serving${xsvs==1?'':'s'})`;
+  }
+
   // Wire inputs
   document.getElementById('sheet-close').addEventListener('click',closeSheet);
   document.getElementById('d-name').addEventListener('input',e=>d.name=e.target.value);
-  document.getElementById('d-icon').addEventListener('input',e=>d.icon=e.target.value);
-  document.getElementById('d-servings').addEventListener('input',e=>{ d.servings = Number(e.target.value) || 1; renderDishForm(isEdit); });
-  document.getElementById('d-category').addEventListener('change',e=>d.category=e.target.value);
+  document.getElementById('d-servings').addEventListener('input', e => {
+    const v = Number(e.target.value);
+    d.servings = (v > 0) ? v : 1;
+    updateDishTotals();
+  });
   document.querySelectorAll('#d-meals .chip').forEach(c=>c.addEventListener('click',()=>{c.classList.toggle('active'); d.suggested_meals = Array.from(document.querySelectorAll('#d-meals .chip.active')).map(c=>c.dataset.meal);}));
   document.getElementById('d-fav').addEventListener('click',()=>{const b=document.getElementById('d-fav'); b.classList.toggle('on'); d.favorite=b.classList.contains('on');});
 
-  // Ingredient grams editing
+  // Ingredient grams editing — update totals only, don't re-render (focus must stay on input)
   document.querySelectorAll('[data-ing-idx]').forEach(inp => inp.addEventListener('input', e => {
     d.items[Number(inp.dataset.ingIdx)].grams = Number(e.target.value) || 0;
-    renderDishForm(isEdit);
+    updateDishTotals();
   }));
   document.querySelectorAll('[data-rm-idx]').forEach(b => b.addEventListener('click', () => {
     d.items.splice(Number(b.dataset.rmIdx), 1);
@@ -968,9 +990,9 @@ function renderDishForm(isEdit) {
     if (!d.name.trim()) { toast('Name required'); return; }
     if (!d.items.length) { toast('Add at least one ingredient'); return; }
     const payload = {
-      user_id: currentUser.id, name: d.name.trim(), icon: d.icon.trim() || null,
+      user_id: currentUser.id, name: d.name.trim(),
       description: d.description || null, servings: d.servings,
-      category: d.category, suggested_meals: d.suggested_meals, favorite: d.favorite,
+      category: 'mixed', suggested_meals: d.suggested_meals, favorite: d.favorite,
       updated_at: new Date().toISOString(),
     };
     let dishId;
@@ -1173,7 +1195,7 @@ function renderMcList() {
     }
     const row = d => {
       const per = dishPerServing(d);
-      const icon = d.icon || '🍲';
+      const icon = iconForDish(d);
       return `<div class="mc-food-row" data-dish-id="${d.id}"><div class="ico">${icon}</div><div class="info"><div class="name">${esc(d.name)} <span class="dish-tag">Dish</span></div><div class="macros">per serving · P${round0(per.protein_g)} F${round0(per.fat_g)} C${round0(per.carbs_g)} · ${round0(per.kcal)} kcal</div></div></div>`;
     };
     el.innerHTML = `
@@ -1252,7 +1274,7 @@ function renderMcFoot() {
   } else {
     // Dish portion
     const dish = mcSelected.data;
-    const icon = dish.icon || '🍲';
+    const icon = iconForDish(dish);
     const per = dishPerServing(dish);
     const servings = Number(mcPortionValue) || 0;
     const macros = computeDishMacros(dish, servings);
@@ -1327,7 +1349,7 @@ function addToDraft(thenLog) {
     const dish = mcSelected.data;
     const macros = computeDishMacros(dish, mcPortionValue);
     mealDraft.items.push({
-      type:'dish', recipe_id: dish.id, name: dish.name, icon: dish.icon || '🍲',
+      type:'dish', recipe_id: dish.id, name: dish.name, icon: iconForDish(dish),
       servings: mcPortionValue, macros,
     });
   }
