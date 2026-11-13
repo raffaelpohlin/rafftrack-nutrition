@@ -257,6 +257,25 @@ code { font-family:var(--mono); font-size:13.5px; }
 .ing-picker-portion .amount .u { font-size:11px; color:var(--muted); }
 
 /* Meal composer */
+/* Barcode scanner */
+.bc-scanner { position:fixed; inset:0; background:#000; z-index:300; display:none; flex-direction:column; overflow:hidden; }
+.bc-scanner.show { display:flex; }
+.bc-top { padding:max(55px, calc(env(safe-area-inset-top, 0px) + 35px)) 22px 14px; display:flex; justify-content:space-between; align-items:center; background:rgba(10,22,51,0.9); flex-shrink:0; z-index:2; }
+.bc-top-title { font-size:18px; font-weight:800; color:#fff; letter-spacing:-0.01em; }
+.bc-top-close { background:none; border:0; color:#fff; font-size:22px; cursor:pointer; width:36px; height:36px; display:grid; place-items:center; line-height:1; }
+.bc-video-wrap { flex:1; position:relative; overflow:hidden; background:#000; }
+.bc-video-wrap video { width:100%; height:100%; object-fit:cover; display:block; }
+.bc-overlay { position:absolute; inset:0; display:grid; place-items:center; pointer-events:none; }
+.bc-frame { width:80vw; max-width:340px; height:28vh; max-height:200px; border:3px solid var(--primary); border-radius:14px; box-shadow:0 0 0 9999px rgba(0,0,0,0.5); position:relative; }
+.bc-frame::before { content:''; position:absolute; left:8%; right:8%; top:50%; height:2px; background:var(--primary); box-shadow:0 0 10px var(--primary); animation:bc-scan 2s ease-in-out infinite; }
+@keyframes bc-scan { 0%,100% { top:12%; } 50% { top:88%; } }
+.bc-hint { padding:14px 22px calc(env(safe-area-inset-bottom, 0px) + 20px); background:rgba(10,22,51,0.9); color:#9DAECB; text-align:center; font-size:13px; line-height:1.45; flex-shrink:0; z-index:2; }
+.bc-status { position:absolute; left:50%; bottom:calc(env(safe-area-inset-bottom, 0px) + 100px); transform:translateX(-50%); background:rgba(16,31,69,0.95); color:#fff; padding:10px 20px; border-radius:20px; font-size:13px; font-weight:700; display:none; z-index:3; max-width:85vw; text-align:center; }
+.bc-status.show { display:block; }
+.bc-error { position:absolute; inset:60px 22px auto 22px; background:var(--surface); border:1px solid var(--stop); border-left:4px solid var(--stop); border-radius:var(--r-box); padding:16px; color:var(--text); font-size:14px; line-height:1.5; display:none; z-index:3; }
+.bc-error.show { display:block; }
+.bc-error .big { font-weight:800; font-size:15px; margin-bottom:6px; }
+
 .mc { position:fixed; inset:0; background:var(--bg); z-index:200; display:none; flex-direction:column; overflow:hidden; }
 .mc.show { display:flex; }
 .mc-top { flex-shrink:0; padding:max(55px, calc(env(safe-area-inset-top, 0px) + 35px)) 22px 14px; background:var(--bg); border-bottom:1px solid var(--line); }
@@ -384,6 +403,20 @@ code { font-family:var(--mono); font-size:13.5px; }
     <div id="mc-food-list"></div>
   </div>
   <div class="mc-foot"><div class="mc-foot-inner" id="mc-foot-inner"></div></div>
+</div>
+
+<div class="bc-scanner" id="bc-scanner">
+  <div class="bc-top">
+    <div class="bc-top-title">Scan barcode</div>
+    <button class="bc-top-close" id="bc-close-btn" aria-label="Close">✕</button>
+  </div>
+  <div class="bc-video-wrap">
+    <video id="bc-video" playsinline autoplay muted></video>
+    <div class="bc-overlay"><div class="bc-frame"></div></div>
+    <div class="bc-status" id="bc-status"></div>
+    <div class="bc-error" id="bc-error"></div>
+  </div>
+  <div class="bc-hint">Hold the barcode flat inside the frame · back camera</div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -754,12 +787,13 @@ async function deleteEntry(id) {
 // ====== Foods tab (all raw foods) ======
 async function renderFoods() {
   app.innerHTML=`<div class="screen"><div class="app-header"><div><div class="app-title">Foods</div><div class="app-sub">All raw ingredients</div></div>
-    <div class="header-right"><button class="btn btn-primary btn-small" id="add-food">+ Add food</button></div></div>
+    <div class="header-right" style="flex-direction:row; gap:6px"><button class="btn btn-secondary btn-small" id="scan-food">📷 Scan</button><button class="btn btn-primary btn-small" id="add-food">+ Add</button></div></div>
     <div class="field food-search"><div class="input"><input type="search" id="food-search" placeholder="Search foods…" value="${esc(foodSearch)}"></div></div>
     <div id="foods-content"><div class="loading" style="min-height:40vh">Loading</div></div>
   </div>${tabBarHTML()}`;
   wireTabBar();
   document.getElementById('add-food').addEventListener('click',()=>openFoodForm(null));
+  document.getElementById('scan-food').addEventListener('click', openBarcodeScanner);
   const sEl=document.getElementById('food-search');
   sEl.addEventListener('input',()=>{foodSearch=sEl.value.toLowerCase(); renderFoodList();});
   foodsCache=await fetchFoods();
@@ -772,10 +806,14 @@ function renderFoodList() {
   if (!filtered.length) {
     content.innerHTML = `<div class="empty-state">
       <div class="big">No match for "${esc(foodSearch)}"</div>
-      Not in your library yet. Let Claude look it up and add it automatically.<br>
-      <button class="btn btn-primary" id="ai-lookup-btn" style="margin-top:14px">🤖 Ask Claude for macros</button>
+      Not in your library yet. Try scanning the barcode, or let Claude look it up by name.
+      <div style="display:flex; flex-direction:column; gap:8px; margin-top:16px; align-items:stretch">
+        <button class="btn btn-primary" id="ai-lookup-btn">🤖 Ask Claude for macros</button>
+        <button class="btn btn-secondary" id="scan-fallback-btn">📷 Scan barcode</button>
+      </div>
     </div>`;
     document.getElementById('ai-lookup-btn').addEventListener('click', () => askClaudeForFood(foodSearch));
+    document.getElementById('scan-fallback-btn').addEventListener('click', openBarcodeScanner);
     return;
   }
   content.innerHTML=`<div class="food-list">${filtered.map(f=>{
@@ -785,6 +823,189 @@ function renderFoodList() {
   }).join('')}</div>`;
   document.querySelectorAll('.food-row').forEach(r=>r.addEventListener('click',()=>{const f=foodsCache.find(x=>x.id===r.dataset.id); if (f) openFoodForm(f);}));
 }
+
+// ====== BARCODE SCANNER ======
+let bcReader = null;
+let bcLastCode = null;
+let bcLastCodeAt = 0;
+
+function loadZXing() {
+  if (typeof ZXing !== 'undefined') return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js';
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error('Failed to load barcode library'));
+    document.head.appendChild(s);
+  });
+}
+
+function showBcStatus(msg) {
+  const el = document.getElementById('bc-status');
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+}
+function hideBcStatus() {
+  const el = document.getElementById('bc-status');
+  if (el) el.classList.remove('show');
+}
+function showBcError(title, detail) {
+  const el = document.getElementById('bc-error');
+  if (!el) return;
+  el.innerHTML = `<div class="big">${esc(title)}</div>${esc(detail||'')}`;
+  el.classList.add('show');
+}
+function hideBcError() {
+  const el = document.getElementById('bc-error');
+  if (el) el.classList.remove('show');
+}
+
+async function openBarcodeScanner() {
+  const scanner = document.getElementById('bc-scanner');
+  scanner.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  hideBcStatus(); hideBcError();
+  bcLastCode = null;
+
+  try {
+    showBcStatus('Starting camera…');
+    await loadZXing();
+    bcReader = new ZXing.BrowserMultiFormatReader();
+    const hints = new Map();
+    hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [
+      ZXing.BarcodeFormat.EAN_13,
+      ZXing.BarcodeFormat.EAN_8,
+      ZXing.BarcodeFormat.UPC_A,
+      ZXing.BarcodeFormat.UPC_E,
+      ZXing.BarcodeFormat.CODE_128,
+      ZXing.BarcodeFormat.CODE_39,
+    ]);
+    bcReader.hints = hints;
+
+    await bcReader.decodeFromConstraints(
+      { video: { facingMode: { ideal: 'environment' } } },
+      'bc-video',
+      (result, err) => {
+        if (result) handleBarcodeDetected(result.getText());
+      }
+    );
+    hideBcStatus();
+  } catch (e) {
+    console.error('Scanner error:', e);
+    let title = 'Camera unavailable';
+    let detail = e.message || String(e);
+    if (/permission|denied|NotAllowed/i.test(detail)) {
+      title = 'Camera permission denied';
+      detail = 'Grant camera access in Safari → Settings → Websites → Camera, then reopen the PWA.';
+    } else if (/NotFound|NotReadable/i.test(detail)) {
+      title = 'No camera found';
+      detail = 'No usable camera on this device.';
+    }
+    hideBcStatus();
+    showBcError(title, detail);
+  }
+}
+
+function closeBarcodeScanner() {
+  if (bcReader) {
+    try { bcReader.reset(); } catch(e) {}
+    bcReader = null;
+  }
+  const scanner = document.getElementById('bc-scanner');
+  if (scanner) scanner.classList.remove('show');
+  document.body.style.overflow = '';
+  hideBcStatus(); hideBcError();
+  bcLastCode = null;
+}
+
+async function handleBarcodeDetected(code) {
+  // Debounce — ZXing fires repeatedly
+  const now = Date.now();
+  if (code === bcLastCode && (now - bcLastCodeAt) < 3000) return;
+  bcLastCode = code; bcLastCodeAt = now;
+
+  showBcStatus(`Found ${code} · looking up…`);
+  const food = await fetchFromOpenFoodFacts(code);
+
+  if (food) {
+    closeBarcodeScanner();
+    openFoodForm(food, { aiSource: food._source, aiConfidence: food._confidence });
+    return;
+  }
+
+  // OFF didn't have it — offer AI fallback
+  hideBcStatus();
+  showBcError(
+    `Barcode ${code} not in OpenFoodFacts`,
+    'Tap Cancel below, then search by name in Foods and use "🤖 Ask Claude" instead.'
+  );
+  // Let user close manually
+}
+
+async function fetchFromOpenFoodFacts(barcode) {
+  try {
+    const r = await fetch(`https://world.openfoodfacts.org/api/v0/product/${encodeURIComponent(barcode)}.json`);
+    if (!r.ok) return null;
+    const data = await r.json();
+    if (data.status === 0 || !data.product) return null;
+    return normalizeOFF(data.product, barcode);
+  } catch (e) {
+    console.error('OFF fetch error:', e);
+    return null;
+  }
+}
+
+function parseServingSize(s) {
+  if (!s) return null;
+  const m = String(s).match(/(\d+(?:\.\d+)?)\s*g/i);
+  if (m) return Number(m[1]);
+  const mv = String(s).match(/(\d+(?:\.\d+)?)\s*ml/i);
+  return mv ? Number(mv[1]) : null; // approximate ml as g for liquids
+}
+
+function inferCategoryFromOFF(p) {
+  const tags = (p.categories_tags || []).join(' ').toLowerCase();
+  if (/alcohol|beer|wine|spirit|liquor/.test(tags)) return 'alcohol';
+  if (/drink|beverage|water|juice|soda|coffee|tea/.test(tags)) return 'drink';
+  if (/dairy|yogurt|milk|cheese|butter/.test(tags)) return 'dairy';
+  if (/fruit/.test(tags)) return 'fruit';
+  if (/vegetable/.test(tags)) return 'vegetable';
+  if (/meat|fish|poultry|protein|seafood/.test(tags)) return 'protein';
+  if (/bread|cereal|pasta|rice|grain|cake|cookie|biscuit|snack/.test(tags)) return 'carb';
+  if (/oil|nut-butter|nut|seed/.test(tags)) return 'fat';
+  return 'mixed';
+}
+
+function normalizeOFF(p, barcode) {
+  const n = p.nutriments || {};
+  const salt_g = Number(n.salt_100g) || 0;
+  const sodium_direct_g = Number(n.sodium_100g) || 0;
+  const sodium_mg = sodium_direct_g ? sodium_direct_g * 1000 : salt_g * 400;
+  const name = p.product_name || p.product_name_en || p.generic_name || `Product ${barcode}`;
+  return {
+    name,
+    brand: p.brands || '',
+    protein_g: round1(Number(n.proteins_100g) || 0),
+    fat_g: round1(Number(n.fat_100g) || 0),
+    carbs_g: round1(Number(n.carbohydrates_100g) || 0),
+    fiber_g: round1(Number(n.fiber_100g) || 0),
+    sodium_mg: round0(sodium_mg),
+    alcohol_g: round1(Number(n.alcohol_100g) || 0),
+    default_serving_g: parseServingSize(p.serving_size),
+    default_serving_label: p.serving_size || null,
+    category: inferCategoryFromOFF(p),
+    micronutrients: {},
+    suggested_meals: [],
+    favorite: false,
+    icon: '',
+    _source: `OpenFoodFacts · ${barcode}`,
+    _confidence: 'high',
+  };
+}
+
+// Wire close button once
+document.getElementById('bc-close-btn').addEventListener('click', closeBarcodeScanner);
 
 async function askClaudeForFood(query) {
   if (!query || !query.trim()) { toast('Type a food name first'); return; }
